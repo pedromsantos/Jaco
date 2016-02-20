@@ -80,5 +80,11 @@ namespace Jaco
 
             return Notes.Select(note => root.IntervalWithOther(note)).Skip(1).ToList();
         }
+
+        public Chord Transpose(Note newRoot)
+        {
+            var interval = NoteForFunction(Function.Root).IntervalWithOther(newRoot);
+            return new Chord(notes.Select(n => new NoteWithFunction(n.Note.Transpose(interval), n.Function)).ToArray());
+        }
     } 
 }

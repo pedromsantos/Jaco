@@ -186,5 +186,21 @@ namespace JacoTests
                 .Notes
                 .Should().ContainInOrder(expectedChordNotes);
         }
+
+        public static TheoryData<IEnumerable<Note>, IEnumerable<Note>> Transpose
+           => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
+           {
+                { new[] { Note.C, Note.E, Note.G }, new [] { Note.F, Note.A, Note.C } },
+                { new[] { Note.C, Note.E, Note.G }, new [] { Note.D, Note.GFlat, Note.A } },
+           };
+
+        [Theory, MemberData(nameof(Transpose))]
+        public void TransposeChord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
+        {
+            new Chord(chordNotes.ToArray())
+                .Transpose(expectedChordNotes.First())
+                .Notes
+                .Should().ContainInOrder(expectedChordNotes);
+        }
     }
 }
