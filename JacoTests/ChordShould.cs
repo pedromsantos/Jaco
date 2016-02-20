@@ -14,12 +14,6 @@ namespace JacoTests
             chord = new Chord(Note.C, Note.E, Note.G, Note.B, Note.D, Note.F, Note.A);
         }
 
-        [Fact]
-        public void CreateChordFromNotes()
-        {
-            chord.Notes.Should().ContainInOrder(Note.C, Note.E, Note.G);
-        }
-
         public static TheoryData<Function, Note> FunctionsToNotes
            => new TheoryData<Function, Note>
            {
@@ -93,6 +87,12 @@ namespace JacoTests
         public void Invert(Chord theChord, IEnumerable<Note> invertedChordNotes)
         {
             theChord.Invert().Notes.Should().ContainInOrder(invertedChordNotes);
+        }
+
+        [Theory, MemberData(nameof(FunctionsToNotes))]
+        public void MaintainRelationFunctionNoteAfterInversion(Function function, Note expectedNote)
+        {
+            chord.Invert().NoteForFunction(function).Should().Be(expectedNote);
         }
     }
 }

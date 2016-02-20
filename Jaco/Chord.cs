@@ -3,21 +3,43 @@ using System.Linq;
 
 namespace Jaco
 {
+    public struct NoteWithFunction
+    {
+        public Note Note { get; }
+
+        public Function Function { get; }
+
+        public NoteWithFunction(Note note, Function function)
+        {
+            Function = function;
+            Note = note;
+        }
+    }
+
     public class Chord
     {
-        private readonly List<Note> notes;
+        private readonly List<NoteWithFunction> notes;
 
         public Chord(params Note[] notes)
         {
-            this.notes = new List<Note>();
+            this.notes = new List<NoteWithFunction>();
+            for (var i = 0; i < notes.Length; i++)
+            {
+                this.notes.Add(new NoteWithFunction(notes[i], Function.Functions.ElementAt(i)));
+            }
+        }
+
+        public Chord(params NoteWithFunction[] notes)
+        {
+            this.notes = new List<NoteWithFunction>();
             this.notes.AddRange(notes);
         }
 
-        public IEnumerable<Note> Notes => notes;
+        public IEnumerable<Note> Notes => notes.Select(n => n.Note);
 
-        public Note Bass => notes.First();
+        public Note Bass => notes.First().Note;
 
-        public Note Lead => notes.Last();
+        public Note Lead => notes.Last().Note;
 
         public string Name
         {
@@ -30,7 +52,7 @@ namespace Jaco
 
         public Note NoteForFunction(Function function)
         {
-            return notes[function.Index];
+            return notes.First(n => n.Function == function).Note;
         }
 
         public Chord Invert()
