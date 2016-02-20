@@ -45,6 +45,7 @@
     <Compile Include="Chord.cs" />
     <Compile Include="ChordFunction.cs" />
     <Compile Include="Drop2.cs" />
+    <Compile Include="Drop3.cs" />
     <Compile Include="Infrastructure\LinqExtensions.cs" />
     <Compile Include="Interval.cs" />
     <Compile Include="Note.cs" />

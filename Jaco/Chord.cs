@@ -49,7 +49,7 @@ namespace Jaco
             return new Chord(invertedChordNotes.ToArray());
         }
 
-        public Drop2 ToDrop2()
+        public Chord ToDrop2()
         {
             var swaped = notes.Swap(0, 1);
             var drop2Notes = swaped.Rotate();
@@ -58,7 +58,7 @@ namespace Jaco
 
         public Chord ToDrop3()
         {
-            return ToDrop2().ToDrop2();
+            return new Drop3(ToDrop2().ToDrop2().notes.ToArray());
         }
 
         public Chord ToClosed()

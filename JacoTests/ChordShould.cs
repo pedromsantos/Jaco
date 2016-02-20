@@ -155,12 +155,33 @@ namespace JacoTests
            => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
            {
                { new[] { Note.C, Note.G, Note.B, Note.E }, new [] { Note.E, Note.B, Note.C, Note.G } },
+               { new[] { Note.E, Note.B, Note.C, Note.G }, new [] { Note.G, Note.C, Note.E, Note.B } },
+               { new[] { Note.G, Note.C, Note.E, Note.B }, new [] { Note.B, Note.E, Note.G, Note.C } },
+               { new[] { Note.B, Note.E, Note.G, Note.C }, new [] { Note.C, Note.G, Note.B, Note.E } },
            };
 
         [Theory, MemberData(nameof(Drop2Invertions))]
         public void InvertDrop2Chord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
         {
             new Drop2(chordNotes.ToArray())
+                .Invert()
+                .Notes
+                .Should().ContainInOrder(expectedChordNotes);
+        }
+
+        public static TheoryData<IEnumerable<Note>, IEnumerable<Note>> Drop3Invertions
+           => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
+           {
+               { new[] { Note.C, Note.B, Note.E, Note.G }, new [] { Note.E, Note.C, Note.G, Note.B } },
+               { new[] { Note.E, Note.C, Note.G, Note.B }, new [] { Note.G, Note.E, Note.B, Note.C } },
+               { new[] { Note.G, Note.E, Note.B, Note.C }, new [] { Note.B, Note.G, Note.C, Note.E } },
+               { new[] { Note.B, Note.G, Note.C, Note.E }, new [] { Note.C, Note.B, Note.E, Note.G } },
+           };
+
+        [Theory, MemberData(nameof(Drop3Invertions))]
+        public void InvertDrop3Chord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
+        {
+            new Drop3(chordNotes.ToArray())
                 .Invert()
                 .Notes
                 .Should().ContainInOrder(expectedChordNotes);
