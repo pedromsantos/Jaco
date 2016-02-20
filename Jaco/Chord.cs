@@ -1,24 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using Jaco.Infrastructure;
 
 namespace Jaco
 {
-    public struct NoteWithFunction
-    {
-        public Note Note { get; }
-
-        public Function Function { get; }
-
-        public NoteWithFunction(Note note, Function function)
-        {
-            Function = function;
-            Note = note;
-        }
-    }
-
     public class Chord
     {
-        private readonly List<NoteWithFunction> notes;
+        protected readonly List<NoteWithFunction> notes;
 
         public Chord(params Note[] notes)
         {
@@ -55,10 +43,35 @@ namespace Jaco
             return notes.First(n => n.Function == function).Note;
         }
 
-        public Chord Invert()
+        public virtual Chord Invert()
         {
-            var invertedChordNotes = notes.Skip(1).Concat(notes.Take(1));
+            var invertedChordNotes = notes.Rotate();
             return new Chord(invertedChordNotes.ToArray());
+        }
+
+        public Drop2 ToDrop2()
+        {
+            var swaped = notes.Swap(0, 1);
+            var drop2Notes = swaped.Rotate();
+            return new Drop2(drop2Notes.ToArray());
+        }
+
+        public Chord ToDrop3()
+        {
+            return ToDrop2().ToDrop2();
+        }
+
+        public Chord ToClosed()
+        {
+            var closedChordNotes = new List<NoteWithFunction>();
+            closedChordNotes.AddRange(notes);
+
+            foreach (var note in notes)
+            {
+                closedChordNotes[note.Function.Index] = note;
+            }
+
+            return new Chord(closedChordNotes.ToArray());
         }
 
         private IEnumerable<Interval> Intervals()
@@ -66,6 +79,6 @@ namespace Jaco
             var root = NoteForFunction(Function.Root);
 
             return Notes.Select(note => root.IntervalWithOther(note)).Skip(1).ToList();
-        } 
-    }
+        }
+    } 
 }

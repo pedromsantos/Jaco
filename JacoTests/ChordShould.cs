@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Jaco;
 using Xunit;
@@ -86,13 +87,83 @@ namespace JacoTests
         [Theory, MemberData(nameof(ChordInvertions))]
         public void Invert(Chord theChord, IEnumerable<Note> invertedChordNotes)
         {
-            theChord.Invert().Notes.Should().ContainInOrder(invertedChordNotes);
+            theChord
+                .Invert()
+                .Notes
+                .Should().ContainInOrder(invertedChordNotes);
         }
 
         [Theory, MemberData(nameof(FunctionsToNotes))]
-        public void MaintainRelationFunctionNoteAfterInversion(Function function, Note expectedNote)
+        public void MaintainRelationFunctionNoteAfterFirstInversion(Function function, Note expectedNote)
         {
-            chord.Invert().NoteForFunction(function).Should().Be(expectedNote);
+            chord
+                .Invert()
+                .NoteForFunction(function)
+                .Should().Be(expectedNote);
+        }
+
+        [Theory, MemberData(nameof(FunctionsToNotes))]
+        public void MaintainRelationFunctionNoteAfterSecondInversion(Function function, Note expectedNote)
+        {
+            chord.
+                Invert()
+                .Invert()
+                .NoteForFunction(function)
+                .Should().Be(expectedNote);
+        }
+
+        [Theory, MemberData(nameof(FunctionsToNotes))]
+        public void MaintainRelationFunctionNoteAfterThirdInversion(Function function, Note expectedNote)
+        {
+            chord
+                .Invert()
+                .Invert()
+                .Invert()
+                .NoteForFunction(function)
+                .Should().Be(expectedNote);
+        }
+
+        [Fact]
+        public void BeAbleToCreateDrop2Chord()
+        {
+            new Chord(Note.C, Note.E, Note.G, Note.B)
+                .ToDrop2()
+                .Notes
+                .Should().ContainInOrder(Note.C, Note.G, Note.B, Note.E);
+        }
+
+        [Fact]
+        public void BeAbleToCreateDrop3Chord()
+        {
+            new Chord(Note.C, Note.E, Note.G, Note.B)
+                .ToDrop3()
+                .Notes
+                .Should().ContainInOrder(Note.C, Note.B, Note.E, Note.G);
+        }
+
+        [Fact]
+        public void BeAbleToCreateClosedChord()
+        {
+            new Chord(Note.C, Note.E, Note.G, Note.B)
+                .ToDrop2()
+                .ToClosed()
+                .Notes
+                .Should().ContainInOrder(Note.C, Note.E, Note.G, Note.B);
+        }
+
+        public static TheoryData<IEnumerable<Note>, IEnumerable<Note>> Drop2Invertions
+           => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
+           {
+               { new[] { Note.C, Note.G, Note.B, Note.E }, new [] { Note.E, Note.B, Note.C, Note.G } },
+           };
+
+        [Theory, MemberData(nameof(Drop2Invertions))]
+        public void InvertDrop2Chord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
+        {
+            new Drop2(chordNotes.ToArray())
+                .Invert()
+                .Notes
+                .Should().ContainInOrder(expectedChordNotes);
         }
     }
 }

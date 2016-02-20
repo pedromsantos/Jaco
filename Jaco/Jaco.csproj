@@ -44,9 +44,12 @@
   <ItemGroup>
     <Compile Include="Chord.cs" />
     <Compile Include="ChordFunction.cs" />
+    <Compile Include="Drop2.cs" />
+    <Compile Include="Infrastructure\LinqExtensions.cs" />
     <Compile Include="Interval.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Function.cs" />
+    <Compile Include="NoteWithFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pitch.cs" />
   </ItemGroup>
