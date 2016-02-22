@@ -12,8 +12,6 @@ namespace Jaco
 
     public class Note
     {
-        private readonly int index;
-
         public static readonly Note C = new Note(Pitch.C, "C", Accident.None, 0);
 
         public static readonly Note CSharp = new Note(Pitch.CSharp, "C#", Accident.Sharp, 1);
@@ -77,6 +75,8 @@ namespace Jaco
             return (int) instance.Pitch;
         }
 
+        private readonly int index;
+
         private Note(Pitch pitch, string name, Accident accident, int index)
         {
             this.index = index;
@@ -93,12 +93,12 @@ namespace Jaco
 
         public Note Sharp()
         {
-            return AccidentedNote(Accident.Sharp);
+            return Transpose(Accident.Sharp);
         } 
 
         public Note Flat()
         {
-            return AccidentedNote(Accident.Flat);
+            return Transpose(Accident.Flat);
         }
 
         public Interval IntervalWithOther(Note other)
@@ -132,7 +132,7 @@ namespace Jaco
             return distance < 0 ? 12 - distance*-1 : distance;
         }
 
-        private Note AccidentedNote(Accident accident)
+        private Note Transpose(Accident accident)
         {
             var accidentedNoteIndex = index + (int)accident * (Accident == accident ? 2 : 1);
 
