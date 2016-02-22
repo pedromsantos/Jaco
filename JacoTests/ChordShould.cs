@@ -191,8 +191,8 @@ namespace JacoTests
            => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
            {
                 { new[] { Note.C, Note.E, Note.G }, new [] { Note.F, Note.A, Note.C } },
-                { new[] { Note.C, Note.E, Note.G }, new [] { Note.D, Note.FSharp, Note.A } },
-                { new[] { Note.C, Note.E, Note.G }, new [] { Note.E, Note.GSharp, Note.B } },
+                { new[] { Note.C, Note.E, Note.G }, new [] { Note.D, Note.GFlat, Note.A } },
+                { new[] { Note.C, Note.E, Note.G }, new [] { Note.E, Note.AFlat, Note.B } },
            };
 
         [Theory, MemberData(nameof(Transpose))]

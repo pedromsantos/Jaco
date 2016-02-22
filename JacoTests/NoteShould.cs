@@ -146,21 +146,5 @@ namespace JacoTests
         {
             noteToTranspose.Transpose(interval).Should().Be(transposedNote);
         }
-
-        public static TheoryData<Note, Note> NoteEquals
-            => new TheoryData<Note, Note>
-            {
-                {Note.CSharp, Note.DFlat},
-                {Note.DSharp, Note.EFlat},
-                {Note.FSharp, Note.GFlat},
-                {Note.GSharp, Note.AFlat},
-                {Note.ASharp, Note.BFlat},
-            };
-
-        [Theory, MemberData(nameof(NoteEquals))]
-        public void NotesWithSamePitchShouldBeEqual(Note sharpedNote, Note flatedNote)
-        {
-            sharpedNote.Should().Be(flatedNote);
-        }
     }
 }
