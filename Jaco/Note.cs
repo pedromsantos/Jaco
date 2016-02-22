@@ -3,16 +3,9 @@ using System.Linq;
 
 namespace Jaco
 {
-    public enum Accident
-    {
-        Flat = -1,
-        None = 0,
-        Sharp = 1
-    }
-
     public class Note
     {
-        public static readonly Note C = new Note(Pitch.C, "C", Accident.None, 0);
+        public static readonly Note C = new Note(Pitch.C, "C", Accident.None, MinNoteIndex);
 
         public static readonly Note CSharp = new Note(Pitch.CSharp, "C#", Accident.Sharp, 1);
 
@@ -44,7 +37,7 @@ namespace Jaco
 
         public static readonly Note BFlat = new Note(Pitch.BFlat, "Bb", Accident.Flat, 15);
 
-        public static readonly Note B = new Note(Pitch.B, "B", Accident.None, 16);
+        public static readonly Note B = new Note(Pitch.B, "B", Accident.None, MaxNoteIndex);
 
         public static IEnumerable<Note> Notes
         {
@@ -74,6 +67,9 @@ namespace Jaco
         {
             return (int) instance.Pitch;
         }
+
+        private const int MinNoteIndex = 0;
+        private const int MaxNoteIndex = 16;
 
         private readonly int index;
 
@@ -129,27 +125,26 @@ namespace Jaco
         {
             var distance = other - this;
 
-            return distance < 0 ? 12 - distance*-1 : distance;
+            return distance < 0 ? 12 - distance * -1 : distance;
         }
 
         private Note Transpose(Accident accident)
         {
-            var accidentedNoteIndex = index + (int)accident * (Accident == accident ? 2 : 1);
+            return NoteAtIndex(CalculateNoteIndexForAccident(accident));
+        }
 
-            const int minNoteIndex = 0;
-            const int maxNoteIndex = 16;
+        private Note NoteAtIndex(int indexForNote)
+        {
+            return indexForNote < MinNoteIndex
+                ? B
+                : indexForNote > MaxNoteIndex
+                    ? C
+                    : Notes.ElementAt(indexForNote);
+        }
 
-            if (accidentedNoteIndex < minNoteIndex)
-            {
-                return B;
-            }
-
-            if (accidentedNoteIndex > maxNoteIndex)
-            {
-                return C;
-            }
-
-            return Notes.ElementAt(accidentedNoteIndex);
+        private int CalculateNoteIndexForAccident(Accident accident)
+        {
+            return index + (int)accident * (Accident == accident ? 2 : 1);
         }
     }
 }
