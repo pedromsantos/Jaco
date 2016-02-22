@@ -5,22 +5,46 @@ namespace Jaco
 {
     public class Note
     {
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Note) obj);
+        }
+
         public static readonly Note C = new Note(Pitch.C, "C");
+
         public static readonly Note CSharp = new Note(Pitch.CSharp, "C#");
+
         public static readonly Note DFlat = new Note(Pitch.DFlat, "Db");
+
         public static readonly Note D = new Note(Pitch.D, "D");
+
         public static readonly Note DSharp = new Note(Pitch.DSharp, "D#");
+
         public static readonly Note EFlat = new Note(Pitch.EFlat, "Eb");
+
         public static readonly Note E = new Note(Pitch.E, "E");
+
         public static readonly Note F = new Note(Pitch.F, "F");
+
         public static readonly Note FSharp = new Note(Pitch.FSharp, "F#");
+
         public static readonly Note GFlat = new Note(Pitch.GFlat, "Gb");
+
         public static readonly Note G = new Note(Pitch.G, "G");
+
         public static readonly Note GSharp = new Note(Pitch.GSharp, "G#");
+
         public static readonly Note AFlat = new Note(Pitch.AFlat, "Ab");
+
         public static readonly Note A = new Note(Pitch.A, "A");
+
         public static readonly Note ASharp = new Note(Pitch.ASharp, "A#");
+
         public static readonly Note BFlat = new Note(Pitch.BFlat, "Bb");
+
         public static readonly Note B = new Note(Pitch.B, "B");
 
         public static IEnumerable<Note> Notes
@@ -46,7 +70,7 @@ namespace Jaco
                 yield return B;
             }
         }
- 
+
         public static implicit operator int(Note instance)
         {
             return (int) instance.Pitch;
@@ -60,7 +84,7 @@ namespace Jaco
 
         public string Name { get; }
 
-        public Pitch Pitch { get; } 
+        public Pitch Pitch { get; }
 
         public Note Sharp()
         {
@@ -126,6 +150,11 @@ namespace Jaco
             return resultingNote;
         }
 
+        public override int GetHashCode()
+        {
+            return (int) Pitch;
+        }
+
         private int Index
         {
             get
@@ -143,6 +172,11 @@ namespace Jaco
 
                 return index;
             }
+        }
+
+        protected bool Equals(Note other)
+        {
+            return (int)Pitch == (int)other.Pitch;
         }
 
         private int MeasureAbsoluteSemitones(Note other)
