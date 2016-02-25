@@ -203,5 +203,32 @@ namespace JacoTests
                 .Notes
                 .Should().ContainInOrder(expectedChordNotes);
         }
+
+        public static TheoryData<Function, Note> InvertionsForFunctionInPosition
+           => new TheoryData<Function, Note>
+           {
+               { Function.Root,  Note.C },
+               { Function.Third, Note.E },
+               { Function.Fifth, Note.G },
+               { Function.Seventh, Note.B },
+           };
+
+        [Theory, MemberData(nameof(InvertionsForFunctionInPosition))]
+        public void ChooseInvertionThatSatisfiesHavingASpecificNoteAsLead(Function functionAsLead, Note expectedLead)
+        {
+            chord
+                .InversionForFunctionAsLead(functionAsLead)
+                .Lead
+                .Should().Be(expectedLead);
+        }
+
+        [Theory, MemberData(nameof(InvertionsForFunctionInPosition))]
+        public void ChooseInvertionThatSatisfiesHavingASpecificNoteAsBass(Function functionAsBass, Note expectedBass)
+        {
+            chord
+                .InversionForFunctionAsBass(functionAsBass)
+                .Bass
+                .Should().Be(expectedBass);
+        }
     }
 }
