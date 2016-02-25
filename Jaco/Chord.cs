@@ -106,7 +106,9 @@ namespace Jaco
         public Chord FindInversionWithLeadClosestToNote(Note note)
         {
             var function = notes.MinBy(n => 
-                Math.Min(n.Note.MeasureAbsoluteSemitones(note), note.MeasureAbsoluteSemitones(n.Note)))
+                Math.Min(
+                    n.Note.MeasureAbsoluteSemitones(note), 
+                    note.MeasureAbsoluteSemitones(n.Note)))
                 .Function;
 
             return InversionForFunctionAsLead(function);

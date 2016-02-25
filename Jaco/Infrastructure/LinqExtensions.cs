@@ -40,13 +40,13 @@ namespace Jaco.Infrastructure
                     throw new InvalidOperationException("Sequence was empty");
                 }
 
-                TSource min = sourceIterator.Current;
-                TKey minKey = selector(min);
+                var min = sourceIterator.Current;
+                var minKey = selector(min);
 
                 while (sourceIterator.MoveNext())
                 {
-                    TSource candidate = sourceIterator.Current;
-                    TKey candidateProjected = selector(candidate);
+                    var candidate = sourceIterator.Current;
+                    var candidateProjected = selector(candidate);
 
                     if (comparer.Compare(candidateProjected, minKey) < 0)
                     {
@@ -54,6 +54,7 @@ namespace Jaco.Infrastructure
                         minKey = candidateProjected;
                     }
                 }
+
                 return min;
             }
         }
