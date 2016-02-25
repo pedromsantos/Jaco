@@ -121,7 +121,7 @@ namespace Jaco
             return resultingNote;
         }
 
-        private int MeasureAbsoluteSemitones(Note other)
+        public int MeasureAbsoluteSemitones(Note other)
         {
             var distance = other - this;
 
@@ -145,6 +145,16 @@ namespace Jaco
         private int CalculateNoteIndexForAccident(Accident accident)
         {
             return index + (int)accident * (Accident == accident ? 2 : 1);
+        }
+
+        public static bool operator >(Note noteA, Note noteB)
+        {
+            return noteA.Pitch > noteB.Pitch;
+        }
+
+        public static bool operator <(Note noteA, Note noteB)
+        {
+            return noteA.Pitch < noteB.Pitch;
         }
     }
 }

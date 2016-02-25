@@ -230,5 +230,23 @@ namespace JacoTests
                 .Bass
                 .Should().Be(expectedBass);
         }
+
+        public static TheoryData<Note, Note> NotesClosestToPosition 
+           => new TheoryData<Note, Note>
+           {
+               { Note.CSharp,  Note.C },
+               { Note.FSharp, Note.G },
+               { Note.ASharp, Note.B },
+               { Note.F, Note.E },
+           };
+
+        [Theory, MemberData(nameof(NotesClosestToPosition))]
+        public void FindInvertionWithLeadClosestToNote(Note closeToLead, Note expectedLead)
+        {
+            new Chord(Note.C, Note.E, Note.G, Note.B)
+                 .FindInversionWithLeadClosestToNote(closeToLead)
+                 .Lead
+                 .Should().Be(expectedLead);
+        }
     }
 }

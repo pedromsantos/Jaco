@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Jaco
 {
-    public class Interval
+    public class Interval : IComparable<Interval>
     {
         public static readonly Interval Unisson = new Interval(0);
         public static readonly Interval MinorSecond = new Interval(1);
@@ -76,6 +76,11 @@ namespace Jaco
         public static bool operator <(Interval intervalA, int distance)
         {
             return intervalA.distance < distance;
+        }
+
+        public int CompareTo(Interval other)
+        {
+            return distance.CompareTo(other.distance);
         }
     }
 }
