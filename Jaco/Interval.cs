@@ -6,25 +6,28 @@ namespace Jaco
 {
     public class Interval : IComparable<Interval>
     {
-        public static readonly Interval Unisson = new Interval(0);
-        public static readonly Interval MinorSecond = new Interval(1);
-        public static readonly Interval MajorSecond = new Interval(2);
-        public static readonly Interval MinorThird = new Interval(3);
-        public static readonly Interval MajorThird = new Interval(4);
-        public static readonly Interval PerfectForth = new Interval(5);
-        public static readonly Interval DiminishedFifth = new Interval(6);
-        public static readonly Interval PerfectFifth = new Interval(7);
-        public static readonly Interval AugmentedFifth = new Interval(8);
-        public static readonly Interval MajorSixth = new Interval(9);
-        public static readonly Interval MinorSeventh = new Interval(10);
-        public static readonly Interval MajorSeventh = new Interval(11);
-        public static readonly Interval PerfectOctave = new Interval(12);
+        public static readonly Interval Unisson = new Interval(0, "Unisson");
+        public static readonly Interval MinorSecond = new Interval(1, "Minor second");
+        public static readonly Interval MajorSecond = new Interval(2, "Major second");
+        public static readonly Interval MinorThird = new Interval(3, "Minor third");
+        public static readonly Interval MajorThird = new Interval(4, "Major third");
+        public static readonly Interval PerfectForth = new Interval(5, "Perfect fourth");
+        public static readonly Interval DiminishedFifth = new Interval(6, "Diminished fifth");
+        public static readonly Interval PerfectFifth = new Interval(7, "Perfect fifth");
+        public static readonly Interval AugmentedFifth = new Interval(8, "Augmented fifth");
+        public static readonly Interval MajorSixth = new Interval(9, "Major sixth");
+        public static readonly Interval MinorSeventh = new Interval(10, "Minor seventh");
+        public static readonly Interval MajorSeventh = new Interval(11, "Major seventh");
+        public static readonly Interval PerfectOctave = new Interval(12, "Perfect octave");
 
         private readonly int distance;
 
-        private Interval(int distance)
+        public string Name { get; }
+
+        private Interval(int distance, string name)
         {
             this.distance = distance;
+            this.Name = name;
         }
 
         public static IEnumerable<Interval> Intervals

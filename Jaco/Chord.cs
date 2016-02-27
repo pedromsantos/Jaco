@@ -37,6 +37,8 @@ namespace Jaco
 
         public IEnumerable<Note> Notes => ChordNotes.Select(n => n.Note);
 
+        public IEnumerable<string> NoteNames => ChordNotes.Select(n => n.Note.Name);
+
         public Note Bass => ChordNotes.First().Note;
 
         public Note Lead => ChordNotes.Last().Note;
