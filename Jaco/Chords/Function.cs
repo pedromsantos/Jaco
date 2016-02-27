@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Jaco
+namespace Jaco.Chords
 {
     public class Function
     {

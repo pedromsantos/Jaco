@@ -64,14 +64,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChordFunctionShould.cs" />
-    <Compile Include="ChordShould.cs" />
-    <Compile Include="IntervalShould.cs" />
-    <Compile Include="FunctionShould.cs" />
-    <Compile Include="NoteShould.cs" />
+    <Compile Include="Chords\ChordFunctionShould.cs" />
+    <Compile Include="Chords\ChordShould.cs" />
+    <Compile Include="Notes\IntervalShould.cs" />
+    <Compile Include="Chords\FunctionShould.cs" />
+    <Compile Include="Notes\NoteShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScaleHarmonizerShould.cs" />
-    <Compile Include="ScaleShould.cs" />
+    <Compile Include="Scales\ScaleHarmonizerShould.cs" />
+    <Compile Include="Scales\ScaleShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,4 +1,6 @@
-﻿namespace Jaco
+﻿using Jaco.Chords;
+
+namespace Jaco.Scales
 {
     public interface IHarmonizer
     {

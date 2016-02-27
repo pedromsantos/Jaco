@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Jaco.Infrastructure;
+using Jaco.Notes;
 
-namespace Jaco
+namespace Jaco.Chords
 {
     public class Chord
     {

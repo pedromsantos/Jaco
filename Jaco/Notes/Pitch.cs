@@ -1,4 +1,4 @@
-﻿namespace Jaco
+﻿namespace Jaco.Notes
 {
     public enum Pitch
     {

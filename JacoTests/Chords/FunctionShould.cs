@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using Jaco;
+using Jaco.Chords;
 using Xunit;
 
-namespace JacoTests
+namespace JacoTests.Chords
 {
     public class FunctionShould
     {

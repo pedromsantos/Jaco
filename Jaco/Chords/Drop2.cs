@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Jaco.Infrastructure;
 
-namespace Jaco
+namespace Jaco.Chords
 {
     public class Drop2 : Chord
     {

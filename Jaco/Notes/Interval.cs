@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jaco
+namespace Jaco.Notes
 {
     public class Interval : IComparable<Interval>
     {

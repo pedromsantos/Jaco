@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Jaco.Notes;
 
-namespace Jaco
+namespace Jaco.Scales
 {
     public enum ScaleQuality
     {

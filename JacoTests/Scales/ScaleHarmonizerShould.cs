@@ -1,9 +1,11 @@
 ﻿using System;
 using FluentAssertions;
-using Jaco;
+using Jaco.Chords;
+using Jaco.Notes;
+using Jaco.Scales;
 using Xunit;
 
-namespace JacoTests
+namespace JacoTests.Scales
 {
     public class ScaleHarmonizerShould
     {

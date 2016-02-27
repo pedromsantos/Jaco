@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Jaco;
+using Jaco.Chords;
+using Jaco.Notes;
 using Xunit;
 
-namespace JacoTests
+namespace JacoTests.Chords
 {
     public class ChordFunctionShould
     {

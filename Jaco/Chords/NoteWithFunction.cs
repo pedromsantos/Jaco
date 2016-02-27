@@ -1,4 +1,6 @@
-namespace Jaco
+using Jaco.Notes;
+
+namespace Jaco.Chords
 {
     public struct NoteWithFunction
     {
