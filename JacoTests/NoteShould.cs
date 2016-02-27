@@ -146,5 +146,33 @@ namespace JacoTests
         {
             noteToTranspose.Transpose(interval).Should().Be(transposedNote);
         }
+
+        public static TheoryData<Note, Note> EqualNotes
+            => new TheoryData<Note, Note>
+            {
+                {Note.C, Note.C},
+                {Note.CSharp, Note.CSharp},
+                {Note.DFlat, Note.DFlat},
+                {Note.D, Note.D},
+                {Note.DSharp, Note.DSharp},
+                {Note.EFlat, Note.EFlat},
+                {Note.E, Note.E},
+                {Note.F, Note.F},
+                {Note.FSharp, Note.FSharp},
+                {Note.GFlat, Note.GFlat},
+                {Note.G, Note.G},
+                {Note.GSharp, Note.GSharp},
+                {Note.AFlat, Note.AFlat},
+                {Note.A, Note.A},
+                {Note.ASharp, Note.ASharp},
+                {Note.BFlat, Note.BFlat},
+                {Note.B, Note.B}
+            };
+
+        [Theory, MemberData(nameof(EqualNotes))]
+        public void BeEqualWhenSameNote(Note note, Note otherNote)
+        {
+            note.Should().BeSameAs(otherNote);
+        }
     }
 }
