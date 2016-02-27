@@ -91,6 +91,6 @@ namespace JacoTests
         public void FindRelativeScale(Scale scale, Scale expectedScale)
         {
             scale.Relative().Should().Be(expectedScale);
-        }
+        } 
     }
 }

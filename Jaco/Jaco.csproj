@@ -55,6 +55,7 @@
     <Compile Include="NoteWithFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pitch.cs" />
+    <Compile Include="TriadsHarmonizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
