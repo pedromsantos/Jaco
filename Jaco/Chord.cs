@@ -1,54 +1,45 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Jaco.Infrastructure;
 
 namespace Jaco
 {
     public class Chord
     {
-        protected readonly List<NoteWithFunction> notes;
+        protected readonly List<NoteWithFunction> ChordNotes;
 
         protected Chord()
         {
-            notes = new List<NoteWithFunction>();
+            ChordNotes = new List<NoteWithFunction>();
         }
 
-        public Chord(params Note[] notes)
-            :this()
+        public Chord(params NoteWithFunction[] notes)
         {
-            for (var i = 0; i < notes.Length; i++)
-            {
-                this.notes.Add(new NoteWithFunction(notes[i], Function.Functions.ElementAt(i)));
-            }
+            ChordNotes = new List<NoteWithFunction>();
+            ChordNotes.AddRange(notes);
         }
 
         public Chord(Note root, ChordFunction function)
             :this()
         {
+            ChordNotes.Add(new NoteWithFunction(root, Function.Root));
+
             var noteFunctionIndex = 1;
 
-            notes.Add(new NoteWithFunction(root, Function.Root));
             foreach (var interval in function.Intervals)
             {
-                var note = new NoteWithFunction(root.Transpose(interval).Sharp().Flat(), Function.Functions.ElementAt(noteFunctionIndex));
-                notes.Add(note);
+                var note = new NoteWithFunction(root.Transpose(interval), Function.Functions.ElementAt(noteFunctionIndex));
+                ChordNotes.Add(note);
                 noteFunctionIndex++;
             }
         }
 
-        public Chord(params NoteWithFunction[] notes)
-        {
-            this.notes = new List<NoteWithFunction>();
-            this.notes.AddRange(notes);
-        }
+        public IEnumerable<Note> Notes => ChordNotes.Select(n => n.Note);
 
-        public IEnumerable<Note> Notes => notes.Select(n => n.Note);
+        public Note Bass => ChordNotes.First().Note;
 
-        public Note Bass => notes.First().Note;
-
-        public Note Lead => notes.Last().Note;
+        public Note Lead => ChordNotes.Last().Note;
 
         public string Name
         {
@@ -61,33 +52,33 @@ namespace Jaco
 
         public Note NoteForFunction(Function function)
         {
-            return notes.First(n => n.Function == function).Note;
+            return ChordNotes.First(n => n.Function == function).Note;
         }
 
         public virtual Chord Invert()
         {
-            var invertedChordNotes = notes.Rotate();
+            var invertedChordNotes = ChordNotes.Rotate();
             return new Chord(invertedChordNotes.ToArray());
         }
 
         public Chord ToDrop2()
         {
-            var swaped = notes.Swap(0, 1);
+            var swaped = ChordNotes.Swap(0, 1);
             var drop2Notes = swaped.Rotate();
             return new Drop2(drop2Notes.ToArray());
         }
 
         public Chord ToDrop3()
         {
-            return new Drop3(ToDrop2().ToDrop2().notes.ToArray());
+            return new Drop3(ToDrop2().ToDrop2().ChordNotes.ToArray());
         }
 
         public Chord ToClosed()
         {
             var closedChordNotes = new List<NoteWithFunction>();
-            closedChordNotes.AddRange(notes);
+            closedChordNotes.AddRange(ChordNotes);
 
-            foreach (var note in notes)
+            foreach (var note in ChordNotes)
             {
                 closedChordNotes[note.Function.Index] = note;
             }
@@ -98,17 +89,17 @@ namespace Jaco
         public Chord Transpose(Note newRoot)
         {
             var interval = NoteForFunction(Function.Root).IntervalWithOther(newRoot);
-            return new Chord(notes.Select(n => new NoteWithFunction(n.Note.Transpose(interval), n.Function)).ToArray());
+            return new Chord(ChordNotes.Select(n => new NoteWithFunction(n.Note.Transpose(interval), n.Function)).ToArray());
         }
 
         public Chord InversionForFunctionAsLead(Function functionAsLead)
         {
-            return InversionForNoteFunction(functionAsLead, c => c.notes.Last().Function);
+            return InversionForNoteFunction(functionAsLead, c => c.ChordNotes.Last().Function);
         }
 
         public Chord InversionForFunctionAsBass(Function functionAsBass)
         {
-            return InversionForNoteFunction(functionAsBass, c => c.notes.First().Function);
+            return InversionForNoteFunction(functionAsBass, c => c.ChordNotes.First().Function);
         }
 
         private Chord InversionForNoteFunction(Function function, Func<Chord, Function> functionAtDesiredPosition)
@@ -125,7 +116,7 @@ namespace Jaco
 
         public Chord FindInversionWithLeadClosestToNote(Note note)
         {
-            var function = notes.MinBy(n => 
+            var function = ChordNotes.MinBy(n => 
                 Math.Min(
                     n.Note.MeasureAbsoluteSemitones(note), 
                     note.MeasureAbsoluteSemitones(n.Note)))

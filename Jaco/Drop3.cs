@@ -5,11 +5,6 @@ namespace Jaco
 {
     public class Drop3 : Chord
     {
-        public Drop3(params Note[] notes)
-            : base(notes)
-        {
-        }
-
         public Drop3(params NoteWithFunction[] notes)
             : base(notes)
         {
@@ -17,7 +12,7 @@ namespace Jaco
 
         public override Chord Invert()
         {
-            return new Drop3(notes.Rotate().Rotate().Swap(1, 2).ToArray());
+            return new Drop3(ChordNotes.Rotate().Rotate().Swap(1, 2).ToArray());
         }
     }
 }

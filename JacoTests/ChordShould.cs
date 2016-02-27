@@ -12,7 +12,7 @@ namespace JacoTests
 
         public ChordShould()
         {
-            chord = new Chord(Note.C, Note.E, Note.G, Note.B, Note.D, Note.F, Note.A);
+            chord = new Chord(Note.C, ChordFunction.Major7);
         }
 
         public static TheoryData<Function, Note> FunctionsToNotes
@@ -22,9 +22,6 @@ namespace JacoTests
                { Function.Third, Note.E },
                { Function.Fifth, Note.G },
                { Function.Seventh, Note.B },
-               { Function.Ninth, Note.D },
-               { Function.Eleventh, Note.F },
-               { Function.Thirteenth, Note.A },
            };
 
         [Theory, MemberData(nameof(FunctionsToNotes))]
@@ -42,28 +39,49 @@ namespace JacoTests
         [Fact]
         public void ReturnHighestNoteForLead()
         {
-            chord.Lead.Should().Be(Note.A);
+            chord.Lead.Should().Be(Note.B);
         }
 
         [Fact]
         public void BeNamedAfterTheRootNote()
         {
-            var cmaj = new Chord(Note.C, Note.E, Note.G);
+            var cmaj = new Chord(Note.C, ChordFunction.Major);
             cmaj.Name.Should().StartWith("C");
+        }
+
+        public static TheoryData<ChordFunction, IEnumerable<Note>> ChordFunctions
+            => new TheoryData<ChordFunction, IEnumerable<Note>>
+            {
+                { ChordFunction.Major,  new [] { Note.C, Note.E, Note.G}},
+                { ChordFunction.Augmented,  new [] { Note.C, Note.E, Note.AFlat}},
+                { ChordFunction.Minor,  new [] { Note.C, Note.EFlat, Note.G}},
+                { ChordFunction.Diminished,  new [] { Note.C, Note.EFlat, Note.GFlat}},
+                { ChordFunction.Major7,  new [] { Note.C, Note.E, Note.G, Note.B}},
+                { ChordFunction.Diminished7,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.A}},
+                { ChordFunction.Minor7,  new [] { Note.C, Note.EFlat, Note.G, Note.BFlat}},
+                { ChordFunction.Minor7b5,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.BFlat}},
+                { ChordFunction.Diminished7,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.A}},
+            };
+
+        [Theory, MemberData(nameof(ChordFunctions))]
+        public void CreateChordFromRootAndFunctions(ChordFunction function, IEnumerable<Note> expectedNotes)
+        {
+            new Chord(Note.C, function).Notes
+                .Should().ContainInOrder(expectedNotes);
         }
 
         public static TheoryData<Chord, string> ChordNames
            => new TheoryData<Chord, string>
            {
-               { new Chord(Note.C, Note.E, Note.G), "Maj" },
-               { new Chord(Note.C, Note.E, Note.GSharp), "Aug" },
-               { new Chord(Note.C, Note.EFlat, Note.G), "Min" },
-               { new Chord(Note.C, Note.EFlat, Note.GFlat), "Dim" },
-               { new Chord(Note.C, Note.E, Note.G, Note.B), "Maj7" },
-               { new Chord(Note.C, Note.E, Note.G, Note.BFlat), "Dom7" },
-               { new Chord(Note.C, Note.EFlat, Note.G, Note.BFlat), "Min7" },
-               { new Chord(Note.C, Note.EFlat, Note.GFlat, Note.BFlat), "Min7b5" },
-               { new Chord(Note.C, Note.EFlat, Note.GFlat, Note.A), "Dim7" },
+               { new Chord(Note.C, ChordFunction.Major), "Maj" },
+               { new Chord(Note.C, ChordFunction.Augmented), "Aug" },
+               { new Chord(Note.C, ChordFunction.Minor), "Min" },
+               { new Chord(Note.C, ChordFunction.Diminished), "Dim" },
+               { new Chord(Note.C, ChordFunction.Major7), "Maj7" },
+               { new Chord(Note.C, ChordFunction.Dominant7), "Dom7" },
+               { new Chord(Note.C, ChordFunction.Minor7), "Min7" },
+               { new Chord(Note.C, ChordFunction.Minor7b5), "Min7b5" },
+               { new Chord(Note.C, ChordFunction.Diminished7), "Dim7" },
            };
 
         [Theory, MemberData(nameof(ChordNames))]
@@ -75,13 +93,13 @@ namespace JacoTests
         public static TheoryData<Chord, IEnumerable<Note>> ChordInvertions 
            => new TheoryData<Chord, IEnumerable<Note>>
            {
-               { new Chord(Note.C, Note.E, Note.G), new [] {Note.E, Note.G, Note.C} },
-               { new Chord(Note.E, Note.G, Note.C), new [] {Note.G, Note.C, Note.E} },
-               { new Chord(Note.G, Note.C, Note.E), new [] {Note.C, Note.E, Note.G} },
-               { new Chord(Note.C, Note.E, Note.G, Note.B), new [] {Note.E, Note.G, Note.B, Note.C} },
-               { new Chord(Note.E, Note.G, Note.B, Note.C), new [] {Note.G, Note.B, Note.C, Note.E} },
-               { new Chord(Note.G, Note.B, Note.C, Note.E), new [] {Note.B, Note.C, Note.E, Note.G} },
-               { new Chord(Note.B, Note.C, Note.E, Note.G), new [] {Note.C, Note.E, Note.G, Note.B} },
+               { new Chord(Note.C,ChordFunction.Major), new [] {Note.E, Note.G, Note.C} },
+               { new Chord(Note.C, ChordFunction.Major).Invert(), new [] {Note.G, Note.C, Note.E} },
+               { new Chord(Note.C, ChordFunction.Major).Invert().Invert(), new [] {Note.C, Note.E, Note.G} },
+               { new Chord(Note.C, ChordFunction.Major7), new [] {Note.E, Note.G, Note.B, Note.C} },
+               { new Chord(Note.C, ChordFunction.Major7).Invert(), new [] {Note.G, Note.B, Note.C, Note.E} },
+               { new Chord(Note.C, ChordFunction.Major7).Invert().Invert(), new [] {Note.B, Note.C, Note.E, Note.G} },
+               { new Chord(Note.C, ChordFunction.Major7).Invert().Invert().Invert(), new [] {Note.C, Note.E, Note.G, Note.B} },
            };
 
         [Theory, MemberData(nameof(ChordInvertions))]
@@ -126,7 +144,7 @@ namespace JacoTests
         [Fact]
         public void BeAbleToCreateDrop2Chord()
         {
-            new Chord(Note.C, Note.E, Note.G, Note.B)
+            new Chord(Note.C, ChordFunction.Major7)
                 .ToDrop2()
                 .Notes
                 .Should().ContainInOrder(Note.C, Note.G, Note.B, Note.E);
@@ -135,7 +153,7 @@ namespace JacoTests
         [Fact]
         public void BeAbleToCreateDrop3Chord()
         {
-            new Chord(Note.C, Note.E, Note.G, Note.B)
+            new Chord(Note.C, ChordFunction.Major7)
                 .ToDrop3()
                 .Notes
                 .Should().ContainInOrder(Note.C, Note.B, Note.E, Note.G);
@@ -144,61 +162,61 @@ namespace JacoTests
         [Fact]
         public void BeAbleToCreateClosedChord()
         {
-            new Chord(Note.C, Note.E, Note.G, Note.B)
+            new Chord(Note.C, ChordFunction.Major7)
                 .ToDrop2()
                 .ToClosed()
                 .Notes
                 .Should().ContainInOrder(Note.C, Note.E, Note.G, Note.B);
         }
 
-        public static TheoryData<IEnumerable<Note>, IEnumerable<Note>> Drop2Invertions
-           => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
+        public static TheoryData<Chord, IEnumerable<Note>> Drop2Invertions
+           => new TheoryData<Chord, IEnumerable<Note>>
            {
-               { new[] { Note.C, Note.G, Note.B, Note.E }, new [] { Note.E, Note.B, Note.C, Note.G } },
-               { new[] { Note.E, Note.B, Note.C, Note.G }, new [] { Note.G, Note.C, Note.E, Note.B } },
-               { new[] { Note.G, Note.C, Note.E, Note.B }, new [] { Note.B, Note.E, Note.G, Note.C } },
-               { new[] { Note.B, Note.E, Note.G, Note.C }, new [] { Note.C, Note.G, Note.B, Note.E } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop2(), new [] { Note.E, Note.B, Note.C, Note.G } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop2().Invert(), new [] { Note.G, Note.C, Note.E, Note.B } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop2().Invert().Invert(), new [] { Note.B, Note.E, Note.G, Note.C } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop2().Invert().Invert().Invert(), new [] { Note.C, Note.G, Note.B, Note.E } },
            };
 
         [Theory, MemberData(nameof(Drop2Invertions))]
-        public void InvertDrop2Chord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
+        public void InvertDrop2Chord(Chord theChord, IEnumerable<Note> expectedChordNotes)
         {
-            new Drop2(chordNotes.ToArray())
+            theChord
                 .Invert()
                 .Notes
                 .Should().ContainInOrder(expectedChordNotes);
         }
 
-        public static TheoryData<IEnumerable<Note>, IEnumerable<Note>> Drop3Invertions
-           => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
+        public static TheoryData<Chord, IEnumerable<Note>> Drop3Invertions
+           => new TheoryData<Chord, IEnumerable<Note>>
            {
-               { new[] { Note.C, Note.B, Note.E, Note.G }, new [] { Note.E, Note.C, Note.G, Note.B } },
-               { new[] { Note.E, Note.C, Note.G, Note.B }, new [] { Note.G, Note.E, Note.B, Note.C } },
-               { new[] { Note.G, Note.E, Note.B, Note.C }, new [] { Note.B, Note.G, Note.C, Note.E } },
-               { new[] { Note.B, Note.G, Note.C, Note.E }, new [] { Note.C, Note.B, Note.E, Note.G } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop3(), new [] { Note.E, Note.C, Note.G, Note.B } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop3().Invert(), new [] { Note.G, Note.E, Note.B, Note.C } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop3().Invert().Invert(), new [] { Note.B, Note.G, Note.C, Note.E } },
+               { new Chord(Note.C, ChordFunction.Major7).ToDrop3().Invert().Invert().Invert(), new [] { Note.C, Note.B, Note.E, Note.G } },
            };
 
         [Theory, MemberData(nameof(Drop3Invertions))]
-        public void InvertDrop3Chord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
+        public void InvertDrop3Chord(Chord theChord, IEnumerable<Note> expectedChordNotes)
         {
-            new Drop3(chordNotes.ToArray())
+           theChord 
                 .Invert()
                 .Notes
                 .Should().ContainInOrder(expectedChordNotes);
         }
 
-        public static TheoryData<IEnumerable<Note>, IEnumerable<Note>> Transpose
-           => new TheoryData<IEnumerable<Note>, IEnumerable<Note>>
+        public static TheoryData<Chord, IEnumerable<Note>> Transpose
+           => new TheoryData<Chord, IEnumerable<Note>>
            {
-                { new[] { Note.C, Note.E, Note.G }, new [] { Note.F, Note.A, Note.C } },
-                { new[] { Note.C, Note.E, Note.G }, new [] { Note.D, Note.GFlat, Note.A } },
-                { new[] { Note.C, Note.E, Note.G }, new [] { Note.E, Note.AFlat, Note.B } },
+                { new Chord(Note.C, ChordFunction.Major), new [] { Note.F, Note.A, Note.C } },
+                { new Chord(Note.C, ChordFunction.Major), new [] { Note.D, Note.GFlat, Note.A } },
+                { new Chord(Note.C, ChordFunction.Major), new [] { Note.E, Note.AFlat, Note.B } },
            };
 
         [Theory, MemberData(nameof(Transpose))]
-        public void TransposeChord(IEnumerable<Note> chordNotes, IEnumerable<Note> expectedChordNotes)
+        public void TransposeChord(Chord theChord, IList<Note> expectedChordNotes)
         {
-            new Chord(chordNotes.ToArray())
+            theChord
                 .Transpose(expectedChordNotes.First())
                 .Notes
                 .Should().ContainInOrder(expectedChordNotes);
@@ -243,32 +261,10 @@ namespace JacoTests
         [Theory, MemberData(nameof(NotesClosestToPosition))]
         public void FindInvertionWithLeadClosestToNote(Note closeToLead, Note expectedLead)
         {
-            new Chord(Note.C, Note.E, Note.G, Note.B)
+            new Chord(Note.C, ChordFunction.Major7)
                  .FindInversionWithLeadClosestToNote(closeToLead)
                  .Lead
                  .Should().Be(expectedLead);
-        }
-
-
-        public static TheoryData<ChordFunction, IEnumerable<Note>> ChordFunctions
-           => new TheoryData<ChordFunction, IEnumerable<Note>>
-           {
-               { ChordFunction.Major,  new [] { Note.C, Note.E, Note.G}},
-               { ChordFunction.Augmented,  new [] { Note.C, Note.E, Note.AFlat}},
-               { ChordFunction.Minor,  new [] { Note.C, Note.EFlat, Note.G}},
-               { ChordFunction.Diminished,  new [] { Note.C, Note.EFlat, Note.GFlat}},
-               { ChordFunction.Major7,  new [] { Note.C, Note.E, Note.G, Note.B}},
-               { ChordFunction.Diminished7,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.A}},
-               { ChordFunction.Minor7,  new [] { Note.C, Note.EFlat, Note.G, Note.BFlat}},
-               { ChordFunction.Minor7b5,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.BFlat}},
-               { ChordFunction.Diminished7,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.A}},
-           };
-
-        [Theory, MemberData(nameof(ChordFunctions))]
-        public void CreateChordFromRootAndFunctions(ChordFunction function, IEnumerable<Note> expectedNotes)
-        {
-            new Chord(Note.C, function).Notes
-                .Should().ContainInOrder(expectedNotes);
         }
     }
 }

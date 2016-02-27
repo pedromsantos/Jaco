@@ -5,11 +5,6 @@ namespace Jaco
 {
     public class Drop2 : Chord
     {
-        public Drop2(params Note[] notes)
-            : base(notes)
-        {
-        }
-
         public Drop2(params NoteWithFunction[] notes)
             : base(notes)
         {
@@ -18,9 +13,9 @@ namespace Jaco
         public override Chord Invert()
         {
             return new Drop2((new[] 
-                { notes.Last() }
+                { ChordNotes.Last() }
                     .Concat(
-                    notes.Take(notes.Count - 1)
+                    ChordNotes.Take(ChordNotes.Count - 1)
                         .Rotate()
                         .Rotate())
                         ).ToArray());
