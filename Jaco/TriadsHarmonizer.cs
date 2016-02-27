@@ -13,7 +13,9 @@ namespace Jaco
 
         public Chord I()
         {
-            return new Chord(scale.I, ChordFunction.Major);
+            return scale.Quality == ScaleQuality.Major
+                ? new Chord(scale.I, ChordFunction.Major)
+                : new Chord(scale.I, ChordFunction.Minor);
         }
 
         public Chord II()

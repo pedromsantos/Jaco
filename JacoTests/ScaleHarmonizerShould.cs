@@ -25,7 +25,7 @@ namespace JacoTests
                 { () => new SeventhsHarmonizer(Scale.CMajor).VI(),  new Chord(Note.A, ChordFunction.Minor7)},
                 { () => new SeventhsHarmonizer(Scale.CMajor).VII(),  new Chord(Note.B, ChordFunction.Minor7b5)},
                 // Minor scales
-                { () => new TriadsHarmonizer(Scale.AMinor).I(),  new Chord(Note.A, ChordFunction.Major)},
+                { () => new TriadsHarmonizer(Scale.AMinor).I(),  new Chord(Note.A, ChordFunction.Minor)},
                 { () => new TriadsHarmonizer(Scale.AMinor).II(),  new Chord(Note.B, ChordFunction.Diminished)},
                 { () => new TriadsHarmonizer(Scale.AMinor).III(),  new Chord(Note.C, ChordFunction.Augmented)},
                 { () => new TriadsHarmonizer(Scale.AMinor).IV(),  new Chord(Note.D, ChordFunction.Minor)},
