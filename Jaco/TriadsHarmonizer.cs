@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Jaco
 {
     public class TriadsHarmonizer : IHarmonizer
