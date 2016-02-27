@@ -49,6 +49,7 @@
     <Compile Include="Drop3.cs" />
     <Compile Include="Infrastructure\LinqExtensions.cs" />
     <Compile Include="Interval.cs" />
+    <Compile Include="Scale.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="NoteWithFunction.cs" />
