@@ -248,5 +248,27 @@ namespace JacoTests
                  .Lead
                  .Should().Be(expectedLead);
         }
+
+
+        public static TheoryData<ChordFunction, IEnumerable<Note>> ChordFunctions
+           => new TheoryData<ChordFunction, IEnumerable<Note>>
+           {
+               { ChordFunction.Major,  new [] { Note.C, Note.E, Note.G}},
+               { ChordFunction.Augmented,  new [] { Note.C, Note.E, Note.AFlat}},
+               { ChordFunction.Minor,  new [] { Note.C, Note.EFlat, Note.G}},
+               { ChordFunction.Diminished,  new [] { Note.C, Note.EFlat, Note.GFlat}},
+               { ChordFunction.Major7,  new [] { Note.C, Note.E, Note.G, Note.B}},
+               { ChordFunction.Diminished7,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.A}},
+               { ChordFunction.Minor7,  new [] { Note.C, Note.EFlat, Note.G, Note.BFlat}},
+               { ChordFunction.Minor7b5,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.BFlat}},
+               { ChordFunction.Diminished7,  new [] { Note.C, Note.EFlat, Note.GFlat, Note.A}},
+           };
+
+        [Theory, MemberData(nameof(ChordFunctions))]
+        public void CreateChordFromRootAndFunctions(ChordFunction function, IEnumerable<Note> expectedNotes)
+        {
+            new Chord(Note.C, function).Notes
+                .Should().ContainInOrder(expectedNotes);
+        }
     }
 }

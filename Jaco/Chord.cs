@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Jaco.Infrastructure;
 
 namespace Jaco
@@ -9,12 +10,31 @@ namespace Jaco
     {
         protected readonly List<NoteWithFunction> notes;
 
-        public Chord(params Note[] notes)
+        protected Chord()
         {
-            this.notes = new List<NoteWithFunction>();
+            notes = new List<NoteWithFunction>();
+        }
+
+        public Chord(params Note[] notes)
+            :this()
+        {
             for (var i = 0; i < notes.Length; i++)
             {
                 this.notes.Add(new NoteWithFunction(notes[i], Function.Functions.ElementAt(i)));
+            }
+        }
+
+        public Chord(Note root, ChordFunction function)
+            :this()
+        {
+            var noteFunctionIndex = 1;
+
+            notes.Add(new NoteWithFunction(root, Function.Root));
+            foreach (var interval in function.Intervals)
+            {
+                var note = new NoteWithFunction(root.Transpose(interval).Sharp().Flat(), Function.Functions.ElementAt(noteFunctionIndex));
+                notes.Add(note);
+                noteFunctionIndex++;
             }
         }
 
