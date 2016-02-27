@@ -36,9 +36,9 @@ First load the Jaco.dll in C# interactive
 ```csharp
 var cmaj = new Jaco.Chord(Jaco.Note.C, Jaco.ChordFunction.Major)
 ```
-| Example                                      | Output             |
-| -------------------------------------------- | -------------------|
-| > cmaj.name                                  | "CMaj"             |
-| > var noteNames = cmaj.NoteNames; notenames; | {"C", "E", "G"}    |
-| > cmaj.Lead.Name                             | "G"                |
-| > cmaj.Bass.Name                             | "C"                |
+| Example                                        | Output             |
+| ---------------------------------------------- | -------------------|
+| > cmaj.name                                    | "CMaj"             |
+| > var noteNames = cmaj.NoteNames; > notenames; | {"C", "E", "G"}    |
+| > cmaj.Lead.Name                               | "G"                |
+| > cmaj.Bass.Name                               | "C"                |
