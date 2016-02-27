@@ -78,5 +78,19 @@ namespace JacoTests
         {
             Scale.CMajor.DoesNoteBelongToScale(Note.ASharp).Should().Be(false);
         }
+
+
+        public static TheoryData<Scale, Scale> RelativeScales
+            => new TheoryData<Scale, Scale>
+            {
+                { Scale.CMajor,  Scale.AMinor},
+                { Scale.AMinor,  Scale.CMajor},
+            };
+
+        [Theory, MemberData(nameof(RelativeScales))]
+        public void FindRelativeScale(Scale scale, Scale expectedScale)
+        {
+            scale.Relative().Should().Be(expectedScale);
+        }
     }
 }

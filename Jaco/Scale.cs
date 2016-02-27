@@ -165,6 +165,13 @@ namespace Jaco
             return Notes.Any(n => n.Name == note.Name);
         }
 
+        public Scale Relative()
+        {
+            return Quality == ScaleQuality.Major
+                ? ScaleForRootAndQuality(VI, ScaleQuality.Minor)
+                : ScaleForRootAndQuality(III, ScaleQuality.Major);
+        }
+
         private IEnumerable<Note> GenerateScaleNotes()
         {
             if (accidentals == 0)
