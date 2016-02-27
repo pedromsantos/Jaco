@@ -1,6 +1,8 @@
+using System.Linq;
+
 namespace Jaco
 {
-    public class TriadsHarmonizer
+    public class TriadsHarmonizer : IHarmonizer
     {
         private readonly Scale scale;
 
@@ -16,17 +18,23 @@ namespace Jaco
 
         public Chord II()
         {
-            return new Chord(scale.II, ChordFunction.Minor);
+            return scale.Quality == ScaleQuality.Major
+                ? new Chord(scale.II, ChordFunction.Minor)
+                : new Chord(scale.II, ChordFunction.Diminished);
         }
 
         public Chord III()
         {
-            return new Chord(scale.III, ChordFunction.Minor);
+            return scale.Quality == ScaleQuality.Major
+                ? new Chord(scale.III, ChordFunction.Minor)
+                : new Chord(scale.III, ChordFunction.Augmented);
         }
 
         public Chord IV()
         {
-            return new Chord(scale.IV, ChordFunction.Major);
+            return scale.Quality == ScaleQuality.Major
+                ? new Chord(scale.IV, ChordFunction.Major)
+                : new Chord(scale.IV, ChordFunction.Minor);
         }
 
         public Chord V()
@@ -36,12 +44,16 @@ namespace Jaco
 
         public Chord VI()
         {
-            return new Chord(scale.VI, ChordFunction.Minor);
+            return scale.Quality == ScaleQuality.Major
+                ? new Chord(scale.VI, ChordFunction.Minor)
+                : new Chord(scale.VI, ChordFunction.Major);
         }
 
         public Chord VII()
         {
-            return new Chord(scale.VII, ChordFunction.Diminished);
+            return scale.Quality == ScaleQuality.Major
+                ? new Chord(scale.VII, ChordFunction.Diminished)
+                : new Chord(scale.VII.Sharp(), ChordFunction.Diminished);
         }
     }
 }

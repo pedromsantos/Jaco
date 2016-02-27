@@ -83,18 +83,15 @@ namespace Jaco
 
         private readonly int accidentals;
 
-        private readonly Note root;
-
         public ScaleQuality Quality { get; }
 
         protected Scale(Note root, int accidentals, ScaleQuality quality)
         {
-            this.root = root;
             Quality = quality;
             this.accidentals = accidentals;
 
             Notes = GenerateScaleNotes();
-            Notes = OrderScaleNotes();
+            OrderScaleNotes(root);
 
             const string major = "Major";
             const string minor = "Minor";
@@ -104,7 +101,7 @@ namespace Jaco
 
         public string Name { get; private set; }
 
-        public IEnumerable<Note> Notes { get; }
+        public IEnumerable<Note> Notes { get; private set; }
 
         public static IEnumerable<Scale> Scales
         {
@@ -157,7 +154,7 @@ namespace Jaco
 
         public static Scale ScaleForRootAndQuality(Note root, ScaleQuality quality)
         {
-            return Scales.First(k => k.root == root && k.Quality == quality);
+            return Scales.First(k => k.I == root && k.Quality == quality);
         }
 
         public bool DoesNoteBelongToScale(Note note)
@@ -168,8 +165,8 @@ namespace Jaco
         public Scale Relative()
         {
             return Quality == ScaleQuality.Major
-                ? ScaleForRootAndQuality(VI, ScaleQuality.Minor)
-                : ScaleForRootAndQuality(III, ScaleQuality.Major);
+                ? ScaleForRootAndQuality(VI, ScaleQuality.Minor).OrderScaleNotes(VI)
+                : ScaleForRootAndQuality(III, ScaleQuality.Major).OrderScaleNotes(III);
         }
 
         private IEnumerable<Note> GenerateScaleNotes()
@@ -188,13 +185,15 @@ namespace Jaco
                        : Fifths.Take(accidentals).Select(n => n.Sharp()).Union(Fifths.Skip(accidentals)).ToList();
         }
 
-        private IEnumerable<Note> OrderScaleNotes()
+        private Scale OrderScaleNotes(Note rootNote)
         {
             var enumerable = Notes.OrderBy(n => n.Pitch).ToList();
 
-            return
-                enumerable.SkipWhile(n => n.Name != root.Name)
-                          .Union(enumerable.TakeWhile(n => n.Name != root.Name));
+            Notes =
+                enumerable.SkipWhile(n => n.Name != rootNote.Name)
+                          .Union(enumerable.TakeWhile(n => n.Name != rootNote.Name));
+
+            return this;
         }
     }
 }

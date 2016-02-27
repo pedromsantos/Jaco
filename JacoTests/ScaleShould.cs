@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using FluentAssertions;
 using Jaco;
 using Xunit;
@@ -80,17 +81,17 @@ namespace JacoTests
         }
 
 
-        public static TheoryData<Scale, Scale> RelativeScales
-            => new TheoryData<Scale, Scale>
+        public static TheoryData<Scale, IEnumerable<Note>> RelativeScales
+            => new TheoryData<Scale, IEnumerable<Note>>
             {
-                { Scale.CMajor,  Scale.AMinor},
-                { Scale.AMinor,  Scale.CMajor},
+                { Scale.CMajor,  Scale.AMinor.Notes},
+                { Scale.AMinor,  Scale.CMajor.Notes},
             };
 
         [Theory, MemberData(nameof(RelativeScales))]
-        public void FindRelativeScale(Scale scale, Scale expectedScale)
+        public void FindRelativeScale(Scale scale, IEnumerable<Note> expectedScaleNotes)
         {
-            scale.Relative().Should().Be(expectedScale);
-        } 
+            scale.Relative().Notes.Should().ContainInOrder(expectedScaleNotes);
+        }
     }
 }
