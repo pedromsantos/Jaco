@@ -20,14 +20,14 @@ namespace Jaco.Notes
         public static readonly Interval MajorSeventh = new Interval(11, "Major seventh");
         public static readonly Interval PerfectOctave = new Interval(12, "Perfect octave");
 
-        private readonly int distance;
+        public int Distance { get; }
 
         public string Name { get; }
 
         private Interval(int distance, string name)
         {
-            this.distance = distance;
-            this.Name = name;
+            Distance = distance;
+            Name = name;
         }
 
         public static IEnumerable<Interval> Intervals
@@ -52,38 +52,38 @@ namespace Jaco.Notes
 
         public static Interval CreateIntervalFromDistance(int distance)
         {
-            return Intervals.Single(interval => interval.distance == distance);
+            return Intervals.Single(interval => interval.Distance == distance);
         }
 
         public static Interval operator -(Interval intervalA, Interval intervalB)
         {
-            var difference = Math.Abs(intervalA.distance - intervalB.distance);
-            return Intervals.Single(interval => interval.distance == difference);
+            var difference = Math.Abs(intervalA.Distance - intervalB.Distance);
+            return Intervals.Single(interval => interval.Distance == difference);
         }
 
         public static bool operator >(Interval intervalA, Interval intervalB)
         {
-            return intervalA.distance > intervalB.distance;
+            return intervalA.Distance > intervalB.Distance;
         }
 
         public static bool operator <(Interval intervalA, Interval intervalB)
         {
-            return intervalA.distance < intervalB.distance;
+            return intervalA.Distance < intervalB.Distance;
         }
 
         public static bool operator >(Interval intervalA, int distance)
         {
-            return intervalA.distance > distance;
+            return intervalA.Distance > distance;
         }
 
         public static bool operator <(Interval intervalA, int distance)
         {
-            return intervalA.distance < distance;
+            return intervalA.Distance < distance;
         }
 
         public int CompareTo(Interval other)
         {
-            return distance.CompareTo(other.distance);
+            return Distance.CompareTo(other.Distance);
         }
     }
 }

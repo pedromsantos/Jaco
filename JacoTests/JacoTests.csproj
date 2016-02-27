@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Chords\ChordFunctionShould.cs" />
     <Compile Include="Chords\ChordShould.cs" />
+    <Compile Include="Guitar\GuitarStringShould.cs" />
     <Compile Include="Notes\IntervalShould.cs" />
     <Compile Include="Chords\FunctionShould.cs" />
     <Compile Include="Notes\NoteShould.cs" />
