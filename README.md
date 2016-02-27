@@ -31,6 +31,11 @@ First load the Jaco.dll in C# interactive
 | > Jaco.Note.A.Transpose(Jaco.Interval.MajorSecond).Name  | "B"              |
 | > Jaco.Interval.CreateIntervalFromDistance(1).Name       | "Minor second"   |
 
+### Keys
+| Example                                  | Output                             |
+| ---------------------------------------- | ---------------------------------- |
+| > Jaco.Scale.CMajor.Name                 | "C Major"                          |
+
 ### Chords
 #### Building chords
 ```csharp
