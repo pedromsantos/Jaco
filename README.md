@@ -6,9 +6,9 @@ Jaco is named after Jazz Musician [Jaco Pastorius](https://en.wikipedia.org/wiki
 
 These examples are taken from VS2015 C# interactive window
 Load the Jaco.dll using something like this:
-
+```
 >#r "c:\\Users\pedro.santos\src\Jaco\Jaco\bin\Debug\Jaco.dll"
-
+```
 | Example                                     | Output                                          |
 | ------------------------------------------- | ----------------------------------------------- |
 | > Jaco.Note.A.Name                          | "A"              |                              |
