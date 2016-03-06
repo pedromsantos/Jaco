@@ -4,4 +4,4 @@ XUNIT_PATH="./packages/xunit.runner.console.2.0.0/tools/xunit.console.x86.exe"
 TESTS_PATH="./**/bin/Debug/*Tests.dll"
 SOURCES_PATH="./**/*.cs"
 
-fswatch -0 $SOURCES_PATH | xargs -0 -n 1 -I {} mono $XUNIT_PATH $TESTS_PATH
+fsmonitor -s -p '+*.cs' mono $XUNIT_PATH $TESTS_PATH
