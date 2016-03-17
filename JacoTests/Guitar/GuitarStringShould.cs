@@ -133,5 +133,39 @@ namespace JacoTests.Guitar
             GuitarString.First.FretForNote(note)
                 .Should().Be(expectedFret);
         }
+
+        public static TheoryData<GuitarString, GuitarString> GuitarStringsSequenceBackward
+             => new TheoryData<GuitarString, GuitarString>
+             {
+                 { GuitarString.Sixth, GuitarString.Fifth },
+                 { GuitarString.Fifth, GuitarString.Fourth },
+                 { GuitarString.Fourth, GuitarString.Third },
+                 { GuitarString.Third, GuitarString.Second },
+                 { GuitarString.Second, GuitarString.First },
+                 { GuitarString.First, GuitarString.First },
+             };
+
+        [Theory, MemberData(nameof(GuitarStringsSequenceBackward))]
+        public void ReturnPreviousString(GuitarString guitarString, GuitarString expectedGuitarString)
+        {
+            guitarString.Previous().Should().Be(expectedGuitarString);
+        }
+
+        public static TheoryData<GuitarString, GuitarString> GuitarStringsSequenceForward
+             => new TheoryData<GuitarString, GuitarString>
+             {
+                 { GuitarString.Sixth, GuitarString.Sixth },
+                 { GuitarString.Fifth, GuitarString.Sixth },
+                 { GuitarString.Fourth, GuitarString.Fifth },
+                 { GuitarString.Third, GuitarString.Fourth },
+                 { GuitarString.Second, GuitarString.Third },
+                 { GuitarString.First, GuitarString.Second },
+             };
+
+        [Theory, MemberData(nameof(GuitarStringsSequenceForward))]
+        public void ReturnNextString(GuitarString guitarString, GuitarString expectedGuitarString)
+        {
+            guitarString.Next().Should().Be(expectedGuitarString);
+        }
     }
 }

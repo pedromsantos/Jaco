@@ -68,7 +68,7 @@ namespace Jaco.Notes
 
         public string Name { get; }
 
-        public Accident Accident { get; set; }
+        public Accident Accident { get; }
 
         public Pitch Pitch { get; }
 

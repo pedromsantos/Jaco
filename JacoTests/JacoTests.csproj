@@ -75,6 +75,9 @@
     <Compile Include="Scales\ScaleShould.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\packages\xunit.core.2.0.0\build\_Desktop\xunit.execution.desktop.dll">
+      <Link>Notes\xunit.execution.desktop.dll</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

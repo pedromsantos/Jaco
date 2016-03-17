@@ -34,6 +34,21 @@ namespace Jaco.Guitar
 
         public Note NoteOnOpenString { get; }
 
+        public int FretForNote(Note note)
+        {
+            return NoteOnOpenString.MeasureAbsoluteSemitones(note);
+        }
+
+        public GuitarString Previous()
+        {
+            return Ordinal == 0 ? First : Values.ElementAt(Ordinal - 1);
+        }
+
+        public GuitarString Next()
+        {
+            return Ordinal == 5 ? Sixth : Values.ElementAt(Ordinal + 1);
+        }
+
         private int Ordinal
         {
             get
@@ -51,21 +66,6 @@ namespace Jaco.Guitar
 
                 return index;
             }
-        }
-
-        public static GuitarString StringFromIndex(int index)
-        {
-            return Values.ElementAt(index);
-        }
-
-        public int FretForNote(Note note)
-        {
-            return NoteOnOpenString.MeasureAbsoluteSemitones(note);
-        }
-
-        public GuitarString Previous()
-        {
-            return Ordinal == 0 ? First : Values.ElementAt(Ordinal - 1);
         }
     }
 }
