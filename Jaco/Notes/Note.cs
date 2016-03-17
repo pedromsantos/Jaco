@@ -48,12 +48,6 @@ namespace Jaco.Notes
             }
         }
 
-        public static implicit operator int(Note instance) => (int) instance.Pitch;
-
-        public static bool operator >(Note noteA, Note noteB) => noteA.Pitch > noteB.Pitch;
-
-        public static bool operator <(Note noteA, Note noteB) => noteA.Pitch < noteB.Pitch;
-
         private const int MinNoteIndex = 0;
         private const int MaxNoteIndex = 16;
 
@@ -99,7 +93,7 @@ namespace Jaco.Notes
 
         public int MeasureAbsoluteSemitones(Note other)
         {
-            var distance = other - this;
+            var distance = other.Pitch - Pitch;
 
             return distance < 0 ? 12 - distance * -1 : distance;
         }
