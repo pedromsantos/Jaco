@@ -241,3 +241,4 @@ _Pvt_Extensions
 .idea
 
 packages/
+.idea/workspace.xml
