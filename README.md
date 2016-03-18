@@ -12,34 +12,34 @@ First load the Jaco.dll in C# interactive
 
 ### Notes
 
-| Example                                     | Output                                          |
-| ------------------------------------------- | ----------------------------------------------- |
-| > Jaco.Note.A.Name                          | "A"                                             |
-| > Jaco.Note.A.Flat().Name                   | "Ab"                                            |
-| > Jaco.Note.A.Sharp().Name                  | "A#"                                            |
-| > Jaco.Note.A == Jaco.Note.A                | true                                            |
-| > Jaco.Note.A == Jaco.Note.C                | false                                           |
-| > ReferenceEquals(Jaco.Note.A, Jaco.Note.C) | false                                           |
+| Example                                                 | Output                                          |
+| ------------------------------------------------------- | ----------------------------------------------- |
+| > Jaco.Notes.Note.A.Name                                | "A"                                             |
+| > Jaco.Notes.Note.A.Flat().Name                         | "Ab"                                            |
+| > Jaco.Notes.Note.A.Sharp().Name                        | "A#"                                            |
+| > Jaco.Notes.Note.A == Jaco.Note.A                      | true                                            |
+| > Jaco.Notes.Note.A == Jaco.Note.C                      | false                                           |
+| > ReferenceEquals(Jaco.Notes.Note.A, Jaco.Notes.Note.C) | false                                           |
 
 ### Intervals
 
-| Example                                                  | Output           |
-| -------------------------------------------------------- | ---------------- |
-| > Jaco.Note.A.IntervalWithOther(Jaco.Note.ASharp).Name   | "Minor second"   |
-| > Jaco.Note.A.IntervalWithOther(Jaco.Note.B).Name        | "Major second"   |
-| > Jaco.Note.A.Transpose(Jaco.Interval.MinorSecond).Name  | "Bb"             |
-| > Jaco.Note.A.Transpose(Jaco.Interval.MajorSecond).Name  | "B"              |
-| > Jaco.Interval.CreateIntervalFromDistance(1).Name       | "Minor second"   |
+| Example                                                              | Output           |
+| -------------------------------------------------------------------- | ---------------- |
+| > Jaco.Notes.Note.A.IntervalWithOther(Jaco.Notes.Note.ASharp).Name   | "Minor second"   |
+| > Jaco.Notes.Note.A.IntervalWithOther(Jaco.Notes.Note.B).Name        | "Major second"   |
+| > Jaco.Notes.Note.A.Transpose(Jaco.Notes.Interval.MinorSecond).Name  | "Bb"             |
+| > Jaco.Notes.Note.A.Transpose(Jaco.Notes.Interval.MajorSecond).Name  | "B"              |
+| > Jaco.Notes.Interval.CreateIntervalFromDistance(1).Name             | "Minor second"   |
 
 ### Keys
 | Example                                  | Output                             |
 | ---------------------------------------- | ---------------------------------- |
-| > Jaco.Scale.CMajor.Name                 | "C Major"                          |
+| > Jaco.ScalesScale.CMajor.Name           | "C Major"                          |
 
 ### Chords
 #### Building chords
 ```csharp
-var cmaj = new Jaco.Chord(Jaco.Note.C, Jaco.ChordFunction.Major)
+var cmaj = new Jaco.Chirds.Chord(Jaco.Note.C, Jaco.ChordFunction.Major)
 ```
 | Example                                        | Output             |
 | ---------------------------------------------- | -------------------|
