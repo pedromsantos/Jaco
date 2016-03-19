@@ -16,7 +16,7 @@ namespace Jaco.Chords
         }
 
         protected Chord(params NoteWithFunction[] notes)
-            :this()
+           :this()
         {
             ChordNotes.AddRange(notes);
         }
