@@ -71,7 +71,7 @@ namespace Jaco.Notes
 
         public Note Flat() => Transpose(Accident.Flat);
 
-        public Interval IntervalWithOther(Note other) => 
+        public Interval IntervalWithOther(Note other) =>
             Interval.CreateIntervalFromDistance(MeasureAbsoluteSemitones(other));
 
         public Note Transpose(Interval transposingInterval)
@@ -98,10 +98,10 @@ namespace Jaco.Notes
             return distance < 0 ? 12 - distance * -1 : distance;
         }
 
-        private Note Transpose(Accident accident) => 
+        private Note Transpose(Accident accident) =>
             NoteAtIndex(CalculateNoteIndexForAccident(accident));
 
-        private int CalculateNoteIndexForAccident(Accident accident) => 
+        private int CalculateNoteIndexForAccident(Accident accident) =>
             index + (int)accident * (Accident == accident ? 2 : 1);
 
         private Note NoteAtIndex(int indexForNote)
