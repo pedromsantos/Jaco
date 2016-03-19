@@ -26,13 +26,10 @@ namespace Jaco.Chords
         {
             ChordNotes.Add(new NoteWithFunction(root, Function.Root));
 
-            var noteFunctionIndex = 1;
-
             foreach (var interval in function.Intervals)
             {
-                var note = new NoteWithFunction(root.Transpose(interval), Function.Functions.ElementAt(noteFunctionIndex));
+                var note = new NoteWithFunction(root.Transpose(interval), Function.FunctionForInterval(interval));
                 ChordNotes.Add(note);
-                noteFunctionIndex++;
             }
         }
 

@@ -1,5 +1,7 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Jaco.Chords;
+using Jaco.Notes;
 using Xunit;
 
 namespace JacoTests.Chords
@@ -23,6 +25,25 @@ namespace JacoTests.Chords
         {
             function.Name.Should().Be(name);
             function.Index.Should().Be(index);
+        }
+
+
+        public static TheoryData<Function, IList<Interval>> FunctionsAndIntervals
+                   => new TheoryData<Function, IList<Interval>>
+                   {
+                       { Function.Root, new [] {Interval.Unisson} },
+                       { Function.Third, new [] {Interval.MajorThird, Interval.MinorThird } },
+                       { Function.Fifth, new [] {Interval.PerfectFifth, Interval.AugmentedFifth, Interval.DiminishedFifth } },
+                       { Function.Seventh, new [] {Interval.MinorSeventh, Interval.MajorSeventh } },
+                   };
+
+        [Theory, MemberData(nameof(FunctionsAndIntervals))]
+        public void RelateFunctionToIntervals(Function function, IEnumerable<Interval> expectedIntervals)
+        {
+            foreach (var interval in expectedIntervals)
+            {
+                Function.FunctionForInterval(interval).Should().Be(function);
+            }
         }
     }
 }
