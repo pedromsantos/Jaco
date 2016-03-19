@@ -10,9 +10,9 @@ namespace Jaco.Chords
         public static readonly Function Third = new Function("3", new [] {Interval.MajorThird, Interval.MinorThird });
         public static readonly Function Fifth = new Function("5", new [] {Interval.PerfectFifth, Interval.AugmentedFifth, Interval.DiminishedFifth });
         public static readonly Function Seventh = new Function("7", new [] {Interval.MinorSeventh, Interval.MajorSeventh });
-        public static readonly Function Ninth = new Function("9", new List<Interval>());
-        public static readonly Function Eleventh = new Function("11", new List<Interval>());
-        public static readonly Function Thirteenth = new Function("13", new List<Interval>());
+        public static readonly Function Ninth = new Function("9", new [] {Interval.MinorSecond, Interval.MajorSecond });
+        public static readonly Function Eleventh = new Function("11", new [] {Interval.PerfectForth });
+        public static readonly Function Thirteenth = new Function("13", new [] {Interval.MajorSixth });
 
         private readonly IList<Interval> _distanceFromRoot;
 
