@@ -48,11 +48,6 @@ namespace Jaco.Notes
             }
         }
 
-        public static implicit operator int(Note instance)
-        {
-            return (int) instance.Pitch;
-        }
-
         private const int MinNoteIndex = 0;
         private const int MaxNoteIndex = 16;
 
@@ -68,26 +63,16 @@ namespace Jaco.Notes
 
         public string Name { get; }
 
-        public Accident Accident { get; set; }
+        public Accident Accident { get; }
 
         public Pitch Pitch { get; }
 
-        public Note Sharp()
-        {
-            return Transpose(Accident.Sharp);
-        } 
+        public Note Sharp() => Transpose(Accident.Sharp);
 
-        public Note Flat()
-        {
-            return Transpose(Accident.Flat);
-        }
+        public Note Flat() => Transpose(Accident.Flat);
 
-        public Interval IntervalWithOther(Note other)
-        {
-            var distance = MeasureAbsoluteSemitones(other);
-
-            return Interval.CreateIntervalFromDistance(distance);
-        }
+        public Interval IntervalWithOther(Note other) => 
+            Interval.CreateIntervalFromDistance(MeasureAbsoluteSemitones(other));
 
         public Note Transpose(Interval transposingInterval)
         {
@@ -108,15 +93,16 @@ namespace Jaco.Notes
 
         public int MeasureAbsoluteSemitones(Note other)
         {
-            var distance = other - this;
+            var distance = other.Pitch - Pitch;
 
             return distance < 0 ? 12 - distance * -1 : distance;
         }
 
-        private Note Transpose(Accident accident)
-        {
-            return NoteAtIndex(CalculateNoteIndexForAccident(accident));
-        }
+        private Note Transpose(Accident accident) => 
+            NoteAtIndex(CalculateNoteIndexForAccident(accident));
+
+        private int CalculateNoteIndexForAccident(Accident accident) => 
+            index + (int)accident * (Accident == accident ? 2 : 1);
 
         private Note NoteAtIndex(int indexForNote)
         {
@@ -125,21 +111,6 @@ namespace Jaco.Notes
                 : indexForNote > MaxNoteIndex
                     ? C
                     : Notes.ElementAt(indexForNote);
-        }
-
-        private int CalculateNoteIndexForAccident(Accident accident)
-        {
-            return index + (int)accident * (Accident == accident ? 2 : 1);
-        }
-
-        public static bool operator >(Note noteA, Note noteB)
-        {
-            return noteA.Pitch > noteB.Pitch;
-        }
-
-        public static bool operator <(Note noteA, Note noteB)
-        {
-            return noteA.Pitch < noteB.Pitch;
         }
     }
 }

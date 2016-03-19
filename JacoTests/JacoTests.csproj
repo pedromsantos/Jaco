@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Chords\ChordFunctionShould.cs" />
     <Compile Include="Chords\ChordShould.cs" />
+    <Compile Include="Guitar\GuitarStringShould.cs" />
     <Compile Include="Notes\IntervalShould.cs" />
     <Compile Include="Chords\FunctionShould.cs" />
     <Compile Include="Notes\NoteShould.cs" />
@@ -74,6 +75,9 @@
     <Compile Include="Scales\ScaleShould.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\packages\xunit.core.2.0.0\build\_Desktop\xunit.execution.desktop.dll">
+      <Link>Notes\xunit.execution.desktop.dll</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

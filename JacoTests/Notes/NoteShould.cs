@@ -6,7 +6,7 @@ namespace JacoTests.Notes
 {
     public class NoteShould
     {
-        public static TheoryData<Note, string> NoteNames 
+        public static TheoryData<Note, string> NoteNames
             => new TheoryData<Note, string>
             {
                 {Note.C, "C"},
