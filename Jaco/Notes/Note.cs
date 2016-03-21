@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Jaco.Infrastructure;
 
 namespace Jaco.Notes
 {
@@ -93,9 +94,12 @@ namespace Jaco.Notes
 
         public int MeasureAbsoluteSemitones(Note other)
         {
+            const int octave = 12;
+            const int unisson = 0;
+
             var distance = other.Pitch - Pitch;
 
-            return distance < 0 ? 12 - distance * -1 : distance;
+            return distance.Clamp(unisson, octave);
         }
 
         private Note Transpose(Accident accident) => 
