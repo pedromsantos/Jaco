@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Jaco.Infrastructure;
 
 namespace Jaco.Notes
 {
