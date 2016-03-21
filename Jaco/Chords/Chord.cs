@@ -10,14 +10,14 @@ namespace Jaco.Chords
     {
         protected readonly List<NoteWithFunction> ChordNotes;
 
-        protected Chord()
+        private Chord()
         {
             ChordNotes = new List<NoteWithFunction>();
         }
 
-        public Chord(params NoteWithFunction[] notes)
+        protected Chord(params NoteWithFunction[] notes)
+           :this()
         {
-            ChordNotes = new List<NoteWithFunction>();
             ChordNotes.AddRange(notes);
         }
 
@@ -26,19 +26,20 @@ namespace Jaco.Chords
         {
             ChordNotes.Add(new NoteWithFunction(root, Function.Root));
 
-            var noteFunctionIndex = 1;
-
             foreach (var interval in function.Intervals)
             {
-                var note = new NoteWithFunction(root.Transpose(interval), Function.Functions.ElementAt(noteFunctionIndex));
+                var note = new NoteWithFunction(
+                                root.Transpose(interval), 
+                                Function.FunctionForInterval(interval));
+
                 ChordNotes.Add(note);
-                noteFunctionIndex++;
             }
         }
 
         public IEnumerable<Note> Notes => ChordNotes.Select(n => n.Note);
 
-        public IEnumerable<string> NoteNames => ChordNotes.Select(n => n.Note.Name);
+        public IEnumerable<string> NoteNames => 
+                ChordNotes.Select(n => n.Note.Name);
 
         public Note Bass => ChordNotes.First().Note;
 
@@ -48,7 +49,11 @@ namespace Jaco.Chords
         {
             get
             {
-                var functionName = ChordFunction.FunctionForIntervals(Intervals()).AbreviatedName;
+                var functionName = 
+                        ChordFunction
+                        .FunctionForIntervals(Intervals())
+                        .AbreviatedName;
+                
                 return NoteForFunction(Function.Root).Name + functionName;
             }
         }
@@ -91,21 +96,32 @@ namespace Jaco.Chords
 
         public Chord Transpose(Note newRoot)
         {
-            var interval = NoteForFunction(Function.Root).IntervalWithOther(newRoot);
-            return new Chord(ChordNotes.Select(n => new NoteWithFunction(n.Note.Transpose(interval), n.Function)).ToArray());
+            var interval = 
+                    NoteForFunction(Function.Root).
+                    IntervalWithOther(newRoot);
+            
+            return new Chord(ChordNotes.Select(n => 
+                                    new NoteWithFunction(
+                                            n.Note.Transpose(interval), 
+                                            n.Function))
+                            .ToArray());
         }
 
         public Chord InversionForFunctionAsLead(Function functionAsLead)
         {
-            return InversionForNoteFunction(functionAsLead, c => c.ChordNotes.Last().Function);
+            return InversionForNoteFunction(functionAsLead, c => 
+                            c.ChordNotes.Last().Function);
         }
 
         public Chord InversionForFunctionAsBass(Function functionAsBass)
         {
-            return InversionForNoteFunction(functionAsBass, c => c.ChordNotes.First().Function);
+            return InversionForNoteFunction(functionAsBass, 
+                            c => c.ChordNotes.First().Function);
         }
 
-        private Chord InversionForNoteFunction(Function function, Func<Chord, Function> functionAtDesiredPosition)
+        private Chord InversionForNoteFunction(
+                        Function function, 
+                        Func<Chord, Function> functionAtDesiredPosition)
         {
             var invertedChord = this;
 
@@ -119,9 +135,9 @@ namespace Jaco.Chords
 
         public Chord FindInversionWithLeadClosestToNote(Note note)
         {
-            var function = ChordNotes.MinBy(n => 
+            var function = ChordNotes.MinBy(n =>
                 Math.Min(
-                    n.Note.MeasureAbsoluteSemitones(note), 
+                    n.Note.MeasureAbsoluteSemitones(note),
                     note.MeasureAbsoluteSemitones(n.Note)))
                 .Function;
 
@@ -134,5 +150,5 @@ namespace Jaco.Chords
 
             return Notes.Select(note => root.IntervalWithOther(note)).Skip(1).ToList();
         }
-    } 
+    }
 }
