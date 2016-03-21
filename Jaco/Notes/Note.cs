@@ -99,7 +99,7 @@ namespace Jaco.Notes
 
             var distance = other.Pitch - Pitch;
 
-            return distance.Clamp(unisson, octave);
+            return distance < unisson ? octave - distance * -1 : distance;
         }
 
         private Note Transpose(Accident accident) =>
