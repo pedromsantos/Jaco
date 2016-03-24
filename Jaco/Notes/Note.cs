@@ -17,10 +17,16 @@ namespace Jaco.Notes
         public static readonly Note FSharp = new Lazy<Note>(() => new Note(Pitch.FSharp, "F#", Accident.Sharp, 8)).Value;
         public static readonly Note GFlat = new Lazy<Note>(() => new Note(Pitch.GFlat, "Gb", Accident.Flat, 9)).Value;
         public static readonly Note G = new Lazy<Note>(() => new Note(Pitch.G, "G", Accident.None, 10)).Value;
-        public static readonly Note GSharp = new Lazy<Note>(() => new Note(Pitch.GSharp, "G#", Accident.Sharp, 11)).Value;
+
+        public static readonly Note GSharp =
+            new Lazy<Note>(() => new Note(Pitch.GSharp, "G#", Accident.Sharp, 11)).Value;
+
         public static readonly Note AFlat = new Lazy<Note>(() => new Note(Pitch.AFlat, "Ab", Accident.Flat, 12)).Value;
         public static readonly Note A = new Lazy<Note>(() => new Note(Pitch.A, "A", Accident.None, 13)).Value;
-        public static readonly Note ASharp = new Lazy<Note>(() => new Note(Pitch.ASharp, "A#", Accident.Sharp, 14)).Value;
+
+        public static readonly Note ASharp =
+            new Lazy<Note>(() => new Note(Pitch.ASharp, "A#", Accident.Sharp, 14)).Value;
+
         public static readonly Note BFlat = new Lazy<Note>(() => new Note(Pitch.BFlat, "Bb", Accident.Flat, 15)).Value;
         public static readonly Note B = new Lazy<Note>(() => new Note(Pitch.B, "B", Accident.None, MaxNoteIndex)).Value;
 
@@ -98,16 +104,14 @@ namespace Jaco.Notes
 
             var distance = other.Pitch - Pitch;
 
-            return distance < unisson ? octave - distance * -1 : distance;
+            return distance < unisson ? octave - distance*-1 : distance;
         }
 
         private Note Transpose(Accident accident) =>
-            this[CalculateNoteIndexForAccident(accident)];
+            Notes.ElementAt(CalculateNoteIndexForAccident(accident));
 
         private int CalculateNoteIndexForAccident(Accident accident) =>
-            index + (int)accident * (Accident == accident ? 2 : 1);
-
-        private Note this[int indexForNote] => Notes.ElementAt(WrapIndex(indexForNote));
+            WrapIndex(index + (int) accident*(Accident == accident ? 2 : 1));
 
         private static int WrapIndex(int indexForNote)
         {
