@@ -100,7 +100,7 @@ namespace Jaco.Scales
             Name = root.Name + " " + (quality == ScaleQuality.Major ? major : minor);
         }
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public IEnumerable<Note> Notes { get; private set; }
 
