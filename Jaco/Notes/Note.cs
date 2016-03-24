@@ -102,18 +102,21 @@ namespace Jaco.Notes
         }
 
         private Note Transpose(Accident accident) =>
-            NoteAtIndex(CalculateNoteIndexForAccident(accident));
+            this[CalculateNoteIndexForAccident(accident)];
 
         private int CalculateNoteIndexForAccident(Accident accident) =>
             index + (int)accident * (Accident == accident ? 2 : 1);
 
-        private Note NoteAtIndex(int indexForNote)
+        private Note this[int indexForNote]
         {
-            return indexForNote < MinNoteIndex
-                ? B
-                : indexForNote > MaxNoteIndex
-                    ? C
-                    : Notes.ElementAt(indexForNote);
+            get
+            {
+                return indexForNote < MinNoteIndex
+                 ? B
+                 : indexForNote > MaxNoteIndex
+                     ? C
+                     : Notes.ElementAt(indexForNote);
+            }
         }
     }
 }
