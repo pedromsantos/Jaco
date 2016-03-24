@@ -107,16 +107,15 @@ namespace Jaco.Notes
         private int CalculateNoteIndexForAccident(Accident accident) =>
             index + (int)accident * (Accident == accident ? 2 : 1);
 
-        private Note this[int indexForNote]
+        private Note this[int indexForNote] => Notes.ElementAt(WrapIndex(indexForNote));
+
+        private static int WrapIndex(int indexForNote)
         {
-            get
-            {
-                return indexForNote < MinNoteIndex
-                 ? B
-                 : indexForNote > MaxNoteIndex
-                     ? C
-                     : Notes.ElementAt(indexForNote);
-            }
+            return indexForNote < MinNoteIndex
+                ? MaxNoteIndex
+                : indexForNote > MaxNoteIndex
+                    ? MinNoteIndex
+                    : indexForNote;
         }
     }
 }
