@@ -58,18 +58,17 @@ namespace Jaco.Notes
         private const int MaxNoteIndex = 16;
 
         private readonly int index;
+        private readonly Accident accident;
 
         private Note(Pitch pitch, string name, Accident accident, int index)
         {
             this.index = index;
+            this.accident = accident;
             Pitch = pitch;
             Name = name;
-            Accident = accident;
         }
 
         public string Name { get; }
-
-        public Accident Accident { get; }
 
         public Pitch Pitch { get; }
 
@@ -107,11 +106,11 @@ namespace Jaco.Notes
             return distance < unisson ? octave - distance*-1 : distance;
         }
 
-        private Note Transpose(Accident accident) =>
-            Notes.ElementAt(CalculateNoteIndexForAccident(accident));
+        private Note Transpose(Accident forAccident) =>
+            Notes.ElementAt(NoteIndex(forAccident));
 
-        private int CalculateNoteIndexForAccident(Accident accident) =>
-            WrapIndex(index + (int) accident*(Accident == accident ? 2 : 1));
+        private int NoteIndex(Accident forAccident) =>
+            WrapIndex(index + (int) forAccident*(accident == forAccident ? 2 : 1));
 
         private static int WrapIndex(int indexForNote)
         {
