@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Guitar\GuitarString.cs" />
-    <Compile Include="Infrastructure\IntExtenssions.cs" />
     <Compile Include="Notes\Accident.cs" />
     <Compile Include="Chords\Chord.cs" />
     <Compile Include="Chords\ChordFunction.cs" />
