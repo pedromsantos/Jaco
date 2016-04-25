@@ -25,8 +25,7 @@ namespace JacoTests.Scales
         [Theory, MemberData(nameof(HarmonizationMajorScaleTriads))]
         public void HarmonizeTriadsMajorScale(Func<Chord> harmonize, Chord expectedChord)
         {
-            var notes = harmonize().Notes;
-            notes.Should().ContainInOrder(expectedChord.Notes);
+            harmonize().Notes.Should().ContainInOrder(expectedChord.Notes);
         }
 
         public static TheoryData<Func<Chord>, Chord> HarmonizationMinorScaleTriads
@@ -47,8 +46,7 @@ namespace JacoTests.Scales
         [Theory, MemberData(nameof(HarmonizationMinorScaleTriads))]
         public void HarmonizeTriadsMinorScale(Func<Chord> harmonize, Chord expectedChord)
         {
-            var notes = harmonize().Notes;
-            notes.Should().ContainInOrder(expectedChord.Notes);
+            harmonize().Notes.Should().ContainInOrder(expectedChord.Notes);
         }
 
         public static TheoryData<Func<Chord>, Chord> HarmonizationMajorScaleSevents
@@ -66,8 +64,7 @@ namespace JacoTests.Scales
         [Theory, MemberData(nameof(HarmonizationMajorScaleSevents))]
         public void HarmonizeSeventsMajorScale(Func<Chord> harmonize, Chord expectedChord)
         {
-            var notes = harmonize().Notes;
-            notes.Should().ContainInOrder(expectedChord.Notes);
+            harmonize().Notes.Should().ContainInOrder(expectedChord.Notes);
         } 
 
         public static TheoryData<Func<Chord>, IEnumerable<Note>> HarmonizationMinorScaleSevenths
@@ -85,8 +82,7 @@ namespace JacoTests.Scales
         [Theory, MemberData(nameof(HarmonizationMinorScaleSevenths))]
         public void HarmonizeSeventsMinorScale(Func<Chord> harmonize, IEnumerable<Note> expectedNotes)
         {
-            var notes = harmonize().Notes;
-            notes.Should().ContainInOrder(expectedNotes);
+            harmonize().Notes.Should().ContainInOrder(expectedNotes);
         }
 
         public static TheoryData<Func<Chord>, Chord> HarmonizationDrop2
@@ -104,8 +100,7 @@ namespace JacoTests.Scales
         [Theory, MemberData(nameof(HarmonizationDrop2))]
         public void HarmonizeDrop2MajorScale(Func<Chord> harmonize, Chord expectedChord)
         {
-            var notes = harmonize().Notes;
-            notes.Should().ContainInOrder(expectedChord.Notes);
+            harmonize().Notes.Should().ContainInOrder(expectedChord.Notes);
         }
 
         public static TheoryData<Func<Chord>, Chord> HarmonizationDrop3
@@ -123,8 +118,7 @@ namespace JacoTests.Scales
         [Theory, MemberData(nameof(HarmonizationDrop3))]
         public void HarmonizeDrop3MajorScale(Func<Chord> harmonize, Chord expectedChord)
         {
-            var notes = harmonize().Notes;
-            notes.Should().ContainInOrder(expectedChord.Notes);
+            harmonize().Notes.Should().ContainInOrder(expectedChord.Notes);
         }
     }
 }
