@@ -1,4 +1,5 @@
 using Jaco.Chords;
+using Jaco.Notes;
 
 namespace Jaco.Scales
 {
@@ -13,49 +14,45 @@ namespace Jaco.Scales
 
         public Chord I()
         {
-            return scale.Quality == ScaleQuality.Major
-                ? new Chord(scale.I, ChordFunction.Major)
-                : new Chord(scale.I, ChordFunction.Minor);
+            return CreateFromScaleNotes(scale.HarmonicI, scale.HarmonicIII, scale.HarmonicV);
         }
 
         public Chord II()
         {
-            return scale.Quality == ScaleQuality.Major
-                ? new Chord(scale.II, ChordFunction.Minor)
-                : new Chord(scale.II, ChordFunction.Diminished);
+            return CreateFromScaleNotes(scale.HarmonicII, scale.HarmonicIV, scale.HarmonicVI);
         }
 
         public Chord III()
         {
-            return scale.Quality == ScaleQuality.Major
-                ? new Chord(scale.III, ChordFunction.Minor)
-                : new Chord(scale.III, ChordFunction.Augmented);
+            return CreateFromScaleNotes(scale.HarmonicIII, scale.HarmonicV, scale.HarmonicVII);
         }
 
         public Chord IV()
         {
-            return scale.Quality == ScaleQuality.Major
-                ? new Chord(scale.IV, ChordFunction.Major)
-                : new Chord(scale.IV, ChordFunction.Minor);
+            return CreateFromScaleNotes(scale.HarmonicIV, scale.HarmonicVI, scale.HarmonicI);
         }
 
         public Chord V()
         {
-            return new Chord(scale.V, ChordFunction.Major);
+            return CreateFromScaleNotes(scale.HarmonicV, scale.HarmonicVII, scale.HarmonicII);
         }
 
         public Chord VI()
         {
-            return scale.Quality == ScaleQuality.Major
-                ? new Chord(scale.VI, ChordFunction.Minor)
-                : new Chord(scale.VI, ChordFunction.Major);
+            return CreateFromScaleNotes(scale.HarmonicVI, scale.HarmonicI, scale.HarmonicIII);
         }
 
         public Chord VII()
         {
-            return scale.Quality == ScaleQuality.Major
-                ? new Chord(scale.VII, ChordFunction.Diminished)
-                : new Chord(scale.VII.Sharp(), ChordFunction.Diminished);
+            return CreateFromScaleNotes(scale.HarmonicVII, scale.HarmonicII, scale.HarmonicIV);
+        }
+
+        private Chord CreateFromScaleNotes(Note root, Note third, Note fifth)
+        {
+            return new Chord(
+                 new NoteWithFunction(root, Function.Root),
+                 new NoteWithFunction(third, Function.Third),
+                 new NoteWithFunction(fifth, Function.Fifth));
         }
     }
 }

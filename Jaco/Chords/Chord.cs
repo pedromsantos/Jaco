@@ -15,7 +15,7 @@ namespace Jaco.Chords
             ChordNotes = new List<NoteWithFunction>();
         }
 
-        protected Chord(params NoteWithFunction[] notes)
+        public Chord(params NoteWithFunction[] notes)
            :this()
         {
             ChordNotes.AddRange(notes);
@@ -148,7 +148,7 @@ namespace Jaco.Chords
         {
             var root = NoteForFunction(Function.Root);
 
-            return Notes.Select(note => root.IntervalWithOther(note)).Skip(1).ToList();
+            return Notes.Select(note => root.IntervalWithOther(note)).OrderBy(i => i.Distance).Skip(1).ToList();
         }
     }
 }

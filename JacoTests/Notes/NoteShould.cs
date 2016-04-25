@@ -128,7 +128,7 @@ namespace JacoTests.Notes
                 {Note.C, Note.F, Interval.PerfectForth },
                 {Note.C, Note.GFlat, Interval.DiminishedFifth },
                 {Note.C, Note.G, Interval.PerfectFifth },
-                {Note.C, Note.AFlat, Interval.AugmentedFifth },
+                {Note.C, Note.GSharp, Interval.AugmentedFifth },
                 {Note.C, Note.A, Interval.MajorSixth },
                 {Note.C, Note.BFlat, Interval.MinorSeventh },
                 {Note.C, Note.B, Interval.MajorSeventh },

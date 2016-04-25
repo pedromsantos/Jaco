@@ -17,16 +17,10 @@ namespace Jaco.Notes
         public static readonly Note FSharp = new Lazy<Note>(() => new Note(Pitch.FSharp, "F#", Accident.Sharp, 8)).Value;
         public static readonly Note GFlat = new Lazy<Note>(() => new Note(Pitch.GFlat, "Gb", Accident.Flat, 9)).Value;
         public static readonly Note G = new Lazy<Note>(() => new Note(Pitch.G, "G", Accident.None, 10)).Value;
-
-        public static readonly Note GSharp =
-            new Lazy<Note>(() => new Note(Pitch.GSharp, "G#", Accident.Sharp, 11)).Value;
-
+        public static readonly Note GSharp =new Lazy<Note>(() => new Note(Pitch.GSharp, "G#", Accident.Sharp, 11)).Value;
         public static readonly Note AFlat = new Lazy<Note>(() => new Note(Pitch.AFlat, "Ab", Accident.Flat, 12)).Value;
         public static readonly Note A = new Lazy<Note>(() => new Note(Pitch.A, "A", Accident.None, 13)).Value;
-
-        public static readonly Note ASharp =
-            new Lazy<Note>(() => new Note(Pitch.ASharp, "A#", Accident.Sharp, 14)).Value;
-
+        public static readonly Note ASharp = new Lazy<Note>(() => new Note(Pitch.ASharp, "A#", Accident.Sharp, 14)).Value;
         public static readonly Note BFlat = new Lazy<Note>(() => new Note(Pitch.BFlat, "Bb", Accident.Flat, 15)).Value;
         public static readonly Note B = new Lazy<Note>(() => new Note(Pitch.B, "B", Accident.None, MaxNoteIndex)).Value;
 
@@ -86,10 +80,7 @@ namespace Jaco.Notes
 
             while (interval != transposingInterval)
             {
-                resultingNote = interval - transposingInterval > 0
-                    ? resultingNote.Flat()
-                    : resultingNote.Sharp();
-
+                resultingNote = transposingInterval.TransposeNote(resultingNote);
                 interval = IntervalWithOther(resultingNote);
             }
 

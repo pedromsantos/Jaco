@@ -57,6 +57,7 @@
     <Compile Include="Chords\Function.cs" />
     <Compile Include="Chords\NoteWithFunction.cs" />
     <Compile Include="Notes\Pitch.cs" />
+    <Compile Include="Scales\ScaleQuality.cs" />
     <Compile Include="Scales\SeventhsHarmonizer.cs" />
     <Compile Include="Scales\TriadsHarmonizer.cs" />
   </ItemGroup>

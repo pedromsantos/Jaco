@@ -54,7 +54,7 @@ namespace JacoTests.Chords
             => new TheoryData<ChordFunction, IEnumerable<Note>>
             {
                 { ChordFunction.Major,  new [] { Note.C, Note.E, Note.G}},
-                { ChordFunction.Augmented,  new [] { Note.C, Note.E, Note.AFlat}},
+                { ChordFunction.Augmented,  new [] { Note.C, Note.E, Note.GSharp}},
                 { ChordFunction.Minor,  new [] { Note.C, Note.EFlat, Note.G}},
                 { ChordFunction.Diminished,  new [] { Note.C, Note.EFlat, Note.GFlat}},
                 { ChordFunction.Major7,  new [] { Note.C, Note.E, Note.G, Note.B}},

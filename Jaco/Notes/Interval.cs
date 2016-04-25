@@ -6,28 +6,36 @@ namespace Jaco.Notes
 {
     public class Interval : IComparable<Interval>
     {
-        public static readonly Interval Unisson = new Interval(0, "Unisson");
-        public static readonly Interval MinorSecond = new Interval(1, "Minor second");
-        public static readonly Interval MajorSecond = new Interval(2, "Major second");
-        public static readonly Interval MinorThird = new Interval(3, "Minor third");
-        public static readonly Interval MajorThird = new Interval(4, "Major third");
-        public static readonly Interval PerfectForth = new Interval(5, "Perfect fourth");
-        public static readonly Interval DiminishedFifth = new Interval(6, "Diminished fifth");
-        public static readonly Interval PerfectFifth = new Interval(7, "Perfect fifth");
-        public static readonly Interval AugmentedFifth = new Interval(8, "Augmented fifth");
-        public static readonly Interval MajorSixth = new Interval(9, "Major sixth");
-        public static readonly Interval MinorSeventh = new Interval(10, "Minor seventh");
-        public static readonly Interval MajorSeventh = new Interval(11, "Major seventh");
-        public static readonly Interval PerfectOctave = new Interval(12, "Perfect octave");
+        public static readonly Interval Unisson = new Interval(0, "Unisson", Accident.None);
+        public static readonly Interval MinorSecond = new Interval(1, "Minor second", Accident.Flat);
+        public static readonly Interval MajorSecond = new Interval(2, "Major second", Accident.None);
+        public static readonly Interval MinorThird = new Interval(3, "Minor third", Accident.Flat);
+        public static readonly Interval MajorThird = new Interval(4, "Major third", Accident.None);
+        public static readonly Interval PerfectForth = new Interval(5, "Perfect fourth", Accident.None);
+        public static readonly Interval DiminishedFifth = new Interval(6, "Diminished fifth", Accident.Flat);
+        public static readonly Interval PerfectFifth = new Interval(7, "Perfect fifth", Accident.None);
+        public static readonly Interval AugmentedFifth = new Interval(8, "Augmented fifth", Accident.Sharp);
+        public static readonly Interval MajorSixth = new Interval(9, "Major sixth", Accident.None);
+        public static readonly Interval MinorSeventh = new Interval(10, "Minor seventh", Accident.Flat);
+        public static readonly Interval MajorSeventh = new Interval(11, "Major seventh", Accident.None);
+        public static readonly Interval PerfectOctave = new Interval(12, "Perfect octave", Accident.None);
 
         public int Distance { get; }
 
         public string Name { get; }
 
-        private Interval(int distance, string name)
+        public Accident Accident { get; }
+
+        private Interval(int distance, string name, Accident accident)
         {
             Distance = distance;
             Name = name;
+            Accident = accident;
+        }
+
+        public Note TransposeNote(Note note)
+        {
+            return Accident == Accident.Sharp ? note.Sharp() : note.Flat();
         }
 
         public static IEnumerable<Interval> Intervals

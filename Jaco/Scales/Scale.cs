@@ -5,15 +5,9 @@ using Jaco.Notes;
 
 namespace Jaco.Scales
 {
-    public enum ScaleQuality
-    {
-        Major,
-        Minor
-    }
-
     public class Scale
     {
-        private static readonly IList<Note> Fifths = new List<Note>
+        private static readonly IReadOnlyCollection<Note> Fifths = new List<Note>
         {
             Note.F,
             Note.C,
@@ -25,61 +19,33 @@ namespace Jaco.Scales
         };
 
         public static readonly Scale AMajor = new Lazy<Scale>(() => new Scale(Note.A, 3, ScaleQuality.Major)).Value;
-
         public static readonly Scale AFlatMajor = new Lazy<Scale>(() => new Scale(Note.AFlat, -4, ScaleQuality.Major)).Value;
-
         public static readonly Scale BMajor = new Lazy<Scale>(() => new Scale(Note.B, 5, ScaleQuality.Major)).Value;
-
         public static readonly Scale BFlatMajor = new Lazy<Scale>(() => new Scale(Note.BFlat, -2, ScaleQuality.Major)).Value;
-
         public static readonly Scale CMajor = new Lazy<Scale>(() => new Scale(Note.C, 0, ScaleQuality.Major)).Value;
-
         public static readonly Scale CSharpMajor = new Lazy<Scale>(() => new Scale(Note.CSharp, 7, ScaleQuality.Major)).Value;
-
         public static readonly Scale DMajor = new Lazy<Scale>(() => new Scale(Note.D, 2, ScaleQuality.Major)).Value;
-
         public static readonly Scale DFlatMajor = new Lazy<Scale>(() => new Scale(Note.DFlat, -5, ScaleQuality.Major)).Value;
-
         public static readonly Scale EMajor = new Lazy<Scale>(() => new Scale(Note.E, 4, ScaleQuality.Major)).Value;
-
         public static readonly Scale EFlatMajor = new Lazy<Scale>(() => new Scale(Note.EFlat, -3, ScaleQuality.Major)).Value;
-
         public static readonly Scale FMajor = new Lazy<Scale>(() => new Scale(Note.F, -1, ScaleQuality.Major)).Value;
-
         public static readonly Scale FSharpMajor = new Lazy<Scale>(() => new Scale(Note.FSharp, 6, ScaleQuality.Major)).Value;
-
         public static readonly Scale GMajor = new Lazy<Scale>(() => new Scale(Note.G, 1, ScaleQuality.Major)).Value;
-
         public static readonly Scale GFlatMajor = new Lazy<Scale>(() => new Scale(Note.GFlat, -6, ScaleQuality.Major)).Value;
-
         public static readonly Scale AMinor = new Lazy<Scale>(() => new Scale(Note.A, 0, ScaleQuality.Minor)).Value;
-
         public static readonly Scale AFlatMinor = new Lazy<Scale>(() => new Scale(Note.AFlat, -7, ScaleQuality.Minor)).Value;
-
         public static readonly Scale ASharpMinor = new Lazy<Scale>(() => new Scale(Note.ASharp, 7, ScaleQuality.Minor)).Value;
-
         public static readonly Scale BMinor = new Lazy<Scale>(() => new Scale(Note.B, 2, ScaleQuality.Minor)).Value;
-
         public static readonly Scale BFlatMinor = new Lazy<Scale>(() => new Scale(Note.BFlat, -5, ScaleQuality.Minor)).Value;
-
         public static readonly Scale CMinor = new Lazy<Scale>(() => new Scale(Note.C, -3, ScaleQuality.Minor)).Value;
-
         public static readonly Scale CSharpMinor = new Lazy<Scale>(() => new Scale(Note.CSharp, 4, ScaleQuality.Minor)).Value;
-
         public static readonly Scale DMinor = new Lazy<Scale>(() => new Scale(Note.D, -1, ScaleQuality.Minor)).Value;
-
         public static readonly Scale DSharpMinor = new Lazy<Scale>(() => new Scale(Note.DFlat, 6, ScaleQuality.Minor)).Value;
-
         public static readonly Scale EMinor = new Lazy<Scale>(() => new Scale(Note.E, 1, ScaleQuality.Minor)).Value;
-
         public static readonly Scale FMinor = new Lazy<Scale>(() => new Scale(Note.F, -4, ScaleQuality.Minor)).Value;
-
         public static readonly Scale FSharpMinor = new Lazy<Scale>(() => new Scale(Note.FSharp, 3, ScaleQuality.Minor)).Value;
-
         public static readonly Scale GMinor = new Lazy<Scale>(() => new Scale(Note.G, -2, ScaleQuality.Minor)).Value;
-
         public static readonly Scale GSharpMinor = new Lazy<Scale>(() => new Scale(Note.GSharp, 5, ScaleQuality.Minor)).Value;
-
         public static readonly Scale EFlatMinor = new Lazy<Scale>(() => new Scale(Note.EFlat, -6, ScaleQuality.Minor)).Value;
 
         private readonly int accidentals;
@@ -153,6 +119,20 @@ namespace Jaco.Scales
 
         public Note VII => Notes.ElementAt(6);
 
+        public Note HarmonicI => I;
+
+        public Note HarmonicII => II;
+
+        public Note HarmonicIII => III;
+
+        public Note HarmonicIV => IV;
+
+        public Note HarmonicV => V;
+
+        public Note HarmonicVI => VI;
+
+        public Note HarmonicVII => Quality == ScaleQuality.Minor ? VII.Sharp() : VII;
+
         public static Scale ScaleForRootAndQuality(Note root, ScaleQuality quality)
         {
             return Scales.First(k => k.I == root && k.Quality == quality);
@@ -183,7 +163,11 @@ namespace Jaco.Scales
                                .Select(n => n.Flat())
                                .Union(Fifths.Reverse().Skip(-accidentals))
                                .ToList()
-                       : Fifths.Take(accidentals).Select(n => n.Sharp()).Union(Fifths.Skip(accidentals)).ToList();
+                       : Fifths
+                            .Take(accidentals)
+                            .Select(n => n.Sharp())
+                            .Union(Fifths.Skip(accidentals))
+                            .ToList();
         }
 
         private Scale OrderScaleNotes(Note rootNote)
