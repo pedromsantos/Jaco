@@ -31,7 +31,7 @@ First load the Jaco.dll in C# interactive
 |Jaco.Notes.Note.A.Transpose(Jaco.Notes.Interval.MajorSecond).Name  | "B"              |
 |Jaco.Notes.Interval.CreateIntervalFromDistance(1).Name             | "Minor second"   |
 
-### Keys
+### Scales
 | Example                                          | Output                             |
 | ------------------------------------------------ | ---------------------------------- |
 | Jaco.Scales.CMajor.Name                          | "C Major"                          |
