@@ -39,7 +39,7 @@ First load the Jaco.dll in C# interactive
 ### Chords
 #### Building chords
 ```csharp
-var cmaj = new Jaco.Chirds.Chord(Jaco.Note.C, Jaco.ChordFunction.Major)
+var cmaj = new Jaco.Chords.Chord(Jaco.Note.C, Jaco.ChordFunction.Major)
 ```
 | Example                                      | Output             |
 | -------------------------------------------- | -------------------|
