@@ -32,9 +32,14 @@ First load the Jaco.dll in C# interactive
 |Jaco.Notes.Interval.CreateIntervalFromDistance(1).Name             | "Minor second"   |
 
 ### Keys
-| Example                                | Output                             |
-| -------------------------------------- | ---------------------------------- |
-| Jaco.ScalesScale.CMajor.Name           | "C Major"                          |
+| Example                                          | Output                             |
+| ------------------------------------------------ | ---------------------------------- |
+| Jaco.Scales.CMajor.Name                          | "C Major"                          |
+| Jaco.Scale.CMajor.I.Name                         | "C"                                |
+| Scale.CMajor.DoesNoteBelongToScale(Note.ASharp)  | false                              |
+| new TriadsHarmonizer(Scale.CMajor).I().Name      | "Cmaj"                             |
+| new TriadsHarmonizer(Scale.AMinor).I().Name      | "Amin"                             |
+| new SeventhsHarmonizer(Scale.CMajor).I().Name    | "Cmaj7"                            |
 
 ### Chords
 #### Building chords
