@@ -39,6 +39,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Guitar\ClosedFret.cs" />
+    <Compile Include="Guitar\ClosedFretMapper.cs" />
+    <Compile Include="Guitar\Fret.cs" />
+    <Compile Include="Guitar\FretMapper.cs" />
     <Compile Include="Guitar\GuitarString.cs" />
     <Compile Include="Notes\Accident.cs" />
     <Compile Include="Chords\Chord.cs" />

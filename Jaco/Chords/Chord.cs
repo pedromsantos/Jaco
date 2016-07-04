@@ -65,8 +65,7 @@ namespace Jaco.Chords
 
         public virtual Chord Invert()
         {
-            var invertedChordNotes = ChordNotes.Rotate();
-            return new Chord(invertedChordNotes.ToArray());
+            return new Chord(ChordNotes.Rotate().ToArray());
         }
 
         public Chord ToDrop2()

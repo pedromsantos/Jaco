@@ -102,6 +102,7 @@ namespace Jaco.Scales
                 yield return FSharpMinor;
                 yield return GMinor;
                 yield return GSharpMinor;
+                yield return EFlatMinor;
             }
         }
 
