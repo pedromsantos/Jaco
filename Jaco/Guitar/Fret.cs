@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Jaco.Guitar
+﻿namespace Jaco.Guitar
 {
     public class Fret
     {

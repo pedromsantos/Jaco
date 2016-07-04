@@ -14,6 +14,15 @@ namespace JacoTests.Guitar
             {
                 {
                     new Chord(Note.C, ChordFunction.Major),
+                    GuitarString.Sixth,
+                    new [] {
+                        new Fret(GuitarString.Sixth, 8),
+                        new Fret(GuitarString.Fifth, 7),
+                        new Fret(GuitarString.Fourth, 5)
+                    }
+                },
+                {
+                    new Chord(Note.C, ChordFunction.Major),
                     GuitarString.Fifth,
                     new [] {
                         new Fret(GuitarString.Fifth, 15),
@@ -21,6 +30,25 @@ namespace JacoTests.Guitar
                         new Fret(GuitarString.Third, 12)
                     }
                 },
+                {
+                    new Chord(Note.C, ChordFunction.Major),
+                    GuitarString.Fourth,
+                    new [] {
+                        new Fret(GuitarString.Fourth, 10),
+                        new Fret(GuitarString.Third, 9),
+                        new Fret(GuitarString.Second, 8)
+                    }
+                },
+                {
+                    new Chord(Note.C, ChordFunction.Major),
+                    GuitarString.Third,
+                    new [] {
+                        new Fret(GuitarString.Third, 5),
+                        new Fret(GuitarString.Second, 5),
+                        new Fret(GuitarString.First, 3)
+                    }
+                },
+
                 {
                     new Chord(Note.F, ChordFunction.Major),
                     GuitarString.Sixth,
