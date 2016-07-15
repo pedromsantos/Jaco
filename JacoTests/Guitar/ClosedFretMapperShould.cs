@@ -138,6 +138,17 @@ namespace JacoTests.Guitar
                         new Fret(GuitarString.Second, 8),
                     }
                 },
+                {
+                    new Chord(Note.C, ChordFunction.Major7).ToDrop3(),
+                    GuitarString.Fifth,
+                    new [] {
+                        new Fret(GuitarString.Fifth, 3),
+                        new Muted(GuitarString.Fourth),
+                        new Fret(GuitarString.Third, 4),
+                        new Fret(GuitarString.Second, 5),
+                        new Fret(GuitarString.First, 3),
+                    }
+                },
             };
 
         [Theory, MemberData(nameof(MapChordOnBassString))]
