@@ -2,11 +2,11 @@
 {
     public class Fret
     {
-        private readonly GuitarString guitarString;
-        private readonly int fret;
+        protected readonly GuitarString guitarString;
+        protected readonly int fret;
 
-        private const int MaxStrech = 5;
         protected const int Octave = 12;
+        private const int MaxStrech = 5;
 
         public Fret(GuitarString guitarString, int fret)
         {
@@ -30,20 +30,25 @@
             }
         }
 
-        protected bool Equals(Fret other)
-        {
-            return Equals(guitarString, other.guitarString) && fret == other.fret;
-        }
-
-        public bool ExceedsMaxStrech(Fret other)
+        public virtual bool ExceedsMaxStrech(Fret other)
         {
             var fretDistance = Distance(other);
             return fretDistance > MaxStrech;
         }
 
-        public Fret RaiseOctave()
+        public virtual Fret RaiseOctave()
         {
             return new Fret(guitarString, fret + Octave);
+        }
+
+        protected virtual bool Equals(Fret other)
+        {
+            return SameString(other) && fret == other.fret;
+        }
+
+        protected bool SameString(Fret other)
+        {
+            return Equals(guitarString, other.guitarString);
         }
 
         private int Distance(Fret other)

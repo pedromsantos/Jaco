@@ -5,6 +5,13 @@ namespace Jaco.Guitar
 {
     public class FretMapper
     {
+        private readonly IStringSkipper skipper;
+
+        public FretMapper(IStringSkipper skipper)
+        {
+            this.skipper = skipper;
+        }
+
         public IEnumerable<Fret> Map(Chord chord, GuitarString bassGuitarString)
         {
             IList<Fret> frets = new List<Fret>();
@@ -14,6 +21,12 @@ namespace Jaco.Guitar
             {
                 frets = AddFret(CreateFret(guitarString, guitarString.FretForNote(note)), frets);
                 guitarString = guitarString.Previous();
+
+                if (skipper.SkippString(note, chord))
+                {
+                    frets = AddFret(new Muted(guitarString), frets);
+                    guitarString = guitarString.Previous();
+                }
             }
            
             return frets;

@@ -53,7 +53,7 @@ namespace JacoTests.Guitar
         [Theory, MemberData(nameof(MapChordOnBassString))]
         public void MapChord(Chord chordToMap, GuitarString bassString, IEnumerable<Fret> expectedFrets)
         {
-            var mapper = new FretMapper();
+            var mapper = new FretMapper(new NoStringSkipper());
             var frets = mapper.Map(chordToMap, bassString);
 
             frets.Should().ContainInOrder(expectedFrets);

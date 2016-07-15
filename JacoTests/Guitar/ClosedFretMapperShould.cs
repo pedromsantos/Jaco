@@ -127,12 +127,28 @@ namespace JacoTests.Guitar
                         new Fret(GuitarString.Second, 14),
                     }
                 },
+                {
+                    new Chord(Note.C, ChordFunction.Major7).ToDrop3(),
+                    GuitarString.Sixth,
+                    new [] {
+                        new Fret(GuitarString.Sixth, 8),
+                        new Muted(GuitarString.Fifth),
+                        new Fret(GuitarString.Fourth, 9),
+                        new Fret(GuitarString.Third, 9),
+                        new Fret(GuitarString.Second, 8),
+                    }
+                },
             };
 
         [Theory, MemberData(nameof(MapChordOnBassString))]
         public void MapChord(Chord chordToMap, GuitarString bassString, IEnumerable<Fret> expectedFrets)
         {
-            var mapper = new ClosedFretMapper();
+            var skipper = chordToMap is Drop3
+                ? (IStringSkipper) new AfterBassStringSkipper() 
+                : new NoStringSkipper();
+
+            var mapper = new ClosedFretMapper(skipper);
+                       
             var frets = mapper.Map(chordToMap, bassString);
 
             frets.Should().ContainInOrder(expectedFrets);

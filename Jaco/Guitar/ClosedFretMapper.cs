@@ -5,13 +5,18 @@ namespace Jaco.Guitar
 {
     public class ClosedFretMapper: FretMapper
     {
+        public ClosedFretMapper(IStringSkipper stringSkipper) 
+            : base(stringSkipper)
+        {
+        }
+
         protected override IList<Fret> AddFret(Fret newFret, IList<Fret> frets)
         {
             if (frets.Count > 0)
             {
                 var lastFret = frets.Last();
 
-                if (newFret.ExceedsMaxStrech(lastFret))
+                if (!(lastFret is Muted) && newFret.ExceedsMaxStrech(lastFret))
                 {
                     frets =  RaiseOctavePreviousFrets(frets);
                 }
