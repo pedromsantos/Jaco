@@ -243,3 +243,5 @@ _Pvt_Extensions
 packages/
 .idea/workspace.xml
 *.swp
+riderModule.iml
+.idea.Jaco
