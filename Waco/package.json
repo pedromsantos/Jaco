@@ -1,0 +1,22 @@
+{
+  "name": "waco",
+  "version": "1.0.0",
+  "description": "GuitarChordsApp",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Santos <pedro@codurance.com> (https://github.com/pedromsantos)",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2"
+  }
+}
