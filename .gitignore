@@ -70,6 +70,8 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.bundle.js
+*.bundle.js.map
 
 # Chutzpah Test files
 _Chutzpah*
