@@ -77,7 +77,7 @@ namespace Jaco.Notes
             var interval = Interval.Unisson;
             var resultingNote = this;
 
-            while (interval != transposingInterval)
+            while (interval.Distance != transposingInterval.Distance)
             {
                 resultingNote = transposingInterval.TransposeNote(resultingNote);
                 interval = IntervalWithOther(resultingNote);

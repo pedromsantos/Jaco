@@ -57,12 +57,13 @@
     <Compile Include="Scales\IHarmonizer.cs" />
     <Compile Include="Infrastructure\LinqExtensions.cs" />
     <Compile Include="Notes\Interval.cs" />
-    <Compile Include="Scales\Scale.cs" />
+    <Compile Include="Scales\Key.cs" />
     <Compile Include="Notes\Note.cs" />
     <Compile Include="Chords\Function.cs" />
     <Compile Include="Chords\NoteWithFunction.cs" />
     <Compile Include="Notes\Pitch.cs" />
-    <Compile Include="Scales\ScaleQuality.cs" />
+    <Compile Include="Scales\KeyQuality.cs" />
+    <Compile Include="Scales\ScaleFormula.cs" />
     <Compile Include="Scales\SeventhsHarmonizer.cs" />
     <Compile Include="Scales\TriadsHarmonizer.cs" />
   </ItemGroup>

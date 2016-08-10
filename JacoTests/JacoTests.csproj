@@ -75,7 +75,8 @@
     <Compile Include="Notes\NoteShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scales\ScaleHarmonizerShould.cs" />
-    <Compile Include="Scales\ScaleShould.cs" />
+    <Compile Include="Scales\KeyShould.cs" />
+    <Compile Include="Scales\ScaleFormulaShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

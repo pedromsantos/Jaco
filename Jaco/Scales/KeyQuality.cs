@@ -1,8 +1,8 @@
 ﻿namespace Jaco.Scales
 {
-    public enum ScaleQuality
+    public enum KeyQuality
     {
         Major,
-        Minor
+        Minor,
     }
 }

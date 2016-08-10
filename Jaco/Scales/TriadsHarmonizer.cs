@@ -5,46 +5,46 @@ namespace Jaco.Scales
 {
     public class TriadsHarmonizer : IHarmonizer
     {
-        private readonly Scale scale;
+        private readonly Scale _scale;
 
         public TriadsHarmonizer(Scale scale)
         {
-            this.scale = scale;
+            _scale = scale;
         }
 
         public Chord I()
         {
-            return CreateFromScaleNotes(scale.HarmonicI, scale.HarmonicIII, scale.HarmonicV);
+            return CreateFromScaleNotes(_scale.I, _scale.III, _scale.V);
         }
 
         public Chord II()
         {
-            return CreateFromScaleNotes(scale.HarmonicII, scale.HarmonicIV, scale.HarmonicVI);
+            return CreateFromScaleNotes(_scale.II, _scale.IV, _scale.VI);
         }
 
         public Chord III()
         {
-            return CreateFromScaleNotes(scale.HarmonicIII, scale.HarmonicV, scale.HarmonicVII);
+            return CreateFromScaleNotes(_scale.III, _scale.V, _scale.VII);
         }
 
         public Chord IV()
         {
-            return CreateFromScaleNotes(scale.HarmonicIV, scale.HarmonicVI, scale.HarmonicI);
+            return CreateFromScaleNotes(_scale.IV, _scale.VI, _scale.I);
         }
 
         public Chord V()
         {
-            return CreateFromScaleNotes(scale.HarmonicV, scale.HarmonicVII, scale.HarmonicII);
+            return CreateFromScaleNotes(_scale.V, _scale.VII, _scale.II);
         }
 
         public Chord VI()
         {
-            return CreateFromScaleNotes(scale.HarmonicVI, scale.HarmonicI, scale.HarmonicIII);
+            return CreateFromScaleNotes(_scale.VI, _scale.I, _scale.III);
         }
 
         public Chord VII()
         {
-            return CreateFromScaleNotes(scale.HarmonicVII, scale.HarmonicII, scale.HarmonicIV);
+            return CreateFromScaleNotes(_scale.VII, _scale.II, _scale.IV);
         }
 
         private Chord CreateFromScaleNotes(Note root, Note third, Note fifth)
