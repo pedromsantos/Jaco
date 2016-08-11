@@ -63,6 +63,7 @@
     <Compile Include="Chords\NoteWithFunction.cs" />
     <Compile Include="Notes\Pitch.cs" />
     <Compile Include="Scales\KeyQuality.cs" />
+    <Compile Include="Scales\Scale.cs" />
     <Compile Include="Scales\ScaleFormula.cs" />
     <Compile Include="Scales\SeventhsHarmonizer.cs" />
     <Compile Include="Scales\TriadsHarmonizer.cs" />

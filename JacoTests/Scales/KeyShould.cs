@@ -21,9 +21,9 @@ namespace JacoTests.Scales
             };
 
         [Theory, MemberData(nameof(ScaleNotes))]
-        public void GenerateCorrectNotesForScale(Key _key, IEnumerable<Note> expectedNotes)
+        public void GenerateCorrectNotesForScale(Key key, IEnumerable<Note> expectedNotes)
         {
-            _key.Notes.Should().ContainInOrder(expectedNotes);
+            key.Notes.Should().ContainInOrder(expectedNotes);
         }
 
         [Fact]
@@ -89,9 +89,9 @@ namespace JacoTests.Scales
             };
 
         [Theory, MemberData(nameof(RelativeScales))]
-        public void FindRelativeScale(Key _key, IEnumerable<Note> expectedScaleNotes)
+        public void FindRelativeScale(Key key, IEnumerable<Note> expectedScaleNotes)
         {
-            _key.Relative().Notes.Should().ContainInOrder(expectedScaleNotes);
+            key.Relative().Notes.Should().ContainInOrder(expectedScaleNotes);
         }
     }
 }

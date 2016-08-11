@@ -4,35 +4,9 @@ using Jaco.Notes;
 
 namespace Jaco.Scales
 {
-    public class Scale
-    {
-        private readonly IEnumerable<Note> _notes;
-
-        public Scale(IEnumerable<Note> notes)
-        {
-            this._notes = notes;
-        }
-
-        public IEnumerable<Note> Notes => _notes;
-
-        public Note I => _notes.ElementAt(0);
-
-        public Note II => _notes.ElementAt(1);
-
-        public Note III => _notes.ElementAt(2);
-
-        public Note IV => _notes.ElementAt(3);
-
-        public Note V => _notes.ElementAt(4);
-
-        public Note VI => _notes.ElementAt(5);
-
-        public Note VII => _notes.ElementAt(6);
-    }
-
     public class ScaleFormula
     {
-        private readonly IEnumerable<Interval> _intervals;
+        private readonly IEnumerable<Interval> intervals;
 
         public static readonly ScaleFormula Ionian = new ScaleFormula(
             new[] {
@@ -270,12 +244,12 @@ namespace Jaco.Scales
 
         protected ScaleFormula(IEnumerable<Interval> intervals)
         {
-            _intervals = intervals;
+            this.intervals = intervals;
         }
 
         public Scale CreateForRoot(Note root)
         {
-            return new Scale(_intervals.Select(root.Transpose));
+            return new Scale(intervals.Select(root.Transpose));
         }
     }
 }

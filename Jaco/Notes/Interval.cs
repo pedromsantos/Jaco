@@ -20,7 +20,7 @@ namespace Jaco.Notes
         public static readonly Interval MinorSixth = new Interval(8, "Minor sixth", Accident.Flat);
         public static readonly Interval MajorSixth = new Interval(9, "Major sixth", Accident.None);
         public static readonly Interval MinorSeventh = new Interval(10, "Minor seventh", Accident.Flat);
-        public static readonly Interval MajorSeventh = new Interval(11, "Major seventh", Accident.None);
+        public static readonly Interval MajorSeventh = new Interval(11, "Major seventh", Accident.Sharp);
         public static readonly Interval PerfectOctave = new Interval(12, "Perfect octave", Accident.None);
 
         public int Distance { get; }
