@@ -36,7 +36,7 @@ namespace Jaco.Scales
             new[]
             {
                 Interval.Unisson,
-                Interval.MajorSecond,
+                Interval.MinorSecond,
                 Interval.MinorThird,
                 Interval.PerfectForth,
                 Interval.PerfectFifth,
