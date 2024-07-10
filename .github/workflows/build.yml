@@ -26,4 +26,4 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:
-          path-to-lcov: JacoTests/TestResults/coverage.info
+          path-to-lcov: ./JacoTests/TestResults/coverage.info
