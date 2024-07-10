@@ -74,4 +74,31 @@ public class IntervalShould
 		Interval.MinorThirteenth.Invert().Invert().Should().Be(Interval.MinorSixth);
 		Interval.MajorThirteenth.Invert().Invert().Should().Be(Interval.MajorSixth);
 	}
+
+	[Fact]
+	public void RaisingAndLoweringOctaveShouldBeSameInterval()
+	{
+		Interval.Unison.OctaveUp().OctaveDown().Should().Be(Interval.Unison);
+		Interval.MinorSecond.OctaveUp().OctaveDown().Should().Be(Interval.MinorSecond);
+		Interval.MajorSecond.OctaveUp().OctaveDown().Should().Be(Interval.MajorSecond);
+		Interval.MinorThird.OctaveUp().OctaveDown().Should().Be(Interval.MinorThird);
+		Interval.MajorThird.OctaveUp().OctaveDown().Should().Be(Interval.MajorThird);
+		Interval.PerfectFourth.OctaveUp().OctaveDown().Should().Be(Interval.PerfectFourth);
+		Interval.PerfectFifth.OctaveUp().OctaveDown().Should().Be(Interval.PerfectFifth);
+		Interval.MinorSixth.OctaveUp().OctaveDown().Should().Be(Interval.MinorSixth);
+		Interval.MajorSixth.OctaveUp().OctaveDown().Should().Be(Interval.MajorSixth);
+		Interval.MinorSeventh.OctaveUp().OctaveDown().Should().Be(Interval.MinorSeventh);
+		Interval.MajorSeventh.OctaveUp().OctaveDown().Should().Be(Interval.MajorSeventh);
+	}
+	[Fact]
+
+	public void RaisingAndLoweringOctaveShouldBeIntervalOctaveDown()
+	{
+		Interval.PerfectOctave.OctaveUp().OctaveDown().Should().Be(Interval.Unison);
+		Interval.MinorNinth.OctaveUp().OctaveDown().Should().Be(Interval.MinorSecond);
+		Interval.MajorNinth.OctaveUp().OctaveDown().Should().Be(Interval.MajorSecond);
+		Interval.PerfectEleventh.OctaveUp().OctaveDown().Should().Be(Interval.PerfectFourth);
+		Interval.MinorThirteenth.OctaveUp().OctaveDown().Should().Be(Interval.MinorSixth);
+		Interval.MajorThirteenth.OctaveUp().OctaveDown().Should().Be(Interval.MajorSixth);
+	}
 }
