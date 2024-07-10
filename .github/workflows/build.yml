@@ -21,7 +21,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test --collect:"XPlat Code Coverage;Format=lcov"
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2
