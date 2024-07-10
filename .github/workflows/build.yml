@@ -18,5 +18,9 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
+          /p:CollectCoverage=true /p:CoverletOutput=TestResults/
+          /p:CoverletOutputFormat=lcov
       - name: Coveralls
         uses: coverallsapp/github-action@v2
+        with:
+          path-to-lcov: JacoTests/TestResults/coverage.info
