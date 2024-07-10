@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaco", ".\Jaco\Jaco.csproj"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacoTests", ".\JacoTests\JacoTests.csproj", "{763629D4-7B27-423A-8D70-952B0F093742}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacoAPI", "JacoAPI\JacoAPI.csproj", "{A481103E-E511-492F-81BE-4A998C3551BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacoAPITests", "JacoAPITests\JacoAPITests.csproj", "{AA576D78-DF7C-4B28-B737-ACB16ED75181}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{763629D4-7B27-423A-8D70-952B0F093742}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{763629D4-7B27-423A-8D70-952B0F093742}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{763629D4-7B27-423A-8D70-952B0F093742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A481103E-E511-492F-81BE-4A998C3551BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A481103E-E511-492F-81BE-4A998C3551BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A481103E-E511-492F-81BE-4A998C3551BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A481103E-E511-492F-81BE-4A998C3551BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA576D78-DF7C-4B28-B737-ACB16ED75181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA576D78-DF7C-4B28-B737-ACB16ED75181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA576D78-DF7C-4B28-B737-ACB16ED75181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA576D78-DF7C-4B28-B737-ACB16ED75181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
