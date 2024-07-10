@@ -26,4 +26,4 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:
-          path-to-lcov: /home/runner/work/Jaco/Jaco/JacoTests/lcov.info
+          path-to-lcov: ${{ github.workspace }}/Jaco/JacoTests/lcov.info
