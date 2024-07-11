@@ -27,3 +27,5 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/", () => "Hello World!");
 
 app.Run();
+
+public partial class Program { }
