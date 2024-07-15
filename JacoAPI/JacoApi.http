@@ -1,6 +1,6 @@
 @JacoApi_HostAddress = http://localhost:5240
 
-GET {{JacoApi_HostAddress}}/weatherforecast/
+GET {{JacoApi_HostAddress}}/Jaco/
 Accept: application/json
 
 ###
