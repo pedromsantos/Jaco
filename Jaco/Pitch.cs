@@ -106,7 +106,7 @@ public class Pitch
 																			0,
 																			0,
 																			() => CSharp!,
-																			() => BFlat!,
+																			() => B!,
 																			() => C!,
 																			() => new IntervalsToPitches()
 																				.Add(Interval.Unison, C!)
@@ -250,8 +250,8 @@ public class Pitch
 																				.Add(Interval.DiminishedFifth, C!)
 																				.Add(Interval.PerfectFifth, CSharp!)
 																				.Add(Interval.AugmentedFifth, D!)
-																				.Add(Interval.MinorSixth, D!)
-																				.Add(Interval.MajorSixth, DSharp!)
+																				.Add(Interval.MinorSixth, DFlat!)
+																				.Add(Interval.MajorSixth, D!)
 																				.Add(Interval.DiminishedSeventh, EFlat!)
 																				.Add(Interval.MinorSeventh, E!)
 																				.Add(Interval.MajorSeventh, ESharp!)
@@ -260,8 +260,8 @@ public class Pitch
 																				.Add(Interval.MajorNinth, G!)
 																				.Add(Interval.PerfectEleventh, B!)
 																				.Add(Interval.AugmentedEleventh, BSharp!)
-																				.Add(Interval.MinorThirteenth, DSharp!)
-																				.Add(Interval.MajorThirteenth, E!));
+																				.Add(Interval.MinorThirteenth, DFlat!)
+																				.Add(Interval.MajorThirteenth, D!));
 	public static readonly Pitch FSharp = new("F#",
 																					 6,
 																					 1,
@@ -293,7 +293,7 @@ public class Pitch
 																				.Add(Interval.DiminishedFifth, DFlat!)
 																				.Add(Interval.PerfectFifth, D!)
 																				.Add(Interval.AugmentedFifth, DSharp!)
-																				.Add(Interval.MinorSixth, DSharp!)
+																				.Add(Interval.MinorSixth, EFlat!)
 																				.Add(Interval.MajorSixth, E!)
 																				.Add(Interval.DiminishedSeventh, FFlat!)
 																				.Add(Interval.MinorSeventh, F!)
@@ -304,7 +304,7 @@ public class Pitch
 																				.Add(Interval.PerfectEleventh, C!)
 																				.Add(Interval.AugmentedEleventh, CSharp!)
 																				.Add(Interval.MinorThirteenth, E!)
-																				.Add(Interval.MajorThirteenth, F!));
+																				.Add(Interval.MajorThirteenth, ESharp!));
 	public static readonly Pitch GSharp = new("G#",
 																					 8,
 																					 1,
@@ -339,6 +339,7 @@ public class Pitch
 																				.Add(Interval.AugmentedFifth, ESharp!)
 																				.Add(Interval.MinorSixth, F!)
 																				.Add(Interval.MajorSixth, FSharp!)
+																				.Add(Interval.DiminishedSeventh, GFlat!)
 																				.Add(Interval.MinorSeventh, G!)
 																				.Add(Interval.MajorSeventh, GSharp!)
 																				.Add(Interval.PerfectOctave, A!)
@@ -346,8 +347,8 @@ public class Pitch
 																				.Add(Interval.MajorNinth, B!)
 																				.Add(Interval.PerfectEleventh, D!)
 																				.Add(Interval.AugmentedEleventh, DSharp!)
-																				.Add(Interval.MinorThirteenth, GSharp!)
-																				.Add(Interval.MajorThirteenth, A!));
+																				.Add(Interval.MinorThirteenth, F!)
+																				.Add(Interval.MajorThirteenth, FSharp!));
 	public static readonly Pitch ASharp = new("A#",
 																					 10,
 																					 1,
@@ -372,18 +373,18 @@ public class Pitch
 																				.Add(Interval.DiminishedFifth, FFlat!)
 																				.Add(Interval.PerfectFifth, F!)
 																				.Add(Interval.AugmentedFifth, FSharp!)
-																				.Add(Interval.MinorSixth, G!)
-																				.Add(Interval.MajorSixth, GSharp!)
-																				.Add(Interval.DiminishedSeventh, A!)
-																				.Add(Interval.MinorSeventh, ASharp!)
-																				.Add(Interval.MajorSeventh, B!)
+																				.Add(Interval.MinorSixth, GFlat!)
+																				.Add(Interval.MajorSixth, G!)
+																				.Add(Interval.DiminishedSeventh, G!)
+																				.Add(Interval.MinorSeventh, AFlat!)
+																				.Add(Interval.MajorSeventh, A!)
 																				.Add(Interval.PerfectOctave, B!)
 																				.Add(Interval.MinorNinth, C!)
 																				.Add(Interval.MajorNinth, CSharp!)
-																				.Add(Interval.PerfectEleventh, E!)
-																				.Add(Interval.AugmentedEleventh, ESharp!)
-																				.Add(Interval.MinorThirteenth, A!)
-																				.Add(Interval.MajorThirteenth, B!));
+																				.Add(Interval.PerfectEleventh, EFlat!)
+																				.Add(Interval.AugmentedEleventh, E!)
+																				.Add(Interval.MinorThirteenth, GFlat!)
+																				.Add(Interval.MajorThirteenth, G!));
 
 	public static readonly Pitch B = new("B",
 																			11,
@@ -402,18 +403,18 @@ public class Pitch
 																				.Add(Interval.DiminishedFifth, F!)
 																				.Add(Interval.PerfectFifth, FSharp!)
 																				.Add(Interval.AugmentedFifth, G!)
-																				.Add(Interval.MinorSixth, AFlat!)
-																				.Add(Interval.MajorSixth, A!)
-																				.Add(Interval.DiminishedSeventh, A!)
-																				.Add(Interval.MinorSeventh, ASharp!)
-																				.Add(Interval.MajorSeventh, B!)
+																				.Add(Interval.MinorSixth, G!)
+																				.Add(Interval.MajorSixth, GSharp!)
+																				.Add(Interval.DiminishedSeventh, AFlat!)
+																				.Add(Interval.MinorSeventh, A!)
+																				.Add(Interval.MajorSeventh, ASharp!)
 																				.Add(Interval.PerfectOctave, B!)
 																				.Add(Interval.MinorNinth, C!)
 																				.Add(Interval.MajorNinth, CSharp!)
 																				.Add(Interval.PerfectEleventh, E!)
 																				.Add(Interval.AugmentedEleventh, ESharp!)
-																				.Add(Interval.MinorThirteenth, A!)
-																				.Add(Interval.MajorThirteenth, B!));
+																				.Add(Interval.MinorThirteenth, G!)
+																				.Add(Interval.MajorThirteenth, GSharp!));
 	public static readonly Pitch BSharp = new("B#",
 																					 0,
 																					 1,
