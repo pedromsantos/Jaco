@@ -11,8 +11,8 @@ public class JacoApiShould
     [Fact]
     public void JacoControllerShould()
     {
-        var controller = new JacoController(new LoggerFactory().CreateLogger<JacoController>());
-
-        controller.Get().As<OkObjectResult>().Value.Should().Be("Hello from Jaco API!");
+        new JacoController(new LoggerFactory().CreateLogger<JacoController>())
+            .Get().As<OkObjectResult>().Value
+            .Should().Be("Hello from Jaco API!");
     }
 }
