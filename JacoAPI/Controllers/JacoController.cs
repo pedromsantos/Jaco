@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JacoApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[Jaco]")]
 public class JacoController : ControllerBase
 {
     private readonly ILogger<JacoController> _logger;
