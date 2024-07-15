@@ -125,10 +125,7 @@ public class PitchShould
         Assert.Equal(10, Pitch.C.AbsoluteDistanceTo(Pitch.BFlat));
         Assert.Equal(11, Pitch.C.AbsoluteDistanceTo(Pitch.B));
     }
-}
 
-public class PitchTransposeShould
-{
     [Fact]
     public void TransposeUsingUnison()
     {
