@@ -101,7 +101,7 @@ public class Pitch
 																					() => C!,
 																					() => B!,
 																					() => C!,
-																					() => C!.intervalsToPitchs().Flat());
+																					() => B!.intervalsToPitchs());
 	public static readonly Pitch C = new("C",
 																			0,
 																			0,
@@ -225,14 +225,14 @@ public class Pitch
 																					 () => F!,
 																					 () => E,
 																					 () => E,
-																					 () => F!.intervalsToPitchs().Sharp());
+																					 () => F!.intervalsToPitchs());
 	public static readonly Pitch FFlat = new("Fb",
 																					5,
 																					1,
 																					() => F!,
 																					() => E,
 																					() => F!,
-																					() => F!.intervalsToPitchs().Flat());
+																					() => E!.intervalsToPitchs());
 	public static readonly Pitch F = new("F",
 																			5,
 																			0,
