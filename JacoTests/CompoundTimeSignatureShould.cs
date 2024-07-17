@@ -2,7 +2,7 @@ using Jaco;
 
 namespace JacoTests;
 
-public class CompoundTimeSignatureTests
+public class CompoundTimeSignatureShould
 {
 	[Fact]
 	public void PulsesMustBeDivisibleBy3()

@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace Jaco;
+﻿namespace Jaco;
 
 internal class IntervalsToPitches
 {

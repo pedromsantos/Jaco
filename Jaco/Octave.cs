@@ -1,3 +1,8 @@
+namespace Jaco;
+
+using System;
+using System.Collections.Generic;
+
 public class Octave
 {
 	private static readonly List<Octave> all = new List<Octave>();
