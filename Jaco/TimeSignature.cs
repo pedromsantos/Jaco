@@ -34,12 +34,12 @@ public abstract class TimeSignature
 		get { return duration.Tick; }
 	}
 
-	public double MillisecondsPerMeasure
+	public double MillisecondsPerCycle
 	{
 		get { return BeatDurationMilliseconds * beats; }
 	}
 
-	public virtual double TicksPerMeasure
+	public virtual double TicksPerCycle
 	{
 		get { return BeatDurationTicks * beats; }
 	}
@@ -49,7 +49,7 @@ public abstract class TimeSignature
 		get { return (bpm.BPM * Duration.TickPerQuarterNote) / 60; }
 	}
 
-	public abstract double ToFillMeasure(Duration duration);
+	public abstract double ToFillCycle(Duration duration);
 
 	public double MillisecondsFor(Duration duration)
 	{

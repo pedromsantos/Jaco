@@ -16,12 +16,12 @@ public class CompoundTimeSignature : TimeSignature
 		get { return duration.Value * 3; }
 	}
 
-	public override double ToFillMeasure(Duration duration)
+	public override double ToFillCycle(Duration duration)
 	{
 		return (BeatDurationTicks / duration.Tick) * beats * 3;
 	}
 
-	public override double TicksPerMeasure
+	public override double TicksPerCycle
 	{
 		get { return BeatDurationTicks * beats * 3; }
 	}

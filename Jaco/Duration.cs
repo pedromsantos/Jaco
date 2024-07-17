@@ -50,7 +50,6 @@ internal class Ticks
 
 public class Duration
 {
-	private static readonly Duration[] all = new Duration[0];
 	private static readonly double dotMultiplier = 1.5;
 	private static readonly double doubleDotMultiplier = 1.75;
 

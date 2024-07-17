@@ -55,7 +55,7 @@ public class SimpleTimeSignatureShould
 
 		var expectedDuration = 4000;
 
-		timeSignature.MillisecondsPerMeasure.Should().Be(expectedDuration);
+		timeSignature.MillisecondsPerCycle.Should().Be(expectedDuration);
 	}
 
 	[Fact]
@@ -63,20 +63,20 @@ public class SimpleTimeSignatureShould
 	{
 		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter, 60);
 
-		Assert.Equal(1920, timeSignature.TicksPerMeasure);
+		Assert.Equal(1920, timeSignature.TicksPerCycle);
 	}
 
 	[Fact]
-	public void NumberOfNotesToFillMeasureIn44()
+	public void NumberOfNotesToFillCycleIn44()
 	{
 		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter, 60);
 
-		Assert.Equal(1, timeSignature.ToFillMeasure(Duration.Whole));
-		Assert.Equal(2, timeSignature.ToFillMeasure(Duration.Half));
-		Assert.Equal(4, timeSignature.ToFillMeasure(Duration.Quarter));
-		Assert.Equal(8, timeSignature.ToFillMeasure(Duration.Eighth));
-		Assert.Equal(16, timeSignature.ToFillMeasure(Duration.Sixteenth));
-		Assert.Equal(32, timeSignature.ToFillMeasure(Duration.ThirtySecond));
-		Assert.Equal(64, timeSignature.ToFillMeasure(Duration.SixtyFourth));
+		Assert.Equal(1, timeSignature.ToFillCycle(Duration.Whole));
+		Assert.Equal(2, timeSignature.ToFillCycle(Duration.Half));
+		Assert.Equal(4, timeSignature.ToFillCycle(Duration.Quarter));
+		Assert.Equal(8, timeSignature.ToFillCycle(Duration.Eighth));
+		Assert.Equal(16, timeSignature.ToFillCycle(Duration.Sixteenth));
+		Assert.Equal(32, timeSignature.ToFillCycle(Duration.ThirtySecond));
+		Assert.Equal(64, timeSignature.ToFillCycle(Duration.SixtyFourth));
 	}
 }

@@ -7,7 +7,7 @@ public class SimpleTimeSignature : TimeSignature
 	{
 	}
 
-	public override double ToFillMeasure(Duration duration)
+	public override double ToFillCycle(Duration duration)
 	{
 		return (BeatDurationTicks / duration.Tick) * beats;
 	}
