@@ -11,29 +11,17 @@ public class CompoundTimeSignatureTests
 	}
 
 	[Fact]
-	public void TestBeatDurationInMilliseconds()
+	public void CalculateBeatDurationInMillisecondsAndTicks()
 	{
 		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
 
 		Assert.Equal(1000, timeSignature.BeatDurationMilliseconds);
-		Assert.Equal(1000, timeSignature.BeatDurationMilliseconds);
-		Assert.Equal(1000, timeSignature.BeatDurationMilliseconds);
-	}
-
-	[Fact]
-	public void TestBeatDurationInTicks()
-	{
-		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
-
 		Assert.Equal(480, timeSignature.TicksPerSecond);
-
-		Assert.Equal(Duration.Eighth.Tick, timeSignature.BeatDurationTicks);
-		Assert.Equal(Duration.Eighth.Tick, timeSignature.BeatDurationTicks);
 		Assert.Equal(Duration.Eighth.Tick, timeSignature.BeatDurationTicks);
 	}
 
 	[Fact]
-	public void NoteDurationsInMilliseconds()
+	public void CalculateNoteDurationsInMilliseconds()
 	{
 		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
 
@@ -49,7 +37,7 @@ public class CompoundTimeSignatureTests
 	}
 
 	[Fact]
-	public void MeasureDurationsInMilliseconds()
+	public void CalculateMeasureDurationsInMilliseconds()
 	{
 		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
 
