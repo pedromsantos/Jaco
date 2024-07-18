@@ -100,11 +100,17 @@ public class Pitch
 		return intervalsToPitchs().IntervalTo(pitch);
 	}
 
+	public bool IsEnharmonicWith(Pitch pitch)
+	{
+		return value == pitch.value;
+	}
+
 	public int Value => value;
+
 
 	public static readonly Pitch CFlat = new("Cb",
 																					0,
-																					1,
+																					-1,
 																					() => B!,
 																					() => C!, () => C!, () => B!.intervalsToPitchs());
 	public static readonly Pitch C = new("C",
@@ -142,7 +148,7 @@ public class Pitch
 
 	public static readonly Pitch DFlat = new("Db",
 																					1,
-																					1,
+																					-1,
 																					() => C,
 																					() => D!, () => D!, () => D!.intervalsToPitchs().Flat());
 	public static readonly Pitch D = new("D",
@@ -180,7 +186,7 @@ public class Pitch
 
 	public static readonly Pitch EFlat = new("Eb",
 																					3,
-																					1,
+																					-1,
 																					() => D,
 																					() => E!, () => E!, () => E!.intervalsToPitchs().Flat());
 	public static readonly Pitch E = new("E",
@@ -217,7 +223,7 @@ public class Pitch
 																					 () => E, () => F!, () => F!.intervalsToPitchs());
 	public static readonly Pitch FFlat = new("Fb",
 																					5,
-																					1,
+																					-1,
 																					() => E,
 																					() => F!, () => F!, () => E!.intervalsToPitchs());
 	public static readonly Pitch F = new("F",
@@ -254,7 +260,7 @@ public class Pitch
 																					 () => F, () => G!, () => F!.intervalsToPitchs().Sharp());
 	public static readonly Pitch GFlat = new("Gb",
 																					6,
-																					1,
+																					-1,
 																					() => F,
 																					() => G!, () => G!, () => G!.intervalsToPitchs().Flat());
 	public static readonly Pitch G = new("G",
@@ -291,7 +297,7 @@ public class Pitch
 																					 () => G, () => A!, () => G!.intervalsToPitchs().Sharp());
 	public static readonly Pitch AFlat = new("Ab",
 																					8,
-																					1,
+																					-1,
 																					() => G,
 																					() => A!, () => A!, () => A!.intervalsToPitchs().Flat());
 
@@ -329,7 +335,7 @@ public class Pitch
 																					 () => A, () => B!, () => A!.intervalsToPitchs().Sharp());
 	public static readonly Pitch BFlat = new("Bb",
 																					10,
-																					1,
+																					-1,
 																					() => A,
 																					() => B!, () => B!, () => new IntervalsToPitches()
 																						.Add(Interval.Unison, BFlat!)

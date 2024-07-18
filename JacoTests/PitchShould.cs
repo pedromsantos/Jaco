@@ -32,22 +32,22 @@ public class PitchShould
     }
 
     [Fact]
-    public void PitchesWithSameValueAndAccidentalsAreEqual()
+    public void PitchesWithSameValueAreEnharmonic()
     {
-        Pitch.CSharp.Should().Be(Pitch.DFlat);
-        Pitch.DSharp.Should().Be(Pitch.EFlat);
-        Pitch.ESharp.Should().Be(Pitch.FFlat);
-        Pitch.FSharp.Should().Be(Pitch.GFlat);
-        Pitch.GSharp.Should().Be(Pitch.AFlat);
-        Pitch.ASharp.Should().Be(Pitch.BFlat);
-        Pitch.BSharp.Should().Be(Pitch.CFlat);
-        Pitch.DFlat.Should().Be(Pitch.CSharp);
-        Pitch.EFlat.Should().Be(Pitch.DSharp);
-        Pitch.FFlat.Should().Be(Pitch.ESharp);
-        Pitch.GFlat.Should().Be(Pitch.FSharp);
-        Pitch.AFlat.Should().Be(Pitch.GSharp);
-        Pitch.BFlat.Should().Be(Pitch.ASharp);
-        Pitch.CFlat.Should().Be(Pitch.BSharp);
+        Pitch.CSharp.IsEnharmonicWith(Pitch.DFlat).Should().BeTrue();
+        Pitch.DSharp.IsEnharmonicWith(Pitch.EFlat).Should().BeTrue();
+        Pitch.ESharp.IsEnharmonicWith(Pitch.FFlat).Should().BeTrue();
+        Pitch.FSharp.IsEnharmonicWith(Pitch.GFlat).Should().BeTrue();
+        Pitch.GSharp.IsEnharmonicWith(Pitch.AFlat).Should().BeTrue();
+        Pitch.ASharp.IsEnharmonicWith(Pitch.BFlat).Should().BeTrue();
+        Pitch.BSharp.IsEnharmonicWith(Pitch.CFlat).Should().BeTrue();
+        Pitch.DFlat.IsEnharmonicWith(Pitch.CSharp).Should().BeTrue();
+        Pitch.EFlat.IsEnharmonicWith(Pitch.DSharp).Should().BeTrue();
+        Pitch.FFlat.IsEnharmonicWith(Pitch.ESharp).Should().BeTrue();
+        Pitch.GFlat.IsEnharmonicWith(Pitch.FSharp).Should().BeTrue();
+        Pitch.AFlat.IsEnharmonicWith(Pitch.GSharp).Should().BeTrue();
+        Pitch.BFlat.IsEnharmonicWith(Pitch.ASharp).Should().BeTrue();
+        Pitch.CFlat.IsEnharmonicWith(Pitch.BSharp).Should().BeTrue();
     }
 
     [Fact]
@@ -154,17 +154,17 @@ public class PitchShould
         Pitch.C.Transpose(Interval.MinorSecond).Should().Be(Pitch.DFlat);
         Pitch.CSharp.Transpose(Interval.MinorSecond).Should().Be(Pitch.D);
         Pitch.DFlat.Transpose(Interval.MinorSecond).Should().Be(Pitch.D);
-        Pitch.D.Transpose(Interval.MinorSecond).Should().Be(Pitch.EFlat);
+        Pitch.D.Transpose(Interval.MinorSecond).Should().Be(Pitch.DSharp);
         Pitch.DSharp.Transpose(Interval.MinorSecond).Should().Be(Pitch.E);
         Pitch.EFlat.Transpose(Interval.MinorSecond).Should().Be(Pitch.E);
         Pitch.E.Transpose(Interval.MinorSecond).Should().Be(Pitch.F);
-        Pitch.F.Transpose(Interval.MinorSecond).Should().Be(Pitch.GFlat);
+        Pitch.F.Transpose(Interval.MinorSecond).Should().Be(Pitch.FSharp);
         Pitch.FSharp.Transpose(Interval.MinorSecond).Should().Be(Pitch.G);
         Pitch.GFlat.Transpose(Interval.MinorSecond).Should().Be(Pitch.G);
-        Pitch.G.Transpose(Interval.MinorSecond).Should().Be(Pitch.AFlat);
+        Pitch.G.Transpose(Interval.MinorSecond).Should().Be(Pitch.GSharp);
         Pitch.GSharp.Transpose(Interval.MinorSecond).Should().Be(Pitch.A);
         Pitch.AFlat.Transpose(Interval.MinorSecond).Should().Be(Pitch.A);
-        Pitch.A.Transpose(Interval.MinorSecond).Should().Be(Pitch.BFlat);
+        Pitch.A.Transpose(Interval.MinorSecond).Should().Be(Pitch.ASharp);
         Pitch.ASharp.Transpose(Interval.MinorSecond).Should().Be(Pitch.B);
         Pitch.BFlat.Transpose(Interval.MinorSecond).Should().Be(Pitch.B);
         Pitch.B.Transpose(Interval.MinorSecond).Should().Be(Pitch.C);
@@ -202,15 +202,15 @@ public class PitchShould
         Pitch.DSharp.Transpose(Interval.MinorThird).Should().Be(Pitch.FSharp);
         Pitch.EFlat.Transpose(Interval.MinorThird).Should().Be(Pitch.GFlat);
         Pitch.E.Transpose(Interval.MinorThird).Should().Be(Pitch.G);
-        Pitch.F.Transpose(Interval.MinorThird).Should().Be(Pitch.AFlat);
+        Pitch.F.Transpose(Interval.MinorThird).Should().Be(Pitch.GSharp);
         Pitch.FSharp.Transpose(Interval.MinorThird).Should().Be(Pitch.A);
         Pitch.GFlat.Transpose(Interval.MinorThird).Should().Be(Pitch.A);
-        Pitch.G.Transpose(Interval.MinorThird).Should().Be(Pitch.BFlat);
+        Pitch.G.Transpose(Interval.MinorThird).Should().Be(Pitch.ASharp);
         Pitch.GSharp.Transpose(Interval.MinorThird).Should().Be(Pitch.B);
         Pitch.AFlat.Transpose(Interval.MinorThird).Should().Be(Pitch.B);
         Pitch.A.Transpose(Interval.MinorThird).Should().Be(Pitch.C);
         Pitch.ASharp.Transpose(Interval.MinorThird).Should().Be(Pitch.CSharp);
-        Pitch.BFlat.Transpose(Interval.MinorThird).Should().Be(Pitch.CSharp);
+        Pitch.BFlat.Transpose(Interval.MinorThird).Should().Be(Pitch.DFlat);
         Pitch.B.Transpose(Interval.MinorThird).Should().Be(Pitch.D);
     }
 
@@ -421,17 +421,17 @@ public class PitchShould
         Pitch.D.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.B);
         Pitch.DSharp.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.C);
         Pitch.EFlat.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.C);
-        Pitch.E.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.CSharp);
+        Pitch.E.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.DFlat);
         Pitch.F.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.EFlat);
         Pitch.FSharp.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.E);
         Pitch.GFlat.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.E);
         Pitch.G.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.FFlat);
         Pitch.GSharp.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.F);
         Pitch.AFlat.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.F);
-        Pitch.A.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.FSharp);
+        Pitch.A.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.GFlat);
         Pitch.ASharp.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.G);
         Pitch.BFlat.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.G);
-        Pitch.B.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.GSharp);
+        Pitch.B.Transpose(Interval.DiminishedSeventh).Should().Be(Pitch.AFlat);
     }
 
     [Fact]
@@ -448,10 +448,10 @@ public class PitchShould
         Pitch.FSharp.Transpose(Interval.MinorSeventh).Should().Be(Pitch.F);
         Pitch.GFlat.Transpose(Interval.MinorSeventh).Should().Be(Pitch.E);
         Pitch.G.Transpose(Interval.MinorSeventh).Should().Be(Pitch.F);
-        Pitch.GSharp.Transpose(Interval.MinorSeventh).Should().Be(Pitch.GFlat);
+        Pitch.GSharp.Transpose(Interval.MinorSeventh).Should().Be(Pitch.FSharp);
         Pitch.AFlat.Transpose(Interval.MinorSeventh).Should().Be(Pitch.GFlat);
         Pitch.A.Transpose(Interval.MinorSeventh).Should().Be(Pitch.G);
-        Pitch.ASharp.Transpose(Interval.MinorSeventh).Should().Be(Pitch.AFlat);
+        Pitch.ASharp.Transpose(Interval.MinorSeventh).Should().Be(Pitch.GSharp);
         Pitch.BFlat.Transpose(Interval.MinorSeventh).Should().Be(Pitch.AFlat);
         Pitch.B.Transpose(Interval.MinorSeventh).Should().Be(Pitch.A);
     }
