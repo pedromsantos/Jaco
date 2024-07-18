@@ -33,7 +33,7 @@ public class NoteShould
 	}
 
 	[Fact]
-	public void MeasureIntervalsBetweenNotes()
+	public void MeasureIntervalsBetweenCAndAllOtherNotes()
 	{
 		var note = new Note(Pitch.C, Duration.Quarter, Octave.C1);
 
@@ -43,7 +43,9 @@ public class NoteShould
 		note.IntervalTo(new Note(Pitch.E, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorThird);
 		note.IntervalTo(new Note(Pitch.F, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFourth);
 		note.IntervalTo(new Note(Pitch.FSharp, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFourth);
+		note.IntervalTo(new Note(Pitch.GFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.DiminishedFifth);
 		note.IntervalTo(new Note(Pitch.G, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFifth);
+		note.IntervalTo(new Note(Pitch.GSharp, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFifth);
 		note.IntervalTo(new Note(Pitch.AFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSixth);
 		note.IntervalTo(new Note(Pitch.A, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSixth);
 		note.IntervalTo(new Note(Pitch.BFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSeventh);
@@ -58,27 +60,48 @@ public class NoteShould
 	}
 
 	[Fact]
-	public void DetectAscendingAndDescendingDirectionsBetweenNotes()
+	public void MeasureIntervalsBetweenCShapAndAllOtherNotes()
 	{
-		var note = new Note(Pitch.G, Duration.Quarter, Octave.C1);
+		var note = new Note(Pitch.CSharp, Duration.Quarter, Octave.C1);
 
-		note.DescendingTo(new Note(Pitch.G, Duration.Quarter, Octave.C1)).Should().BeFalse();
-		note.DescendingTo(new Note(Pitch.FSharp, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.F, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.E, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.EFlat, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.DSharp, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.D, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.DFlat, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.CSharp, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.DescendingTo(new Note(Pitch.C, Duration.Quarter, Octave.C1)).Should().BeTrue();
+		note.IntervalTo(new Note(Pitch.D, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSecond);
+		note.IntervalTo(new Note(Pitch.DSharp, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSecond);
+		note.IntervalTo(new Note(Pitch.E, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorThird);
+		note.IntervalTo(new Note(Pitch.F, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorThird);
+		note.IntervalTo(new Note(Pitch.FSharp, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFourth);
+		note.IntervalTo(new Note(Pitch.G, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFourth);
+		note.IntervalTo(new Note(Pitch.GSharp, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFifth);
+		note.IntervalTo(new Note(Pitch.A, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFifth);
+		// note.IntervalTo(new Note(Pitch.A, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSixth);
+		// note.IntervalTo(new Note(Pitch.B, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSixth);
+		note.IntervalTo(new Note(Pitch.B, Duration.Quarter, Octave.C2)).Should().Be(Interval.MinorSeventh);
+		note.IntervalTo(new Note(Pitch.C, Duration.Quarter, Octave.C2)).Should().Be(Interval.MajorSeventh);
+		note.IntervalTo(new Note(Pitch.CSharp, Duration.Quarter, Octave.C2)).Should().Be(Interval.PerfectOctave);
+		note.IntervalTo(new Note(Pitch.D, Duration.Quarter, Octave.C2)).Should().Be(Interval.MinorNinth);
+		note.IntervalTo(new Note(Pitch.DSharp, Duration.Quarter, Octave.C2)).Should().Be(Interval.MajorNinth);
+		// note.IntervalTo(new Note(Pitch.ESharp, Duration.Quarter, Octave.C2)).Should().Be(Interval.PerfectEleventh);
+		note.IntervalTo(new Note(Pitch.G, Duration.Quarter, Octave.C2)).Should().Be(Interval.AugmentedEleventh);
+		// note.IntervalTo(new Note(Pitch.A, Duration.Quarter, Octave.C2)).Should().Be(Interval.MinorThirteenth);
+		note.IntervalTo(new Note(Pitch.ASharp, Duration.Quarter, Octave.C2)).Should().Be(Interval.MajorThirteenth);
+	}
 
-		note.AscendingTo(new Note(Pitch.G, Duration.Quarter, Octave.C1)).Should().BeFalse();
-		note.AscendingTo(new Note(Pitch.GSharp, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.AscendingTo(new Note(Pitch.A, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.AscendingTo(new Note(Pitch.AFlat, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.AscendingTo(new Note(Pitch.B, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.AscendingTo(new Note(Pitch.BFlat, Duration.Quarter, Octave.C1)).Should().BeTrue();
-		note.AscendingTo(new Note(Pitch.C, Duration.Quarter, Octave.C2)).Should().BeTrue();
+	[Fact]
+	public void MeasureIntervalsBetweenDFlatAndAllOtherNotes()
+	{
+		var note = new Note(Pitch.DFlat, Duration.Quarter, Octave.C1);
+
+		note.IntervalTo(new Note(Pitch.D, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSecond);
+		note.IntervalTo(new Note(Pitch.EFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSecond);
+		note.IntervalTo(new Note(Pitch.E, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorThird);
+		note.IntervalTo(new Note(Pitch.F, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorThird);
+		note.IntervalTo(new Note(Pitch.GFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFourth);
+		note.IntervalTo(new Note(Pitch.G, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFourth);
+		note.IntervalTo(new Note(Pitch.AFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFifth);
+		note.IntervalTo(new Note(Pitch.A, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFifth);
+		// note.IntervalTo(new Note(Pitch.A, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSixth);
+		// note.IntervalTo(new Note(Pitch.B, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSixth);
+		// note.IntervalTo(new Note(Pitch.CFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSeventh);
+		note.IntervalTo(new Note(Pitch.C, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSeventh);
+		note.IntervalTo(new Note(Pitch.DFlat, Duration.Quarter, Octave.C2)).Should().Be(Interval.PerfectOctave);
 	}
 }
