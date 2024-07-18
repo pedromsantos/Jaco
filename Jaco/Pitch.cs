@@ -124,6 +124,25 @@ public class Pitch
 
 	public int Value => value;
 
+	public override bool Equals(object? obj)
+	{
+		if (obj is Pitch pitch)
+		{
+			return value == pitch.value && alterations == pitch.alterations;
+		}
+
+		return false;
+	}
+
+	public override int GetHashCode()
+	{
+		return HashCode.Combine(value, alterations);
+	}
+
+	public override string ToString()
+	{
+		return name;
+	}
 
 	public static readonly Pitch CFlat = new("Cb",
 																					0,
@@ -147,7 +166,7 @@ public class Pitch
 																				.Add(Interval.AugmentedFifth, GSharp!)
 																				.Add(Interval.MinorSixth, AFlat!)
 																				.Add(Interval.MajorSixth, A!)
-																				.Add(Interval.DiminishedSeventh, A!)
+																				.Add(Interval.DiminishedSeventh, BFlat!.SamePitchFlat())
 																				.Add(Interval.MinorSeventh, BFlat!)
 																				.Add(Interval.MajorSeventh, B!)
 																				.Add(Interval.PerfectOctave, C!)
@@ -156,7 +175,13 @@ public class Pitch
 																					 1,
 																					 1,
 																					 () => C,
-																					 () => C, () => D!, () => C!.intervalsToPitchs().Sharp());
+																					 () => C, () => D!, () => C!.intervalsToPitchs().Sharp()
+																					 	.Replace(Interval.MajorThird, ESharp!)
+																						.Replace(Interval.AugmentedFourth, FSharp!.SamePitchSharp())
+																						.Replace(Interval.AugmentedFifth, GSharp!.SamePitchSharp())
+																						.Replace(Interval.DiminishedSeventh, BFlat!)
+																						.Replace(Interval.MinorSeventh, B!)
+																						.Replace(Interval.MajorSeventh, BSharp!));
 
 	public static readonly Pitch DFlat = new("Db",
 																					1,
@@ -165,7 +190,11 @@ public class Pitch
 																					() => D!, () => D!, () =>
 																						D!.intervalsToPitchs().Flat()
 																						.Replace(Interval.MinorSecond, EFlat!.SamePitchFlat())
-																						.Replace(Interval.MinorThird, FFlat!));
+																						.Replace(Interval.MinorThird, FFlat!)
+																						.Replace(Interval.DiminishedFifth, AFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorSixth, BFlat!.SamePitchFlat())
+																						.Replace(Interval.DiminishedSeventh, CFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorSeventh, CFlat!));
 	public static readonly Pitch D = new("D",
 																			2,
 																			0,
@@ -191,13 +220,22 @@ public class Pitch
 																					 3,
 																					 1,
 																					 () => D,
-																					 () => D, () => E!, () => D!.intervalsToPitchs().Sharp().Replace(Interval.MajorSecond, ESharp!));
+																					 () => D, () => E!, () => D!.intervalsToPitchs().Sharp()
+																					 	.Replace(Interval.MajorSecond, ESharp!)
+																						.Replace(Interval.MajorThird, FSharp!.SamePitchSharp())
+																						.Replace(Interval.AugmentedFourth, GSharp!.SamePitchSharp())
+																						.Replace(Interval.MajorSixth, BSharp!)
+																						.Replace(Interval.MajorSeventh, CSharp!.SamePitchSharp()));
 
 	public static readonly Pitch EFlat = new("Eb",
 																					3,
 																					-1,
 																					() => D,
-																					() => E!, () => E!, () => E!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, FFlat!));
+																					() => E!, () => E!, () => E!.intervalsToPitchs().Flat()
+																					.Replace(Interval.MinorSecond, FFlat!)
+																					.Replace(Interval.DiminishedFifth, BFlat!.SamePitchFlat())
+																					.Replace(Interval.MinorSixth, CFlat!)
+																					.Replace(Interval.DiminishedSeventh, DFlat!.SamePitchFlat()));
 	public static readonly Pitch E = new("E",
 																			4,
 																			0,
@@ -254,12 +292,24 @@ public class Pitch
 																					 6,
 																					 1,
 																					 () => F,
-																					 () => F, () => G!, () => F!.intervalsToPitchs().Sharp());
+																					 () => F, () => G!, () => F!.intervalsToPitchs().Sharp()
+																					 	.Replace(Interval.PerfectFourth, BSharp!)
+																						.Replace(Interval.PerfectFifth, CSharp!.SamePitchSharp())
+																						.Replace(Interval.AugmentedFifth, CSharp!.SamePitchSharp().SamePitchSharp())
+																						.Replace(Interval.MinorSeventh, ESharp!)
+																						.Replace(Interval.MajorSeventh, ESharp!.SamePitchSharp()));
 	public static readonly Pitch GFlat = new("Gb",
 																					6,
 																					-1,
 																					() => F,
-																					() => G!, () => G!, () => G!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, AFlat!.SamePitchFlat()));
+																					() => G!, () => G!, () => G!.intervalsToPitchs().Flat()
+																						.Replace(Interval.MinorSecond, AFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorThird, BFlat!.SamePitchFlat())
+																						.Replace(Interval.PerfectFourth, CFlat)
+																						.Replace(Interval.DiminishedFifth, DFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorSixth, EFlat!.SamePitchFlat())
+																						.Replace(Interval.DiminishedSeventh, FFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorSeventh, FFlat!));
 	public static readonly Pitch G = new("G",
 																			7,
 																			0,
@@ -285,12 +335,23 @@ public class Pitch
 																					 8,
 																					 1,
 																					 () => G,
-																					 () => G, () => A!, () => G!.intervalsToPitchs().Sharp());
+																					 () => G, () => A!, () => G!.intervalsToPitchs().Sharp()
+																					 	.Replace(Interval.MajorThird, BSharp!)
+																						.Replace(Interval.AugmentedFourth, CSharp!.SamePitchSharp())
+																						.Replace(Interval.AugmentedFifth, DSharp!.SamePitchSharp())
+																						.Replace(Interval.MajorSixth, ESharp!)
+																						.Replace(Interval.MajorSeventh, FSharp!.SamePitchSharp()));
+
 	public static readonly Pitch AFlat = new("Ab",
 																					8,
 																					-1,
 																					() => G,
-																					() => A!, () => A!, () => A!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, BFlat!.SamePitchFlat()));
+																					() => A!, () => A!, () => A!.intervalsToPitchs().Flat()
+																						.Replace(Interval.MinorSecond, BFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorThird, CFlat!)
+																						.Replace(Interval.DiminishedFifth, EFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorSixth, FFlat!)
+																						.Replace(Interval.DiminishedSeventh, GFlat!.SamePitchFlat()));
 
 	public static readonly Pitch A = new("A",
 																			9,
@@ -317,7 +378,14 @@ public class Pitch
 																					 10,
 																					 1,
 																					 () => A,
-																					 () => A, () => B!, () => A!.intervalsToPitchs().Sharp().Replace(Interval.MajorSecond, BSharp!));
+																					 () => A, () => B!, () => A!.intervalsToPitchs().Sharp()
+																					 	.Replace(Interval.MajorSecond, BSharp!)
+																						.Replace(Interval.MajorThird, CSharp!.SamePitchSharp())
+																						.Replace(Interval.AugmentedFourth, DSharp!.SamePitchSharp())
+																						.Replace(Interval.PerfectFifth, ESharp!)
+																						.Replace(Interval.AugmentedFifth, ESharp!.SamePitchSharp())
+																						.Replace(Interval.MajorSixth, FSharp!.SamePitchSharp())
+																						.Replace(Interval.MajorSeventh, GSharp!.SamePitchSharp()));
 	public static readonly Pitch BFlat = new("Bb",
 																					10,
 																					-1,
@@ -366,24 +434,4 @@ public class Pitch
 																					 1,
 																					 () => B,
 																					 () => B, () => C, () => C!.intervalsToPitchs());
-
-	public override bool Equals(object? obj)
-	{
-		if (obj is Pitch pitch)
-		{
-			return value == pitch.value && alterations == pitch.alterations;
-		}
-
-		return false;
-	}
-
-	public override int GetHashCode()
-	{
-		return HashCode.Combine(value, alterations);
-	}
-
-	public override string ToString()
-	{
-		return name;
-	}
 }
