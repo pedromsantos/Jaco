@@ -92,7 +92,7 @@ public class NoteShould
 
 		// note.IntervalTo(new Note(Pitch.EFlat.SamePitchFlat(), Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorSecond);
 		note.IntervalTo(new Note(Pitch.EFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorSecond);
-		note.IntervalTo(new Note(Pitch.E, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorThird);
+		note.IntervalTo(new Note(Pitch.FFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.MinorThird);
 		note.IntervalTo(new Note(Pitch.F, Duration.Quarter, Octave.C1)).Should().Be(Interval.MajorThird);
 		note.IntervalTo(new Note(Pitch.GFlat, Duration.Quarter, Octave.C1)).Should().Be(Interval.PerfectFourth);
 		note.IntervalTo(new Note(Pitch.G, Duration.Quarter, Octave.C1)).Should().Be(Interval.AugmentedFourth);

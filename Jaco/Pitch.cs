@@ -162,7 +162,10 @@ public class Pitch
 																					1,
 																					-1,
 																					() => C,
-																					() => D!, () => D!, () => D!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, EFlat!.SamePitchFlat()));
+																					() => D!, () => D!, () =>
+																						D!.intervalsToPitchs().Flat()
+																						.Replace(Interval.MinorSecond, EFlat!.SamePitchFlat())
+																						.Replace(Interval.MinorThird, FFlat!));
 	public static readonly Pitch D = new("D",
 																			2,
 																			0,
@@ -188,7 +191,7 @@ public class Pitch
 																					 3,
 																					 1,
 																					 () => D,
-																					 () => D, () => E!, () => D!.intervalsToPitchs().Sharp());
+																					 () => D, () => E!, () => D!.intervalsToPitchs().Sharp().Replace(Interval.MajorSecond, ESharp!));
 
 	public static readonly Pitch EFlat = new("Eb",
 																					3,
@@ -314,7 +317,7 @@ public class Pitch
 																					 10,
 																					 1,
 																					 () => A,
-																					 () => A, () => B!, () => A!.intervalsToPitchs().Sharp());
+																					 () => A, () => B!, () => A!.intervalsToPitchs().Sharp().Replace(Interval.MajorSecond, BSharp!));
 	public static readonly Pitch BFlat = new("Bb",
 																					10,
 																					-1,
