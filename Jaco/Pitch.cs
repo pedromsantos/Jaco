@@ -2,7 +2,7 @@
 
 internal class IntervalsToPitches
 {
-	private readonly Dictionary<Interval, Pitch> intervalsToPitchs = new Dictionary<Interval, Pitch>();
+	private readonly Dictionary<Interval, Pitch> intervalsToPitches = new Dictionary<Interval, Pitch>();
 
 	internal IntervalsToPitches()
 	{
@@ -12,34 +12,39 @@ internal class IntervalsToPitches
 	{
 		foreach (var keyValue in intervalsToPitchs)
 		{
-			this.intervalsToPitchs.Add(keyValue.Key, keyValue.Value);
+			this.intervalsToPitches.Add(keyValue.Key, keyValue.Value);
 		}
+	}
+
+	public IntervalsToPitches Replace(Interval interval, Pitch pitch)
+	{
+		return new IntervalsToPitches(intervalsToPitches.Select((keyValue) => keyValue.Key == interval ? new KeyValuePair<Interval, Pitch>(keyValue.Key, pitch) : keyValue));
 	}
 
 	public IntervalsToPitches Add(Interval interval, Pitch pitch)
 	{
-		intervalsToPitchs.Add(interval, pitch);
+		intervalsToPitches.Add(interval, pitch);
 		return this;
 	}
 
 	public Pitch Transpose(Interval interval)
 	{
-		return intervalsToPitchs[interval];
+		return intervalsToPitches[interval];
 	}
 
 	public Interval IntervalTo(Pitch pitch)
 	{
-		return intervalsToPitchs.First(x => x.Value == pitch).Key;
+		return intervalsToPitches.First(x => x.Value == pitch).Key;
 	}
 
 	internal IntervalsToPitches Sharp()
 	{
-		return new IntervalsToPitches(this.intervalsToPitchs.Select((keyValue) => new KeyValuePair<Interval, Pitch>(keyValue.Key, keyValue.Value.Sharp())));
+		return new IntervalsToPitches(this.intervalsToPitches.Select((keyValue) => new KeyValuePair<Interval, Pitch>(keyValue.Key, keyValue.Value.Sharp())));
 	}
 
 	internal IntervalsToPitches Flat()
 	{
-		return new IntervalsToPitches(this.intervalsToPitchs.Select((keyValue) => new KeyValuePair<Interval, Pitch>(keyValue.Key, keyValue.Value.Flat())));
+		return new IntervalsToPitches(this.intervalsToPitches.Select((keyValue) => new KeyValuePair<Interval, Pitch>(keyValue.Key, keyValue.Value.Flat())));
 	}
 }
 
@@ -81,6 +86,18 @@ public class Pitch
 	public Pitch Natural()
 	{
 		return natural();
+	}
+
+	public Pitch SamePitchFlat()
+	{
+		var newName = this.natural().name + new string('b', Math.Abs(alterations));
+		return new Pitch(newName, value, alterations - 1, flat, natural, sharp, () => new IntervalsToPitches());
+	}
+
+	public Pitch SamePitchSharp()
+	{
+		var newName = this.natural().name + new string('#', Math.Abs(alterations));
+		return new Pitch(newName, value, alterations - 1, flat, natural, sharp, () => new IntervalsToPitches());
 	}
 
 	public int AbsoluteDistanceTo(Pitch to)
@@ -134,12 +151,7 @@ public class Pitch
 																				.Add(Interval.MinorSeventh, BFlat!)
 																				.Add(Interval.MajorSeventh, B!)
 																				.Add(Interval.PerfectOctave, C!)
-																				.Add(Interval.MinorNinth, DFlat!)
-																				.Add(Interval.MajorNinth, D!)
-																				.Add(Interval.PerfectEleventh, F!)
-																				.Add(Interval.AugmentedEleventh, FSharp!)
-																				.Add(Interval.MinorThirteenth, AFlat!)
-																				.Add(Interval.MajorThirteenth, A!));
+																				.Add(Interval.MinorNinth, DFlat!));
 	public static readonly Pitch CSharp = new("C#",
 																					 1,
 																					 1,
@@ -150,14 +162,14 @@ public class Pitch
 																					1,
 																					-1,
 																					() => C,
-																					() => D!, () => D!, () => D!.intervalsToPitchs().Flat());
+																					() => D!, () => D!, () => D!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, EFlat!.SamePitchFlat()));
 	public static readonly Pitch D = new("D",
 																			2,
 																			0,
 																			() => DFlat,
 																			() => D!, () => DSharp!, () => new IntervalsToPitches()
 																				.Add(Interval.Unison, D!)
-																				.Add(Interval.MinorSecond, DSharp!)
+																				.Add(Interval.MinorSecond, EFlat!)
 																				.Add(Interval.MajorSecond, E!)
 																				.Add(Interval.MinorThird, F!)
 																				.Add(Interval.MajorThird, FSharp!)
@@ -168,16 +180,10 @@ public class Pitch
 																				.Add(Interval.AugmentedFifth, ASharp!)
 																				.Add(Interval.MinorSixth, BFlat!)
 																				.Add(Interval.MajorSixth, B!)
-																				.Add(Interval.DiminishedSeventh, B!)
+																				.Add(Interval.DiminishedSeventh, CFlat!)
 																				.Add(Interval.MinorSeventh, C!)
 																				.Add(Interval.MajorSeventh, CSharp!)
-																				.Add(Interval.PerfectOctave, D!)
-																				.Add(Interval.MinorNinth, EFlat!)
-																				.Add(Interval.MajorNinth, E!)
-																				.Add(Interval.PerfectEleventh, G!)
-																				.Add(Interval.AugmentedEleventh, GSharp!)
-																				.Add(Interval.MinorThirteenth, BFlat!)
-																				.Add(Interval.MajorThirteenth, B!));
+																				.Add(Interval.PerfectOctave, D!));
 	public static readonly Pitch DSharp = new("D#",
 																					 3,
 																					 1,
@@ -188,7 +194,7 @@ public class Pitch
 																					3,
 																					-1,
 																					() => D,
-																					() => E!, () => E!, () => E!.intervalsToPitchs().Flat());
+																					() => E!, () => E!, () => E!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, FFlat!));
 	public static readonly Pitch E = new("E",
 																			4,
 																			0,
@@ -209,13 +215,7 @@ public class Pitch
 																				.Add(Interval.DiminishedSeventh, DFlat!)
 																				.Add(Interval.MinorSeventh, D!)
 																				.Add(Interval.MajorSeventh, DSharp!)
-																				.Add(Interval.PerfectOctave, E!)
-																				.Add(Interval.MinorNinth, F!)
-																				.Add(Interval.MajorNinth, FSharp!)
-																				.Add(Interval.PerfectEleventh, A!)
-																				.Add(Interval.AugmentedEleventh, ASharp!)
-																				.Add(Interval.MinorThirteenth, C!)
-																				.Add(Interval.MajorThirteenth, CSharp!));
+																				.Add(Interval.PerfectOctave, E!));
 	public static readonly Pitch ESharp = new("E#",
 																					 5,
 																					 1,
@@ -232,27 +232,21 @@ public class Pitch
 																			() => E,
 																			() => F!, () => FSharp!, () => new IntervalsToPitches()
 																				.Add(Interval.Unison, F!)
-																				.Add(Interval.MinorSecond, FSharp!)
+																				.Add(Interval.MinorSecond, GFlat!)
 																				.Add(Interval.MajorSecond, G!)
-																				.Add(Interval.MinorThird, GSharp!)
+																				.Add(Interval.MinorThird, AFlat!)
 																				.Add(Interval.MajorThird, A!)
 																				.Add(Interval.PerfectFourth, B!)
 																				.Add(Interval.AugmentedFourth, BSharp!)
 																				.Add(Interval.DiminishedFifth, C!)
 																				.Add(Interval.PerfectFifth, CSharp!)
-																				.Add(Interval.AugmentedFifth, D!)
+																				.Add(Interval.AugmentedFifth, CSharp!.SamePitchSharp())
 																				.Add(Interval.MinorSixth, DFlat!)
 																				.Add(Interval.MajorSixth, D!)
 																				.Add(Interval.DiminishedSeventh, EFlat!)
 																				.Add(Interval.MinorSeventh, E!)
 																				.Add(Interval.MajorSeventh, ESharp!)
-																				.Add(Interval.PerfectOctave, F!)
-																				.Add(Interval.MinorNinth, FSharp!)
-																				.Add(Interval.MajorNinth, G!)
-																				.Add(Interval.PerfectEleventh, B!)
-																				.Add(Interval.AugmentedEleventh, BSharp!)
-																				.Add(Interval.MinorThirteenth, DFlat!)
-																				.Add(Interval.MajorThirteenth, D!));
+																				.Add(Interval.PerfectOctave, F!));
 	public static readonly Pitch FSharp = new("F#",
 																					 6,
 																					 1,
@@ -262,16 +256,16 @@ public class Pitch
 																					6,
 																					-1,
 																					() => F,
-																					() => G!, () => G!, () => G!.intervalsToPitchs().Flat());
+																					() => G!, () => G!, () => G!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, AFlat!.SamePitchFlat()));
 	public static readonly Pitch G = new("G",
 																			7,
 																			0,
 																			() => GFlat,
 																			() => G!, () => GSharp!, () => new IntervalsToPitches()
 																				.Add(Interval.Unison, G!)
-																				.Add(Interval.MinorSecond, GSharp!)
+																				.Add(Interval.MinorSecond, AFlat!)
 																				.Add(Interval.MajorSecond, A!)
-																				.Add(Interval.MinorThird, ASharp!)
+																				.Add(Interval.MinorThird, BFlat!)
 																				.Add(Interval.MajorThird, B!)
 																				.Add(Interval.PerfectFourth, C!)
 																				.Add(Interval.AugmentedFourth, CSharp!)
@@ -283,13 +277,7 @@ public class Pitch
 																				.Add(Interval.DiminishedSeventh, FFlat!)
 																				.Add(Interval.MinorSeventh, F!)
 																				.Add(Interval.MajorSeventh, FSharp!)
-																				.Add(Interval.PerfectOctave, G!)
-																				.Add(Interval.MinorNinth, GSharp!)
-																				.Add(Interval.MajorNinth, A!)
-																				.Add(Interval.PerfectEleventh, C!)
-																				.Add(Interval.AugmentedEleventh, CSharp!)
-																				.Add(Interval.MinorThirteenth, E!)
-																				.Add(Interval.MajorThirteenth, ESharp!));
+																				.Add(Interval.PerfectOctave, G!));
 	public static readonly Pitch GSharp = new("G#",
 																					 8,
 																					 1,
@@ -299,7 +287,7 @@ public class Pitch
 																					8,
 																					-1,
 																					() => G,
-																					() => A!, () => A!, () => A!.intervalsToPitchs().Flat());
+																					() => A!, () => A!, () => A!.intervalsToPitchs().Flat().Replace(Interval.MinorSecond, BFlat!.SamePitchFlat()));
 
 	public static readonly Pitch A = new("A",
 																			9,
@@ -307,7 +295,7 @@ public class Pitch
 																			() => AFlat,
 																			() => A!, () => ASharp!, () => new IntervalsToPitches()
 																				.Add(Interval.Unison, A!)
-																				.Add(Interval.MinorSecond, ASharp!)
+																				.Add(Interval.MinorSecond, BFlat!)
 																				.Add(Interval.MajorSecond, B!)
 																				.Add(Interval.MinorThird, C!)
 																				.Add(Interval.MajorThird, CSharp!)
@@ -321,13 +309,7 @@ public class Pitch
 																				.Add(Interval.DiminishedSeventh, GFlat!)
 																				.Add(Interval.MinorSeventh, G!)
 																				.Add(Interval.MajorSeventh, GSharp!)
-																				.Add(Interval.PerfectOctave, A!)
-																				.Add(Interval.MinorNinth, ASharp!)
-																				.Add(Interval.MajorNinth, B!)
-																				.Add(Interval.PerfectEleventh, D!)
-																				.Add(Interval.AugmentedEleventh, DSharp!)
-																				.Add(Interval.MinorThirteenth, F!)
-																				.Add(Interval.MajorThirteenth, FSharp!));
+																				.Add(Interval.PerfectOctave, A!));
 	public static readonly Pitch ASharp = new("A#",
 																					 10,
 																					 1,
@@ -339,7 +321,7 @@ public class Pitch
 																					() => A,
 																					() => B!, () => B!, () => new IntervalsToPitches()
 																						.Add(Interval.Unison, BFlat!)
-																						.Add(Interval.MinorSecond, B!)
+																						.Add(Interval.MinorSecond, CFlat!.SamePitchFlat())
 																						.Add(Interval.MajorSecond, C!)
 																						.Add(Interval.MinorThird, DFlat!)
 																						.Add(Interval.MajorThird, D!)
@@ -350,16 +332,10 @@ public class Pitch
 																						.Add(Interval.AugmentedFifth, FSharp!)
 																						.Add(Interval.MinorSixth, GFlat!)
 																						.Add(Interval.MajorSixth, G!)
-																						.Add(Interval.DiminishedSeventh, G!)
+																						.Add(Interval.DiminishedSeventh, AFlat!.SamePitchFlat())
 																						.Add(Interval.MinorSeventh, AFlat!)
 																						.Add(Interval.MajorSeventh, A!)
-																						.Add(Interval.PerfectOctave, B!)
-																						.Add(Interval.MinorNinth, C!)
-																						.Add(Interval.MajorNinth, CSharp!)
-																						.Add(Interval.PerfectEleventh, EFlat!)
-																						.Add(Interval.AugmentedEleventh, E!)
-																						.Add(Interval.MinorThirteenth, GFlat!)
-																						.Add(Interval.MajorThirteenth, G!));
+																						.Add(Interval.PerfectOctave, B!));
 
 	public static readonly Pitch B = new("B",
 																			11,
@@ -375,19 +351,13 @@ public class Pitch
 																				.Add(Interval.AugmentedFourth, ESharp!)
 																				.Add(Interval.DiminishedFifth, F!)
 																				.Add(Interval.PerfectFifth, FSharp!)
-																				.Add(Interval.AugmentedFifth, G!)
+																				.Add(Interval.AugmentedFifth, F!.Sharp().SamePitchSharp())
 																				.Add(Interval.MinorSixth, G!)
 																				.Add(Interval.MajorSixth, GSharp!)
 																				.Add(Interval.DiminishedSeventh, AFlat!)
 																				.Add(Interval.MinorSeventh, A!)
 																				.Add(Interval.MajorSeventh, ASharp!)
-																				.Add(Interval.PerfectOctave, B!)
-																				.Add(Interval.MinorNinth, C!)
-																				.Add(Interval.MajorNinth, CSharp!)
-																				.Add(Interval.PerfectEleventh, E!)
-																				.Add(Interval.AugmentedEleventh, ESharp!)
-																				.Add(Interval.MinorThirteenth, G!)
-																				.Add(Interval.MajorThirteenth, GSharp!));
+																				.Add(Interval.PerfectOctave, B!));
 	public static readonly Pitch BSharp = new("B#",
 																					 0,
 																					 1,

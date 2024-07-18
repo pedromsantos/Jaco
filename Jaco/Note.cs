@@ -20,7 +20,7 @@ public class Note
 	{
 		if (interval.IsOctaveOrAbove())
 		{
-			return new Note(pitch.Transpose(interval), duration, octave.Up());
+			return new Note(pitch.Transpose(interval.OctaveDown()), duration, octave.Up());
 		}
 
 		return new Note(pitch.Transpose(interval), duration, octave);
