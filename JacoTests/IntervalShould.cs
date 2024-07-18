@@ -78,27 +78,27 @@ public class IntervalShould
 	[Fact]
 	public void RaisingAndLoweringOctaveShouldBeSameInterval()
 	{
-		Interval.Unison.OctaveUp().OctaveDown().Should().Be(Interval.Unison);
-		Interval.MinorSecond.OctaveUp().OctaveDown().Should().Be(Interval.MinorSecond);
-		Interval.MajorSecond.OctaveUp().OctaveDown().Should().Be(Interval.MajorSecond);
-		Interval.MinorThird.OctaveUp().OctaveDown().Should().Be(Interval.MinorThird);
-		Interval.MajorThird.OctaveUp().OctaveDown().Should().Be(Interval.MajorThird);
-		Interval.PerfectFourth.OctaveUp().OctaveDown().Should().Be(Interval.PerfectFourth);
-		Interval.PerfectFifth.OctaveUp().OctaveDown().Should().Be(Interval.PerfectFifth);
-		Interval.MinorSixth.OctaveUp().OctaveDown().Should().Be(Interval.MinorSixth);
-		Interval.MajorSixth.OctaveUp().OctaveDown().Should().Be(Interval.MajorSixth);
-		Interval.MinorSeventh.OctaveUp().OctaveDown().Should().Be(Interval.MinorSeventh);
-		Interval.MajorSeventh.OctaveUp().OctaveDown().Should().Be(Interval.MajorSeventh);
+		Interval.Unison.RaiseOctave().OctaveDown().Should().Be(Interval.Unison);
+		Interval.MinorSecond.RaiseOctave().OctaveDown().Should().Be(Interval.MinorSecond);
+		Interval.MajorSecond.RaiseOctave().OctaveDown().Should().Be(Interval.MajorSecond);
+		Interval.MinorThird.RaiseOctave().OctaveDown().Should().Be(Interval.MinorThird);
+		Interval.MajorThird.RaiseOctave().OctaveDown().Should().Be(Interval.MajorThird);
+		Interval.PerfectFourth.RaiseOctave().OctaveDown().Should().Be(Interval.PerfectFourth);
+		Interval.PerfectFifth.RaiseOctave().OctaveDown().Should().Be(Interval.PerfectFifth);
+		Interval.MinorSixth.RaiseOctave().OctaveDown().Should().Be(Interval.MinorSixth);
+		Interval.MajorSixth.RaiseOctave().OctaveDown().Should().Be(Interval.MajorSixth);
+		Interval.MinorSeventh.RaiseOctave().OctaveDown().Should().Be(Interval.MinorSeventh);
+		Interval.MajorSeventh.RaiseOctave().OctaveDown().Should().Be(Interval.MajorSeventh);
 	}
 	[Fact]
 
 	public void RaisingAndLoweringOctaveShouldBeIntervalOctaveDown()
 	{
-		Interval.PerfectOctave.OctaveUp().OctaveDown().Should().Be(Interval.Unison);
-		Interval.MinorNinth.OctaveUp().OctaveDown().Should().Be(Interval.MinorSecond);
-		Interval.MajorNinth.OctaveUp().OctaveDown().Should().Be(Interval.MajorSecond);
-		Interval.PerfectEleventh.OctaveUp().OctaveDown().Should().Be(Interval.PerfectFourth);
-		Interval.MinorThirteenth.OctaveUp().OctaveDown().Should().Be(Interval.MinorSixth);
-		Interval.MajorThirteenth.OctaveUp().OctaveDown().Should().Be(Interval.MajorSixth);
+		Interval.PerfectOctave.RaiseOctave().OctaveDown().Should().Be(Interval.Unison);
+		Interval.MinorNinth.RaiseOctave().OctaveDown().Should().Be(Interval.MinorSecond);
+		Interval.MajorNinth.RaiseOctave().OctaveDown().Should().Be(Interval.MajorSecond);
+		Interval.PerfectEleventh.RaiseOctave().OctaveDown().Should().Be(Interval.PerfectFourth);
+		Interval.MinorThirteenth.RaiseOctave().OctaveDown().Should().Be(Interval.MinorSixth);
+		Interval.MajorThirteenth.RaiseOctave().OctaveDown().Should().Be(Interval.MajorSixth);
 	}
 }

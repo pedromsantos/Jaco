@@ -40,7 +40,7 @@ public class Interval
 		return invert();
 	}
 
-	public Interval OctaveUp()
+	public Interval RaiseOctave()
 	{
 		return octaveUp();
 	}
@@ -48,6 +48,11 @@ public class Interval
 	public Interval OctaveDown()
 	{
 		return octaveDown();
+	}
+
+	public bool IsOctaveOrAbove()
+	{
+		return semitones >= PerfectOctave.semitones;
 	}
 
 	public static readonly Interval Unison = new(

@@ -95,6 +95,13 @@ public class Pitch
 		return intervalsToPitchs().Transpose(interval);
 	}
 
+	public Interval IntervalTo(Pitch pitch)
+	{
+		return intervalsToPitchs().IntervalTo(pitch);
+	}
+
+	public int Value => value;
+
 	public static readonly Pitch CFlat = new("Cb",
 																					0,
 																					1,
@@ -106,7 +113,7 @@ public class Pitch
 																			() => B!,
 																			() => C!, () => CSharp!, () => new IntervalsToPitches()
 																				.Add(Interval.Unison, C!)
-																				.Add(Interval.MinorSecond, CSharp!)
+																				.Add(Interval.MinorSecond, DFlat!)
 																				.Add(Interval.MajorSecond, D!)
 																				.Add(Interval.MinorThird, EFlat!)
 																				.Add(Interval.MajorThird, E!)
@@ -121,7 +128,7 @@ public class Pitch
 																				.Add(Interval.MinorSeventh, BFlat!)
 																				.Add(Interval.MajorSeventh, B!)
 																				.Add(Interval.PerfectOctave, C!)
-																				.Add(Interval.MinorNinth, CSharp!)
+																				.Add(Interval.MinorNinth, DFlat!)
 																				.Add(Interval.MajorNinth, D!)
 																				.Add(Interval.PerfectEleventh, F!)
 																				.Add(Interval.AugmentedEleventh, FSharp!)

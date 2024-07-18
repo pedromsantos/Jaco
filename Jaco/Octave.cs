@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Octave
 {
 	private static readonly List<Octave> all = new List<Octave>();
+	private readonly int midiBaseValue;
 
 	private Octave(
 		string name,
@@ -18,7 +19,7 @@ public class Octave
 		this.Name = name;
 		this.ShortName = shortName;
 		this.Value = value;
-		this.MidiBaseValue = midiBaseValue;
+		this.midiBaseValue = midiBaseValue;
 		this.Up = up;
 		this.Down = down;
 		all.Add(this);
@@ -27,7 +28,9 @@ public class Octave
 	public string Name { get; }
 	public string ShortName { get; }
 	public int Value { get; }
-	public int MidiBaseValue { get; }
+
+	public int MidiBaseValue => midiBaseValue;
+
 	public Func<Octave> Up { get; }
 	public Func<Octave> Down { get; }
 
