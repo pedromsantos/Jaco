@@ -49,19 +49,19 @@ public class Pitch
 
 	private readonly string name;
 	private readonly int value;
-	private readonly int accidentals;
+	private readonly int alterations;
 	private readonly Func<Pitch> sharp;
 	private readonly Func<Pitch> flat;
 	private readonly Func<Pitch> natural;
 	private readonly Func<IntervalsToPitches> intervalsToPitchs;
 
-	private Pitch(string name, int value, int accidentals, Func<Pitch> flat, Func<Pitch> natural,
+	private Pitch(string name, int value, int alterations, Func<Pitch> flat, Func<Pitch> natural,
 		Func<Pitch> sharp,
 		Func<IntervalsToPitches> intervalsToPitchs)
 	{
 		this.name = name;
 		this.value = value;
-		this.accidentals = accidentals;
+		this.alterations = alterations;
 		this.sharp = sharp;
 		this.flat = flat;
 		this.natural = natural;
@@ -392,7 +392,7 @@ public class Pitch
 	{
 		if (obj is Pitch pitch)
 		{
-			return value == pitch.value && accidentals == pitch.accidentals;
+			return value == pitch.value && alterations == pitch.alterations;
 		}
 
 		return false;
@@ -400,7 +400,7 @@ public class Pitch
 
 	public override int GetHashCode()
 	{
-		return HashCode.Combine(value, accidentals);
+		return HashCode.Combine(value, alterations);
 	}
 
 	public override string ToString()
