@@ -55,6 +55,26 @@ public class Interval
 		return semitones >= PerfectOctave.semitones;
 	}
 
+	public override bool Equals(object? obj)
+	{
+		if (obj is Interval interval)
+		{
+			return semitones == interval.semitones && quality == interval.quality && name == interval.name && abbreviation == interval.abbreviation;
+		}
+
+		return false;
+	}
+
+	public override int GetHashCode()
+	{
+		return semitones + quality.GetHashCode() + name.GetHashCode() + abbreviation.GetHashCode();
+	}
+
+	public override string ToString()
+	{
+		return abbreviation;
+	}
+
 	public static readonly Interval Unison = new(
 		"Unison",
 			"U",
@@ -316,24 +336,4 @@ public class Interval
 		() => MajorThirteenth!,
 		() => MajorSixth!
 	);
-
-	public override bool Equals(object? obj)
-	{
-		if (obj is Interval interval)
-		{
-			return semitones == interval.semitones && quality == interval.quality && name == interval.name && abbreviation == interval.abbreviation;
-		}
-
-		return false;
-	}
-
-	public override int GetHashCode()
-	{
-		return semitones + quality.GetHashCode() + name.GetHashCode() + abbreviation.GetHashCode();
-	}
-
-	public override string ToString()
-	{
-		return abbreviation;
-	}
 }
