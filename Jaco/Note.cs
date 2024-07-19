@@ -26,16 +26,6 @@ public class Note
 		return new Note(pitch.Transpose(interval), duration, octave);
 	}
 
-	public Note OctaveUp()
-	{
-		return new Note(pitch, duration, octave.Up());
-	}
-
-	public Note OctaveDown()
-	{
-		return new Note(pitch, duration, octave.Down());
-	}
-
 	public Interval IntervalTo(Note to)
 	{
 		if (octave == to.octave)
@@ -44,16 +34,6 @@ public class Note
 		}
 
 		return pitch.IntervalTo(to.pitch).RaiseOctave();
-	}
-
-	public bool AscendingTo(Note other)
-	{
-		return this.midiValue < other.midiValue;
-	}
-
-	public bool DescendingTo(Note other)
-	{
-		return this.midiValue > other.midiValue;
 	}
 
 	// public bool IsSamePitch(Note other)
