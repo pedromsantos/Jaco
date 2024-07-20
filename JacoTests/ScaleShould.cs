@@ -32,90 +32,139 @@ public class ScaleShould
 	public void GenerateThirdsFromI()
 	{
 		var scale = new Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.I);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.I).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.C);
-		thirdsFromI[1].Should().Be(Pitch.E);
-		thirdsFromI[2].Should().Be(Pitch.G);
-		thirdsFromI[3].Should().Be(Pitch.B);
+		thirdsFrom[0].Should().Be(Pitch.C);
+		thirdsFrom[1].Should().Be(Pitch.E);
+		thirdsFrom[2].Should().Be(Pitch.G);
+		thirdsFrom[3].Should().Be(Pitch.B);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.I).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C3));
 	}
 
 	[Fact]
 	public void GenerateThirdsFromII()
 	{
 		var scale = new Scale(ScalePattern.Dorian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.II);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.II).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.D);
-		thirdsFromI[1].Should().Be(Pitch.F);
-		thirdsFromI[2].Should().Be(Pitch.A);
-		thirdsFromI[3].Should().Be(Pitch.C);
+		thirdsFrom[0].Should().Be(Pitch.D);
+		thirdsFrom[1].Should().Be(Pitch.F);
+		thirdsFrom[2].Should().Be(Pitch.A);
+		thirdsFrom[3].Should().Be(Pitch.C);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.II).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C4));
 	}
 
 	[Fact]
 	public void GenerateThirdsFromIII()
 	{
 		var scale = new Scale(ScalePattern.Phrygian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.III);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.III).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.EFlat);
-		thirdsFromI[1].Should().Be(Pitch.G);
-		thirdsFromI[2].Should().Be(Pitch.BFlat);
-		thirdsFromI[3].Should().Be(Pitch.DFlat);
+		thirdsFrom[0].Should().Be(Pitch.EFlat);
+		thirdsFrom[1].Should().Be(Pitch.G);
+		thirdsFrom[2].Should().Be(Pitch.BFlat);
+		thirdsFrom[3].Should().Be(Pitch.DFlat);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.III).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C4));
 	}
 
 	[Fact]
 	public void GenerateThirdsFromIV()
 	{
 		var scale = new Scale(ScalePattern.Lydian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.IV);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.IV).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.FSharp);
-		thirdsFromI[1].Should().Be(Pitch.A);
-		thirdsFromI[2].Should().Be(Pitch.C);
-		thirdsFromI[3].Should().Be(Pitch.E);
+		thirdsFrom[0].Should().Be(Pitch.FSharp);
+		thirdsFrom[1].Should().Be(Pitch.A);
+		thirdsFrom[2].Should().Be(Pitch.C);
+		thirdsFrom[3].Should().Be(Pitch.E);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.IV).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C4));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C4));
 	}
 
 	[Fact]
 	public void GenerateThirdsFromV()
 	{
 		var scale = new Scale(ScalePattern.Mixolydian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.V);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.V).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.G);
-		thirdsFromI[1].Should().Be(Pitch.BFlat);
-		thirdsFromI[2].Should().Be(Pitch.D);
-		thirdsFromI[3].Should().Be(Pitch.F);
+		thirdsFrom[0].Should().Be(Pitch.G);
+		thirdsFrom[1].Should().Be(Pitch.BFlat);
+		thirdsFrom[2].Should().Be(Pitch.D);
+		thirdsFrom[3].Should().Be(Pitch.F);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.V).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C4));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C4));
 	}
 
 	[Fact]
 	public void GenerateThirdsFromVI()
 	{
 		var scale = new Scale(ScalePattern.Aeolian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.VI);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.VI).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.AFlat);
-		thirdsFromI[1].Should().Be(Pitch.C);
-		thirdsFromI[2].Should().Be(Pitch.EFlat);
-		thirdsFromI[3].Should().Be(Pitch.G);
+		thirdsFrom[0].Should().Be(Pitch.AFlat);
+		thirdsFrom[1].Should().Be(Pitch.C);
+		thirdsFrom[2].Should().Be(Pitch.EFlat);
+		thirdsFrom[3].Should().Be(Pitch.G);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.VI).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C4));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C4));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C4));
 	}
 
 	[Fact]
 	public void GenerateThirdsFromVII()
 	{
 		var scale = new Scale(ScalePattern.Locrian, Pitch.C, Duration.Eighth, Octave.C3);
-		var thirdsFromI = scale.ThirdsFrom(ScaleDegree.VII);
+		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.VII).ToList();
 
-		thirdsFromI.Count.Should().Be(7);
-		thirdsFromI[0].Should().Be(Pitch.BFlat);
-		thirdsFromI[1].Should().Be(Pitch.DFlat);
-		thirdsFromI[2].Should().Be(Pitch.F);
-		thirdsFromI[3].Should().Be(Pitch.AFlat);
+		thirdsFrom[0].Should().Be(Pitch.BFlat);
+		thirdsFrom[1].Should().Be(Pitch.DFlat);
+		thirdsFrom[2].Should().Be(Pitch.F);
+		thirdsFrom[3].Should().Be(Pitch.AFlat);
+
+		var melodicLineFromThirds = scale.MelodicThirdsFrom(ScaleDegree.VII).ToList();
+
+		melodicLineFromThirds.Count.Should().Be(thirdsFrom.Count);
+		melodicLineFromThirds[0].Should().Be(new Note(thirdsFrom[0], Duration.Eighth, Octave.C3));
+		melodicLineFromThirds[1].Should().Be(new Note(thirdsFrom[1], Duration.Eighth, Octave.C4));
+		melodicLineFromThirds[2].Should().Be(new Note(thirdsFrom[2], Duration.Eighth, Octave.C4));
+		melodicLineFromThirds[3].Should().Be(new Note(thirdsFrom[3], Duration.Eighth, Octave.C4));
 	}
 }

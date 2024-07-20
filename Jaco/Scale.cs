@@ -362,7 +362,7 @@ namespace Jaco
 			return new MelodicLine(pitches.Select((p, i) => new Note(p, duration, p == Pitch.C && i != 0 ? octave.Down() : octave)).Reverse());
 		}
 
-		public List<Pitch> ThirdsFrom(ScaleDegree degree)
+		public IEnumerable<Pitch> ThirdsFrom(ScaleDegree degree)
 		{
 			return pitches
 				.Skip((int)degree)
