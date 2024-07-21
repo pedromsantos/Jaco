@@ -25,7 +25,7 @@ public class ScaleShould
 
 		reverseMelodicLine.Length.Should().Be(7);
 		reverseMelodicLine.First().Should().Be(new Note(Pitch.B, Duration.Eighth, Octave.C3));
-		reverseMelodicLine.Last().Should().Be(new Note(Pitch.C, Duration.Eighth, Octave.C3));
+		reverseMelodicLine.Last().Should().Be(new Note(Pitch.C, Duration.Eighth, Octave.C2));
 	}
 
 	[Fact]

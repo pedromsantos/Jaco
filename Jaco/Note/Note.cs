@@ -1,3 +1,4 @@
+
 namespace Jaco;
 
 public class Note
@@ -26,6 +27,16 @@ public class Note
 		return new Note(pitch.Transpose(interval), duration, octave);
 	}
 
+	public Note Flat()
+	{
+		return new Note(pitch.Flat(), duration, octave);
+	}
+
+	public Note Sharp()
+	{
+		return new Note(pitch.Sharp(), duration, octave);
+	}
+
 	public Interval IntervalTo(Note to)
 	{
 		if (octave == to.octave)
@@ -36,14 +47,14 @@ public class Note
 		return pitch.IntervalTo(to.pitch).RaiseOctave();
 	}
 
+	public bool HasSamePitch(Pitch pitch)
+	{
+		return this.pitch == pitch;
+	}
+
 	// public bool IsSamePitch(Note other)
 	// {
 	// 	return midiValue == other.midiValue;
-	// }
-
-	// public bool HasSamePitch(Pitch pitch)
-	// {
-	// 	return this.pitch == pitch;
 	// }
 
 	// public bool HasSameOctave(Octave octave)

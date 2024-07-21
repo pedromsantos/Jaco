@@ -355,12 +355,38 @@ namespace Jaco
 
 		public MelodicLine ScaleUpMelodicLine()
 		{
-			return new MelodicLine(pitches.Select((p, i) => new Note(p, duration, p == Pitch.C && i != 0 ? octave.Up() : octave)).ToList());
+			var localOctave = octave;
+			var line = new List<Note>();
+
+			foreach (var pitch in pitches)
+			{
+				if (pitch == Pitch.C && line.Count > 0)
+				{
+					localOctave = localOctave.Up();
+				}
+
+				line.Add(new Note(pitch, duration, localOctave));
+			}
+
+			return new MelodicLine(line);
 		}
 
 		public MelodicLine ScaleDownMelodicLine()
 		{
-			return new MelodicLine(pitches.Select((p, i) => new Note(p, duration, p == Pitch.C && i != 0 ? octave.Down() : octave)).Reverse());
+			var localOctave = octave;
+			var line = new List<Note>();
+
+			foreach (var pitch in pitches.Reverse<Pitch>())
+			{
+				if (pitch == Pitch.C && line.Count > 0)
+				{
+					localOctave = localOctave.Down();
+				}
+
+				line.Add(new Note(pitch, duration, localOctave));
+			}
+
+			return new MelodicLine(line);
 		}
 
 		public IEnumerable<Pitch> ThirdsFrom(ScaleDegree degree)

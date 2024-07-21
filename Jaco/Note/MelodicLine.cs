@@ -46,4 +46,9 @@ public class MelodicLine : IEnumerable<Note>
 	{
 		return line.GetEnumerator();
 	}
+
+	internal void Add(Note note)
+	{
+		this.line.Add(note);
+	}
 }
