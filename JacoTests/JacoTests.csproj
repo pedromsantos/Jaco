@@ -48,4 +48,8 @@
     <ItemGroup>
         <None Remove="TestResults\**" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Note/" />
+    </ItemGroup>
 </Project>

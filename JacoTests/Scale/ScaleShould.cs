@@ -10,7 +10,7 @@ public class ScaleShould
 	{
 		var scale = new Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
 
-		var melodicLine = scale.MelodicLine();
+		var melodicLine = scale.ScaleUpMelodicLine();
 
 		melodicLine.Length.Should().Be(7);
 		melodicLine.First().Should().Be(new Note(Pitch.C, Duration.Eighth, Octave.C3));
@@ -21,7 +21,7 @@ public class ScaleShould
 	public void GenerateReverseMelodicLineForScalePitches()
 	{
 		var scale = new Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
-		var reverseMelodicLine = scale.ReverseMelodicLine();
+		var reverseMelodicLine = scale.ScaleDownMelodicLine();
 
 		reverseMelodicLine.Length.Should().Be(7);
 		reverseMelodicLine.First().Should().Be(new Note(Pitch.B, Duration.Eighth, Octave.C3));

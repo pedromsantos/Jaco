@@ -321,7 +321,19 @@ namespace Jaco
 		}
 	}
 
-	public class Scale : IEnumerable<Pitch>
+	public interface IScale
+	{
+		ScalePattern ScalePattern { get; }
+		Pitch Root { get; }
+		MelodicLine ScaleUpMelodicLine();
+		MelodicLine ScaleDownMelodicLine();
+		IEnumerable<Pitch> ThirdsFrom(ScaleDegree degree);
+		MelodicLine MelodicThirdsFrom(ScaleDegree degree);
+		MelodicLine MelodicThirdsTo(ScaleDegree degree);
+		IEnumerator<Pitch> GetEnumerator();
+	}
+
+	public class Scale : IEnumerable<Pitch>, IScale
 	{
 		private readonly ScalePattern scalePattern;
 		private readonly Pitch root;
@@ -340,24 +352,13 @@ namespace Jaco
 
 		public ScalePattern ScalePattern => scalePattern;
 		public Pitch Root => root;
-		public List<Pitch> Pitches => pitches;
 
-		public Pitch PitchFor(ScaleDegree degree)
-		{
-			return pitches[(int)degree];
-		}
-
-		public ScaleDegree DegreeFor(Pitch pitch)
-		{
-			return (ScaleDegree)pitches.FindIndex(p => p == pitch);
-		}
-
-		public MelodicLine MelodicLine()
+		public MelodicLine ScaleUpMelodicLine()
 		{
 			return new MelodicLine(pitches.Select((p, i) => new Note(p, duration, p == Pitch.C && i != 0 ? octave.Up() : octave)).ToList());
 		}
 
-		public MelodicLine ReverseMelodicLine()
+		public MelodicLine ScaleDownMelodicLine()
 		{
 			return new MelodicLine(pitches.Select((p, i) => new Note(p, duration, p == Pitch.C && i != 0 ? octave.Down() : octave)).Reverse());
 		}
