@@ -36,7 +36,7 @@ public class BeatsPerMinute
 
 	public double MilliSeconds(int beats = 1)
 	{
-		return ((double)beats / (double)bpm) * (double)miliSecondsMultiplier;
+		return ((double)beats / (double)bpm) * miliSecondsMultiplier;
 	}
 
 	public double SecondsFor(Duration duration)

@@ -115,7 +115,7 @@ public class Octave
 		() => C7!
 	);
 
-	public static List<Octave> Octaves => all;
+	public static IEnumerable<Octave> Octaves => all;
 
 	public bool LowerThan(Octave other)
 	{
