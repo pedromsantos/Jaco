@@ -1,4 +1,6 @@
-﻿namespace JacoTests;
+﻿using Jaco.Notes;
+
+namespace JacoTests;
 
 using Xunit;
 using Jaco;

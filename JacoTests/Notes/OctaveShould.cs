@@ -1,3 +1,5 @@
+using Jaco.Notes;
+
 namespace JacoTests;
 
 using FluentAssertions;

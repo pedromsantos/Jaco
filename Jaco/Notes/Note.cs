@@ -1,5 +1,5 @@
 
-namespace Jaco;
+namespace Jaco.Note;
 
 public class Note
 {
@@ -9,12 +9,24 @@ public class Note
 
 	private readonly int midiValue;
 
+	public Pitch Pitch { get => pitch; }
+
 	public Note(Pitch pitch, Duration duration, Octave octave)
 	{
 		this.pitch = pitch;
 		this.duration = duration;
 		this.octave = octave;
 		this.midiValue = pitch.Value + octave.MidiBaseValue;
+	}
+
+	public Note OctaveUp()
+	{
+		return new Note(pitch, duration, octave.Up());
+	}
+
+	public Note OctaveDown()
+	{
+		return new Note(pitch, duration, octave.Down());
 	}
 
 	public Note Transpose(Interval interval)

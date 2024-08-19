@@ -1,8 +1,7 @@
 using FluentAssertions;
-using Jaco;
-using Xunit;
+using Jaco.Notes;
 
-namespace JacoTests;
+namespace JacoTests.Note;
 
 public class DurationShould
 {

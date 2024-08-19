@@ -1,4 +1,4 @@
-﻿namespace Jaco;
+﻿namespace Jaco.Note;
 
 internal class IntervalsToPitches
 {
@@ -8,7 +8,7 @@ internal class IntervalsToPitches
 	{
 	}
 
-	internal IntervalsToPitches(IEnumerable<KeyValuePair<Interval, Pitch>> intervalsToPitchs)
+	private IntervalsToPitches(IEnumerable<KeyValuePair<Interval, Pitch>> intervalsToPitchs)
 	{
 		foreach (var keyValue in intervalsToPitchs)
 		{

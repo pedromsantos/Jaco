@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 
-namespace Jaco;
-
+namespace Jaco.Note;
 
 public class MelodicLine : IEnumerable<Note>
 {
@@ -23,6 +21,11 @@ public class MelodicLine : IEnumerable<Note>
 		line.AddRange(melodicLine);
 	}
 
+	public void Add(Note note)
+	{
+		line.Add(note);
+	}
+
 	public MelodicLine DuplicateLineOctaveAbove()
 	{
 		return new MelodicLine(line.Concat(line.Select(n => n.Transpose(Interval.PerfectOctave))).ToList());
@@ -37,18 +40,13 @@ public class MelodicLine : IEnumerable<Note>
 
 	public int Length => line.Count;
 
-	IEnumerator<Note> IEnumerable<Note>.GetEnumerator()
+	public IEnumerator<Note> GetEnumerator()
 	{
 		return line.GetEnumerator();
 	}
 
-	public IEnumerator GetEnumerator()
+	IEnumerator IEnumerable.GetEnumerator()
 	{
-		return line.GetEnumerator();
-	}
-
-	internal void Add(Note note)
-	{
-		this.line.Add(note);
+		return GetEnumerator();
 	}
 }
