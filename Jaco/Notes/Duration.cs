@@ -2,14 +2,12 @@ namespace Jaco.Notes;
 
 internal class Durations
 {
-	private readonly double duration;
-
 	internal Durations(double duration)
 	{
-		this.duration = duration;
+		this.Value = duration;
 	}
 
-	internal double Multiply(double mutiplier) => duration * mutiplier;
+	internal double Multiply(double multiplier) => Value * multiplier;
 
 	internal static readonly Durations Double = new Durations(2.0 / 1.0);
 	internal static readonly Durations Whole = new Durations(1.0);
@@ -20,21 +18,19 @@ internal class Durations
 	internal static readonly Durations ThirtySecond = new Durations(1.0 / 32.0);
 	internal static readonly Durations SixtyFourth = new Durations(1.0 / 64.0);
 
-	public double Value => duration;
+	public double Value { get; }
 }
 
 internal class Ticks
 {
 	internal const int TicksPerQuarterNote = 480;
 
-	private readonly double ticks;
-
 	internal Ticks(double ticks)
 	{
-		this.ticks = ticks;
+		Value = ticks;
 	}
 
-	public double Value => ticks;
+	public double Value { get; }
 
 	internal static readonly Ticks Double = new(TicksPerQuarterNote * 8);
 	internal static readonly Ticks Whole = new(TicksPerQuarterNote * 4);
@@ -59,7 +55,7 @@ public class Duration
 	private Duration(string name, Durations value, Ticks ticks, string stringRepresentation)
 	{
 		this.name = name;
-		this.duration = value;
+		duration = value;
 		this.ticks = ticks;
 		this.stringRepresentation = stringRepresentation;
 	}

@@ -8,11 +8,11 @@ internal class IntervalsToPitches
 	{
 	}
 
-	private IntervalsToPitches(IEnumerable<KeyValuePair<Interval, Pitch>> intervalsToPitchs)
+	private IntervalsToPitches(IEnumerable<KeyValuePair<Interval, Pitch>> intervalsToPitches)
 	{
-		foreach (var keyValue in intervalsToPitchs)
+		foreach (var keyValue in intervalsToPitches)
 		{
-			intervalsToPitches.Add(keyValue.Key, keyValue.Value);
+			this.intervalsToPitches.Add(keyValue.Key, keyValue.Value);
 		}
 	}
 
@@ -58,11 +58,11 @@ public class Pitch
 	private readonly Func<Pitch> sharp;
 	private readonly Func<Pitch> flat;
 	private readonly Func<Pitch> natural;
-	private readonly Func<IntervalsToPitches> intervalsToPitchs;
+	private readonly Func<IntervalsToPitches> intervalsToPitches;
 
 	private Pitch(string name, int value, int alterations, Func<Pitch> flat, Func<Pitch> natural,
 		Func<Pitch> sharp,
-		Func<IntervalsToPitches> intervalsToPitchs)
+		Func<IntervalsToPitches> intervalsToPitches)
 	{
 		this.name = name;
 		this.value = value;
@@ -70,7 +70,7 @@ public class Pitch
 		this.sharp = sharp;
 		this.flat = flat;
 		this.natural = natural;
-		this.intervalsToPitchs = intervalsToPitchs;
+		this.intervalsToPitches = intervalsToPitches;
 	}
 
 	public Pitch Sharp()
@@ -109,12 +109,12 @@ public class Pitch
 
 	public Pitch Transpose(Interval interval)
 	{
-		return intervalsToPitchs().Transpose(interval);
+		return intervalsToPitches().Transpose(interval);
 	}
 
 	public Interval IntervalTo(Pitch pitch)
 	{
-		return intervalsToPitchs().IntervalTo(pitch);
+		return intervalsToPitches().IntervalTo(pitch);
 	}
 
 	public bool IsEnharmonicWith(Pitch pitch)
@@ -148,7 +148,7 @@ public class Pitch
 																					0,
 																					-1,
 																					() => B,
-																					() => C, () => C, () => B.intervalsToPitchs());
+																					() => C, () => C, () => B.intervalsToPitches());
 	public static readonly Pitch C = new("C",
 																			0,
 																			0,
@@ -175,7 +175,7 @@ public class Pitch
 																					 1,
 																					 1,
 																					 () => C,
-																					 () => C, () => D, () => C.intervalsToPitchs().Sharp()
+																					 () => C, () => D, () => C.intervalsToPitches().Sharp()
 																					 	.Replace(Interval.MajorThird, ESharp)
 																						.Replace(Interval.AugmentedFourth, FSharp.SamePitchSharp())
 																						.Replace(Interval.AugmentedFifth, GSharp.SamePitchSharp())
@@ -188,7 +188,7 @@ public class Pitch
 																					-1,
 																					() => C,
 																					() => D, () => D, () =>
-																						D.intervalsToPitchs().Flat()
+																						D.intervalsToPitches().Flat()
 																						.Replace(Interval.MinorSecond, EFlat.SamePitchFlat())
 																						.Replace(Interval.MinorThird, FFlat)
 																						.Replace(Interval.DiminishedFifth, AFlat.SamePitchFlat())
@@ -220,7 +220,7 @@ public class Pitch
 																					 3,
 																					 1,
 																					 () => D,
-																					 () => D, () => E, () => D.intervalsToPitchs().Sharp()
+																					 () => D, () => E, () => D.intervalsToPitches().Sharp()
 																					 	.Replace(Interval.MajorSecond, ESharp)
 																						.Replace(Interval.MajorThird, FSharp.SamePitchSharp())
 																						.Replace(Interval.AugmentedFourth, GSharp.SamePitchSharp())
@@ -231,7 +231,7 @@ public class Pitch
 																					3,
 																					-1,
 																					() => D,
-																					() => E, () => E, () => E.intervalsToPitchs().Flat()
+																					() => E, () => E, () => E.intervalsToPitches().Flat()
 																					.Replace(Interval.MinorSecond, FFlat)
 																					.Replace(Interval.DiminishedFifth, BFlat.SamePitchFlat())
 																					.Replace(Interval.MinorSixth, CFlat)
@@ -261,12 +261,12 @@ public class Pitch
 																					 5,
 																					 1,
 																					 () => E,
-																					 () => E, () => F, () => F.intervalsToPitchs());
+																					 () => E, () => F, () => F.intervalsToPitches());
 	public static readonly Pitch FFlat = new("Fb",
 																					5,
 																					-1,
 																					() => E,
-																					() => F, () => F, () => E.intervalsToPitchs());
+																					() => F, () => F, () => E.intervalsToPitches());
 	public static readonly Pitch F = new("F",
 																			5,
 																			0,
@@ -292,7 +292,7 @@ public class Pitch
 																					 6,
 																					 1,
 																					 () => F,
-																					 () => F, () => G, () => F.intervalsToPitchs().Sharp()
+																					 () => F, () => G, () => F.intervalsToPitches().Sharp()
 																					 	.Replace(Interval.PerfectFourth, BSharp)
 																						.Replace(Interval.PerfectFifth, CSharp.SamePitchSharp())
 																						.Replace(Interval.AugmentedFifth, CSharp.SamePitchSharp().SamePitchSharp())
@@ -302,7 +302,7 @@ public class Pitch
 																					6,
 																					-1,
 																					() => F,
-																					() => G, () => G, () => G.intervalsToPitchs().Flat()
+																					() => G, () => G, () => G.intervalsToPitches().Flat()
 																						.Replace(Interval.MinorSecond, AFlat.SamePitchFlat())
 																						.Replace(Interval.MinorThird, BFlat.SamePitchFlat())
 																						.Replace(Interval.PerfectFourth, CFlat)
@@ -335,7 +335,7 @@ public class Pitch
 																					 8,
 																					 1,
 																					 () => G,
-																					 () => G, () => A, () => G.intervalsToPitchs().Sharp()
+																					 () => G, () => A, () => G.intervalsToPitches().Sharp()
 																					 	.Replace(Interval.MajorThird, BSharp)
 																						.Replace(Interval.AugmentedFourth, CSharp.SamePitchSharp())
 																						.Replace(Interval.AugmentedFifth, DSharp.SamePitchSharp())
@@ -346,7 +346,7 @@ public class Pitch
 																					8,
 																					-1,
 																					() => G,
-																					() => A, () => A, () => A.intervalsToPitchs().Flat()
+																					() => A, () => A, () => A.intervalsToPitches().Flat()
 																						.Replace(Interval.MinorSecond, BFlat.SamePitchFlat())
 																						.Replace(Interval.MinorThird, CFlat)
 																						.Replace(Interval.DiminishedFifth, EFlat.SamePitchFlat())
@@ -378,7 +378,7 @@ public class Pitch
 																					 10,
 																					 1,
 																					 () => A,
-																					 () => A, () => B, () => A.intervalsToPitchs().Sharp()
+																					 () => A, () => B, () => A.intervalsToPitches().Sharp()
 																					 	.Replace(Interval.MajorSecond, BSharp)
 																						.Replace(Interval.MajorThird, CSharp.SamePitchSharp())
 																						.Replace(Interval.AugmentedFourth, DSharp.SamePitchSharp())
@@ -433,5 +433,5 @@ public class Pitch
 																					 0,
 																					 1,
 																					 () => B,
-																					 () => B, () => C, () => C.intervalsToPitchs());
+																					 () => B, () => C, () => C.intervalsToPitches());
 }
