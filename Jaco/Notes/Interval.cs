@@ -9,26 +9,19 @@ public enum IntervalQuality
 	Diminished
 }
 
-public class Interval
+public class Interval(
+	string name,
+	string abbreviation,
+	int semitones,
+	IntervalQuality quality,
+	Func<Interval> invert,
+	Func<Interval> octaveUp,
+	Func<Interval> octaveDown)
 {
-	private readonly string name;
-	private readonly string abbreviation;
-	private readonly int semitones;
-	private readonly IntervalQuality quality;
-	private readonly Func<Interval> invert;
-	private readonly Func<Interval> octaveUp;
-	private readonly Func<Interval> octaveDown;
-
-	public Interval(string name, string abbreviation, int semitones, IntervalQuality quality, Func<Interval> invert, Func<Interval> octaveUp, Func<Interval> octaveDown)
-	{
-		this.name = name;
-		this.abbreviation = abbreviation;
-		this.semitones = semitones;
-		this.quality = quality;
-		this.invert = invert;
-		this.octaveUp = octaveUp;
-		this.octaveDown = octaveDown;
-	}
+	private readonly string name = name;
+	private readonly string abbreviation = abbreviation;
+	private readonly int semitones = semitones;
+	private readonly IntervalQuality quality = quality;
 
 	public bool HaveSameDistance(Interval interval)
 	{
