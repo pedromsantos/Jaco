@@ -8,15 +8,15 @@ public class BarryHarrisLine : IEnumerable<Note>
 {
 	private readonly MelodicLine line;
 	private readonly BarryScale scale;
-	private Octave octave;
+	private readonly Octave octave;
 	private readonly Duration pitchDurations;
 
 	public BarryHarrisLine(BarryScale scale, Octave octave, Duration duration)
 	{
-		this.line = new MelodicLine(new List<Note>());
+		line = new MelodicLine(new List<Note>());
 		this.scale = scale;
 		this.octave = octave;
-		this.pitchDurations = duration;
+		pitchDurations = duration;
 	}
 
 	public BarryHarrisLine ArpeggioUpFrom(ScaleDegree from)
@@ -77,7 +77,7 @@ public class BarryHarrisLine : IEnumerable<Note>
 	{
 		var scaleDown = scale.ScaleDownMinHalfSteps().Skip((int)from).Take(to - from).ToList();
 
-		this.line.Concat(scaleDown);
+		line.Concat(scaleDown);
 
 		return this;
 	}
@@ -86,18 +86,18 @@ public class BarryHarrisLine : IEnumerable<Note>
 	{
 		var scaleDown = scale.ScaleDownMaxHalfSteps().Skip((int)from).Take(to - from).ToList();
 
-		this.line.Concat(scaleDown);
+		line.Concat(scaleDown);
 
 		return this;
 	}
 
 	public BarryHarrisLine ScaleDownFromLastPitchTo(ScaleDegree to)
 	{
-		var from = this.LastDegree();
+		var from = LastDegree();
 
 		if (from != null)
 		{
-			this.ScaleDown(to, from.Value - 1);
+			ScaleDown(to, from.Value - 1);
 		}
 
 		return this;
@@ -109,7 +109,7 @@ public class BarryHarrisLine : IEnumerable<Note>
 
 		if (from != null)
 		{
-			this.ScaleDownExtraHalfSteps(to, from.Value - 1);
+			ScaleDownExtraHalfSteps(to, from.Value - 1);
 		}
 
 		return this;
@@ -117,7 +117,7 @@ public class BarryHarrisLine : IEnumerable<Note>
 
 	public MelodicLine Build()
 	{
-		return this.line;
+		return line;
 	}
 
 	private void CreatePivotArpeggioLine(MelodicLine line, int lowCut, int highCut)
@@ -137,14 +137,9 @@ public class BarryHarrisLine : IEnumerable<Note>
 
 	private ScaleDegree? LastDegree()
 	{
-		var lastNote = this.line.LastNote;
+		var lastNote = line.LastNote;
 
-		if (lastNote != null)
-		{
-			return this.scale.DegreeFor(lastNote.Pitch);
-		}
-
-		return null;
+		return scale.DegreeFor(lastNote.Pitch);
 	}
 
 	public IEnumerator<Note> GetEnumerator()
