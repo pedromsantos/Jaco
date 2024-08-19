@@ -1,17 +1,13 @@
 using System.Collections;
 using Jaco.Notes;
-using Jaco.Scale;
+using Jaco.Scales;
 
 namespace Jaco.Barry;
 
-public abstract class BarryScale : IScale
+public abstract class BarryScale(ScalePattern scalePattern, Pitch root, Duration duration, Octave octave)
+	: IScale
 {
-	protected readonly IScale scale;
-
-	protected BarryScale(ScalePattern scalePattern, Pitch root, Duration duration, Octave octave)
-	{
-		scale = new Scale.Scale(scalePattern, root, duration, octave);
-	}
+	private readonly IScale scale = new Scale(scalePattern, root, duration, octave);
 
 	public ScalePattern ScalePattern => scale.ScalePattern;
 
@@ -42,7 +38,7 @@ public abstract class BarryScale : IScale
 		var scaleLine = scale.ScaleDownMelodicLine();
 		var line = new MelodicLine(new List<Note>());
 
-		foreach (Note note in scaleLine)
+		foreach (var note in scaleLine)
 		{
 			line.Add(note);
 
@@ -60,7 +56,7 @@ public abstract class BarryScale : IScale
 		var scaleLine = scale.ScaleDownMelodicLine();
 		var line = new MelodicLine(new List<Note>());
 
-		foreach (Note note in scaleLine)
+		foreach (var note in scaleLine)
 		{
 			line.Add(note);
 
@@ -108,13 +104,9 @@ public abstract class BarryScale : IScale
 	}
 }
 
-public class BarryDominantScale : BarryScale
+public class BarryDominantScale(Pitch root, Duration duration, Octave octave)
+	: BarryScale(ScalePattern.Mixolydian, root, duration, octave)
 {
-	public BarryDominantScale(Pitch root, Duration duration, Octave octave)
-		: base(ScalePattern.Mixolydian, root, duration, octave)
-	{
-	}
-
 	protected override bool InsertMaxHalfSteps(Note note)
 	{
 		return note.HasSamePitch(Root) ||
@@ -128,13 +120,9 @@ public class BarryDominantScale : BarryScale
 	}
 }
 
-public class BarryMajorScale : BarryScale
+public class BarryMajorScale(Pitch root, Duration duration, Octave octave)
+	: BarryScale(ScalePattern.Ionian, root, duration, octave)
 {
-	public BarryMajorScale(Pitch root, Duration duration, Octave octave)
-		: base(ScalePattern.Ionian, root, duration, octave)
-	{
-	}
-
 	protected override bool InsertMaxHalfSteps(Note note)
 	{
 		return note.HasSamePitch(Root.Transpose(Interval.MajorSecond)) ||
@@ -149,13 +137,9 @@ public class BarryMajorScale : BarryScale
 	}
 }
 
-public class BarryMinorScale : BarryScale
+public class BarryMinorScale(Pitch root, Duration duration, Octave octave)
+	: BarryScale(ScalePattern.HarmonicMinor, root, duration, octave)
 {
-	public BarryMinorScale(Pitch root, Duration duration, Octave octave)
-		: base(ScalePattern.HarmonicMinor, root, duration, octave)
-	{
-	}
-
 	protected override bool InsertMaxHalfSteps(Note note)
 	{
 		return note.HasSamePitch(Root.Transpose(Interval.MajorSixth));

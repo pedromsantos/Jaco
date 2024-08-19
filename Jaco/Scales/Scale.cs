@@ -1,7 +1,7 @@
 using System.Collections;
 using Jaco.Notes;
 
-namespace Jaco.Scale
+namespace Jaco.Scales
 {
 	public enum ScaleDegree
 	{

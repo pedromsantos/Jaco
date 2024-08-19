@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Jaco.Notes;
-using Jaco.Scale;
+using Jaco.Scales;
 
 namespace JacoTests.Scale;
 
@@ -9,7 +9,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateMelodicLineForScalePitches()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
 
 		var melodicLine = scale.ScaleUpMelodicLine();
 
@@ -21,7 +21,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateReverseMelodicLineForScalePitches()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
 		var reverseMelodicLine = scale.ScaleDownMelodicLine();
 
 		reverseMelodicLine.Length.Should().Be(7);
@@ -32,7 +32,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromI()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Ionian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.I).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.C);
@@ -52,7 +52,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromII()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Dorian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Dorian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.II).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.D);
@@ -72,7 +72,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromIII()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Phrygian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Phrygian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.III).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.EFlat);
@@ -92,7 +92,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromIV()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Lydian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Lydian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.IV).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.FSharp);
@@ -112,7 +112,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromV()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Mixolydian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Mixolydian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.V).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.G);
@@ -132,7 +132,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromVI()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Aeolian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Aeolian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.VI).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.AFlat);
@@ -152,7 +152,7 @@ public class ScaleShould
 	[Fact]
 	public void GenerateThirdsFromVII()
 	{
-		var scale = new Jaco.Scale.Scale(ScalePattern.Locrian, Pitch.C, Duration.Eighth, Octave.C3);
+		var scale = new Jaco.Scales.Scale(ScalePattern.Locrian, Pitch.C, Duration.Eighth, Octave.C3);
 		var thirdsFrom = scale.ThirdsFrom(ScaleDegree.VII).ToList();
 
 		thirdsFrom[0].Should().Be(Pitch.BFlat);

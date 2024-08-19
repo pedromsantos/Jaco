@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Jaco.Barry;
 using Jaco.Notes;
-using Jaco.Scale;
+using Jaco.Scales;
 
 namespace JacoTests.Barry;
 

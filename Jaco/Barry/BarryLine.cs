@@ -1,74 +1,59 @@
 ﻿using System.Collections;
 using Jaco.Notes;
-using Jaco.Scale;
+using Jaco.Scales;
 
 namespace Jaco.Barry;
 
-public class BarryHarrisLine : IEnumerable<Note>
+public class BarryHarrisLine(BarryScale scale, Octave octave, Duration duration) : IEnumerable<Note>
 {
-	private readonly MelodicLine line;
-	private readonly BarryScale scale;
-	private readonly Octave octave;
-	private readonly Duration pitchDurations;
-
-	public BarryHarrisLine(BarryScale scale, Octave octave, Duration duration)
-	{
-		line = new MelodicLine(new List<Note>());
-		this.scale = scale;
-		this.octave = octave;
-		pitchDurations = duration;
-	}
+	private readonly MelodicLine line = new(new List<Note>());
 
 	public BarryHarrisLine ArpeggioUpFrom(ScaleDegree from)
 	{
-		this.line.Concat(this.scale.ArpeggioUp(from));
+		line.Concat(scale.ArpeggioUp(from));
 
 		return this;
 	}
 
 	public BarryHarrisLine ArpeggioUpFromLastPitch()
 	{
-		var from = this.LastDegree();
-
-		if (from.HasValue)
-		{
-			this.line.Concat(this.scale.ArpeggioUp(from.Value));
-		}
+		var from = LastDegree();
+		if (!from.HasValue) return this;
+		
+		line.Concat(scale.ArpeggioUp(from.Value));
 
 		return this;
 	}
 
 	public BarryHarrisLine PivotArpeggioUpFrom(ScaleDegree degree)
 	{
-		var arpeggio = this.scale.ArpeggioUp(degree);
-		this.CreatePivotArpeggioLine(arpeggio, 0, 1);
+		var arpeggio = scale.ArpeggioUp(degree);
+		CreatePivotArpeggioLine(arpeggio, 0, 1);
 
 		return this;
 	}
 
 	public BarryHarrisLine PivotArpeggioUpFromLastPitch()
 	{
-		var from = this.LastDegree();
-
-		if (from.HasValue)
-		{
-			var arpeggio = this.scale.ArpeggioUp(from.Value);
-			this.CreatePivotArpeggioLine(arpeggio, 1, 2);
-		}
+		var from = LastDegree();
+		if (!from.HasValue) return this;
+		
+		var arpeggio = scale.ArpeggioUp(from.Value);
+		CreatePivotArpeggioLine(arpeggio, 1, 2);
 
 		return this;
 	}
 
 	public BarryHarrisLine ResolveUpTo(Pitch pitch)
 	{
-		this.line.Concat(new MelodicLine(new List<Note> { new Note(pitch, this.pitchDurations, octave) }));
+		line.Concat(new MelodicLine(new List<Note> { new(pitch, duration, octave) }));
 
 		return this;
 	}
 
 	public BarryHarrisLine ResolveDownTo(Pitch pitch)
 	{
-		this.line.Concat(new MelodicLine(new List<Note> { new Note(pitch, this.pitchDurations, octave) }));
+		line.Concat(new MelodicLine(new List<Note> { new(pitch, duration, octave) }));
 
 		return this;
 	}
@@ -77,7 +62,7 @@ public class BarryHarrisLine : IEnumerable<Note>
 	{
 		var scaleDown = scale.ScaleDownMinHalfSteps().Skip((int)from).Take(to - from).ToList();
 
-		line.Concat(scaleDown);
+		line.Concat(new MelodicLine(scaleDown));
 
 		return this;
 	}
@@ -86,7 +71,7 @@ public class BarryHarrisLine : IEnumerable<Note>
 	{
 		var scaleDown = scale.ScaleDownMaxHalfSteps().Skip((int)from).Take(to - from).ToList();
 
-		line.Concat(scaleDown);
+		line.Concat(new MelodicLine(scaleDown));
 
 		return this;
 	}
@@ -105,7 +90,7 @@ public class BarryHarrisLine : IEnumerable<Note>
 
 	public BarryHarrisLine ScaleDownExtraHalfStepsFromLastPitch(ScaleDegree to)
 	{
-		var from = this.LastDegree();
+		var from = LastDegree();
 
 		if (from != null)
 		{
@@ -120,19 +105,21 @@ public class BarryHarrisLine : IEnumerable<Note>
 		return line;
 	}
 
-	private void CreatePivotArpeggioLine(MelodicLine line, int lowCut, int highCut)
+	private void CreatePivotArpeggioLine(MelodicLine tmpLine, int lowCut, int highCut)
 	{
-		var rawLine = line.ToList();
+		var rawLine = tmpLine.ToList();
 
 		var arpeggioRoot = new MelodicLine(
 			rawLine.GetRange(lowCut, highCut).Select(note => note.OctaveDown())
 		);
-		this.line.Concat(arpeggioRoot);
+		
+		line.Concat(arpeggioRoot);
 
 		var pivot = new MelodicLine(
 			rawLine.GetRange(highCut, rawLine.Count - highCut).Select(note => note.OctaveDown())
 		);
-		this.line.Concat(pivot);
+		
+		line.Concat(pivot);
 	}
 
 	private ScaleDegree? LastDegree()
