@@ -1,6 +1,4 @@
-namespace Jaco;
-
-using Microsoft.VisualBasic;
+namespace Jaco.Notes;
 
 internal class Durations
 {
@@ -36,7 +34,7 @@ internal class Ticks
 		this.ticks = ticks;
 	}
 
-	public double Value => this.ticks;
+	public double Value => ticks;
 
 	internal static readonly Ticks Double = new(TicksPerQuarterNote * 8);
 	internal static readonly Ticks Whole = new(TicksPerQuarterNote * 4);
@@ -50,8 +48,8 @@ internal class Ticks
 
 public class Duration
 {
-	private static readonly double dotMultiplier = 1.5;
-	private static readonly double doubleDotMultiplier = 1.75;
+	private const double DotMultiplier = 1.5;
+	private const double DoubleDotMultiplier = 1.75;
 
 	private readonly string name;
 	private readonly Durations duration;
@@ -66,7 +64,7 @@ public class Duration
 		this.stringRepresentation = stringRepresentation;
 	}
 
-	public static int TickPerQuarterNote { get { return Ticks.TicksPerQuarterNote; } }
+	public static int TickPerQuarterNote => Ticks.TicksPerQuarterNote;
 
 	public string Name => name;
 
@@ -127,15 +125,15 @@ public class Duration
 
 	public static readonly Duration DoubleDottedHalf = new Duration(
 		"Double Dotted Half",
-		new Durations(Durations.Half.Value * doubleDotMultiplier),
-		new Ticks(Ticks.Half.Value * doubleDotMultiplier),
-		Durations.Half.ToString() + "3/4"
+		new Durations(Durations.Half.Value * DoubleDotMultiplier),
+		new Ticks(Ticks.Half.Value * DoubleDotMultiplier),
+		Durations.Half + "3/4"
 	);
 
 	public static readonly Duration DottedHalf = new Duration(
 		"Dotted Half",
-		new Durations(Durations.Half.Value * dotMultiplier),
-		new Ticks(Ticks.Half.Value * dotMultiplier),
+		new Durations(Durations.Half.Value * DotMultiplier),
+		new Ticks(Ticks.Half.Value * DotMultiplier),
 		""
 	);
 
@@ -148,16 +146,16 @@ public class Duration
 
 	public static readonly Duration DoubleDottedQuarter = new Duration(
 		"Double Dotted Quarter",
-		new Durations(Durations.Quarter.Value * doubleDotMultiplier),
-		new Ticks(Ticks.TicksPerQuarterNote * doubleDotMultiplier),
-		Durations.Quarter.ToString() + "3/4"
+		new Durations(Durations.Quarter.Value * DoubleDotMultiplier),
+		new Ticks(Ticks.TicksPerQuarterNote * DoubleDotMultiplier),
+		Durations.Quarter + "3/4"
 	);
 
 	public static readonly Duration DottedQuarter = new Duration(
 		"Dotted Quarter",
-		new Durations(Durations.Quarter.Value * dotMultiplier),
-		new Ticks(Ticks.TicksPerQuarterNote * dotMultiplier),
-		Durations.Quarter.ToString() + "1/2"
+		new Durations(Durations.Quarter.Value * DotMultiplier),
+		new Ticks(Ticks.TicksPerQuarterNote * DotMultiplier),
+		Durations.Quarter + "1/2"
 	);
 
 	public static readonly Duration TripletHalf = new Duration(
@@ -169,16 +167,16 @@ public class Duration
 
 	public static readonly Duration DoubleDottedEighth = new Duration(
 		"Double Dotted Quarter",
-		new Durations(Durations.Eighth.Value * doubleDotMultiplier),
-		new Ticks(Ticks.Eighth.Value * doubleDotMultiplier),
-		Durations.Eighth.ToString() + "3/4"
+		new Durations(Durations.Eighth.Value * DoubleDotMultiplier),
+		new Ticks(Ticks.Eighth.Value * DoubleDotMultiplier),
+		Durations.Eighth + "3/4"
 	);
 
 	public static readonly Duration DottedEighth = new Duration(
 		"Dotted Quarter",
-		new Durations(Durations.Eighth.Value * dotMultiplier),
-		new Ticks(Ticks.Eighth.Value * dotMultiplier),
-		Durations.Eighth.ToString() + "1/2"
+		new Durations(Durations.Eighth.Value * DotMultiplier),
+		new Ticks(Ticks.Eighth.Value * DotMultiplier),
+		Durations.Eighth + "1/2"
 	);
 
 	public static readonly Duration TripletQuarter = new Duration(
@@ -190,16 +188,16 @@ public class Duration
 
 	public static readonly Duration DoubleDottedSixteenth = new Duration(
 		"Double Dotted Sixteenth",
-		new Durations(Durations.Sixteenth.Value * doubleDotMultiplier),
-		new Ticks(Ticks.Sixteenth.Value * doubleDotMultiplier),
-		Durations.Sixteenth.ToString() + "3/4"
+		new Durations(Durations.Sixteenth.Value * DoubleDotMultiplier),
+		new Ticks(Ticks.Sixteenth.Value * DoubleDotMultiplier),
+		Durations.Sixteenth + "3/4"
 	);
 
 	public static readonly Duration DottedSixteenth = new Duration(
 		"Dotted Sixteenth",
-		new Durations(Durations.Sixteenth.Value * dotMultiplier),
-		new Ticks(Ticks.Sixteenth.Value * dotMultiplier),
-		Durations.Sixteenth.ToString() + "1/2"
+		new Durations(Durations.Sixteenth.Value * DotMultiplier),
+		new Ticks(Ticks.Sixteenth.Value * DotMultiplier),
+		Durations.Sixteenth + "1/2"
 	);
 
 	public static readonly Duration TripletEighth = new Duration(
@@ -211,16 +209,16 @@ public class Duration
 
 	public static readonly Duration DoubleDottedThirtySecond = new Duration(
 		"Double Dotted ThirtySecond",
-		new Durations(Durations.ThirtySecond.Value * doubleDotMultiplier),
-		new Ticks(Ticks.ThirtySecond.Value * doubleDotMultiplier),
-		Durations.ThirtySecond.ToString() + "3/4"
+		new Durations(Durations.ThirtySecond.Value * DoubleDotMultiplier),
+		new Ticks(Ticks.ThirtySecond.Value * DoubleDotMultiplier),
+		Durations.ThirtySecond + "3/4"
 	);
 
 	public static readonly Duration DottedThirtySecond = new Duration(
 		"Dotted ThirtySecond",
-		new Durations(Durations.ThirtySecond.Value * dotMultiplier),
-		new Ticks(Ticks.ThirtySecond.Value * dotMultiplier),
-		Durations.ThirtySecond.ToString() + "1/2"
+		new Durations(Durations.ThirtySecond.Value * DotMultiplier),
+		new Ticks(Ticks.ThirtySecond.Value * DotMultiplier),
+		Durations.ThirtySecond + "1/2"
 	);
 
 	public static readonly Duration TripletSixteenth = new Duration(
@@ -232,9 +230,9 @@ public class Duration
 
 	public static readonly Duration DottedSixtyFourth = new Duration(
 		"Dotted SixtyFourth",
-		new Durations(Durations.SixtyFourth.Value * dotMultiplier),
-		new Ticks(Ticks.SixtyFourth.Value * dotMultiplier),
-		Durations.SixtyFourth.ToString() + "1/2"
+		new Durations(Durations.SixtyFourth.Value * DotMultiplier),
+		new Ticks(Ticks.SixtyFourth.Value * DotMultiplier),
+		Durations.SixtyFourth + "1/2"
 	);
 
 	public static readonly Duration TripletThirtySecond = new Duration(

@@ -1,23 +1,15 @@
 
-namespace Jaco.Note;
+namespace Jaco.Notes;
 
-public class Note
+public class Note(Pitch pitch, Duration duration, Octave octave)
 {
-	private readonly Pitch pitch;
-	private readonly Duration duration;
-	private readonly Octave octave;
+	private readonly Pitch pitch = pitch;
+	private readonly Duration duration = duration;
+	private readonly Octave octave = octave;
 
-	private readonly int midiValue;
+	private readonly int midiValue = pitch.Value + octave.MidiBaseValue;
 
-	public Pitch Pitch { get => pitch; }
-
-	public Note(Pitch pitch, Duration duration, Octave octave)
-	{
-		this.pitch = pitch;
-		this.duration = duration;
-		this.octave = octave;
-		this.midiValue = pitch.Value + octave.MidiBaseValue;
-	}
+	public Pitch Pitch => pitch;
 
 	public Note OctaveUp()
 	{
@@ -59,9 +51,9 @@ public class Note
 		return pitch.IntervalTo(to.pitch).RaiseOctave();
 	}
 
-	public bool HasSamePitch(Pitch pitch)
+	public bool HasSamePitch(Pitch otherPitch)
 	{
-		return this.pitch == pitch;
+		return Equals(pitch, otherPitch);
 	}
 
 	// public bool IsSamePitch(Note other)

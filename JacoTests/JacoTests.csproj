@@ -50,6 +50,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Note/" />
+      <Folder Include="Notes\" />
     </ItemGroup>
 </Project>

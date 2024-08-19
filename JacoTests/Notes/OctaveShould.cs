@@ -1,10 +1,7 @@
+using FluentAssertions;
 using Jaco.Notes;
 
-namespace JacoTests;
-
-using FluentAssertions;
-using Xunit;
-using Jaco;
+namespace JacoTests.Notes;
 
 public class OctaveShould
 {

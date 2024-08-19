@@ -1,15 +1,10 @@
 using System.Collections;
 
-namespace Jaco.Note;
+namespace Jaco.Notes;
 
-public class MelodicLine : IEnumerable<Note>
+public class MelodicLine(IEnumerable<Note> notes) : IEnumerable<Note>
 {
-	private readonly List<Note> line;
-
-	public MelodicLine(IEnumerable<Note> notes)
-	{
-		line = notes.ToList();
-	}
+	private readonly List<Note> line = notes.ToList();
 
 	public MelodicLine Slice(int start, int end)
 	{

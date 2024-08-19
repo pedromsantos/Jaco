@@ -1,19 +1,20 @@
-using Jaco;
+using Jaco.Notes;
+using Jaco.Time;
 
-namespace JacoTests;
+namespace JacoTests.Time;
 
 public class CompoundTimeSignatureShould
 {
 	[Fact]
 	public void PulsesMustBeDivisibleBy3()
 	{
-		Assert.Throws<ArgumentException>(() => new CompoundTimeSignature(7, Duration.Eighth, 60));
+		Assert.Throws<ArgumentException>(() => new CompoundTimeSignature(7, Duration.Eighth));
 	}
 
 	[Fact]
 	public void CalculateBeatDurationInMillisecondsAndTicks()
 	{
-		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
+		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth);
 
 		Assert.Equal(1000, timeSignature.BeatDurationMilliseconds);
 		Assert.Equal(480, timeSignature.TicksPerSecond);
@@ -23,7 +24,7 @@ public class CompoundTimeSignatureShould
 	[Fact]
 	public void CalculateNoteDurationsInMilliseconds()
 	{
-		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
+		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth);
 
 		var wholeNoteExpectedDuration = 8000;
 
@@ -39,7 +40,7 @@ public class CompoundTimeSignatureShould
 	[Fact]
 	public void CalculateMeasureDurationsInMilliseconds()
 	{
-		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
+		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth);
 
 		var expectedDuration = 2000;
 
@@ -49,7 +50,7 @@ public class CompoundTimeSignatureShould
 	[Fact]
 	public void MeasureDurationsInTicks()
 	{
-		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
+		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth);
 
 		Assert.Equal(1440, timeSignature.TicksPerCycle);
 	}
@@ -57,7 +58,7 @@ public class CompoundTimeSignatureShould
 	[Fact]
 	public void NumberOfNotesToFillCycleIn68()
 	{
-		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth, 60);
+		var timeSignature = new CompoundTimeSignature(6, Duration.Eighth);
 
 		Assert.Equal(1, timeSignature.ToFillCycle(Duration.DottedHalf));
 		Assert.Equal(2, timeSignature.ToFillCycle(Duration.DottedQuarter));

@@ -1,53 +1,38 @@
-namespace Jaco;
+using Jaco.Notes;
 
-public class BeatsPerMinute
+namespace Jaco.Time;
+
+public class BeatsPerMinute(int bpm, Duration duration)
 {
 	private readonly double miliSecondsMultiplier = 60 * 1000;
 	private readonly int secondsMultiplier = 60;
-	private readonly int bpm;
-	private readonly Duration duration;
 
-	public BeatsPerMinute(int bpm)
-	{
-		this.bpm = bpm;
-		this.duration = Duration.Quarter;
-	}
-
-	public BeatsPerMinute(int bpm, Duration duration)
-	{
-		this.bpm = bpm;
-		this.duration = duration;
-	}
-
-	public int BPM
-	{
-		get { return bpm; }
-	}
+	public int Bpm { get; } = bpm;
 
 	public int Minutes(int beats = 1)
 	{
-		return beats / bpm;
+		return beats / Bpm;
 	}
 
 	public double Seconds(int beats = 1)
 	{
-		return ((double)beats / (double)bpm) * (double)secondsMultiplier;
+		return (beats / (double)Bpm) * secondsMultiplier;
 	}
 
 	public double MilliSeconds(int beats = 1)
 	{
-		return ((double)beats / (double)bpm) * miliSecondsMultiplier;
+		return (beats / (double)Bpm) * miliSecondsMultiplier;
 	}
 
-	public double SecondsFor(Duration duration)
+	public double SecondsFor(Duration duration1)
 	{
-		double durationToBeats = duration.Value / this.duration.Value;
-		return (durationToBeats / bpm) * secondsMultiplier;
+		var durationToBeats = duration1.Value / duration.Value;
+		return (durationToBeats / Bpm) * secondsMultiplier;
 	}
 
-	public double MilliSecondsFor(Duration duration)
+	public double MilliSecondsFor(Duration duration1)
 	{
-		double durationToBeats = duration.Value / this.duration.Value;
-		return (durationToBeats / bpm) * miliSecondsMultiplier;
+		var durationToBeats = duration1.Value / duration.Value;
+		return (durationToBeats / Bpm) * miliSecondsMultiplier;
 	}
 }

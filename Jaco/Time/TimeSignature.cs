@@ -1,55 +1,29 @@
-namespace Jaco;
+using Jaco.Notes;
 
-public abstract class TimeSignature
+namespace Jaco.Time;
+
+public abstract class TimeSignature(int beats, Duration duration, int bpm)
 {
-	private readonly BeatsPerMinute bpm;
+	private readonly BeatsPerMinute bpm = new BeatsPerMinute(bpm, duration);
 
-	protected TimeSignature(int beats, Duration duration, int bpm)
-	{
-		this.beats = beats;
-		this.duration = duration;
-		this.bpm = new BeatsPerMinute(bpm, duration);
-	}
+	protected readonly int Beats = beats;
+	protected readonly Duration Duration = duration;
 
-	protected int beats;
-	protected Duration duration;
+	protected virtual double BeatValue => Duration.Value;
 
-	protected virtual double beatValue
-	{
-		get { return duration.Value; }
-	}
+	public double BeatDuration => BeatValue;
 
-	public double beatDuration
-	{
-		get { return beatValue; }
-	}
+	public double BeatDurationMilliseconds => bpm.MilliSeconds();
 
-	public double BeatDurationMilliseconds
-	{
-		get { return bpm.MilliSeconds(); }
-	}
+	public double BeatDurationTicks => Duration.Tick;
 
-	public double BeatDurationTicks
-	{
-		get { return duration.Tick; }
-	}
+	public double MillisecondsPerCycle => BeatDurationMilliseconds * Beats;
 
-	public double MillisecondsPerCycle
-	{
-		get { return BeatDurationMilliseconds * beats; }
-	}
+	public virtual double TicksPerCycle => BeatDurationTicks * Beats;
 
-	public virtual double TicksPerCycle
-	{
-		get { return BeatDurationTicks * beats; }
-	}
+	public int TicksPerSecond => (bpm.Bpm * Duration.TickPerQuarterNote) / 60;
 
-	public int TicksPerSecond
-	{
-		get { return (bpm.BPM * Duration.TickPerQuarterNote) / 60; }
-	}
-
-	public abstract double ToFillCycle(Duration duration);
+	public abstract double ToFillCycle(Duration durationToTry);
 
 	public double MillisecondsFor(Duration duration)
 	{

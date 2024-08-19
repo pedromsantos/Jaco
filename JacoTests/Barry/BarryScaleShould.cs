@@ -1,7 +1,8 @@
-namespace JacoTests;
-
 using FluentAssertions;
-using Jaco;
+using Jaco.Barry;
+using Jaco.Notes;
+
+namespace JacoTests.Barry;
 
 public class JacoScaleShould
 {

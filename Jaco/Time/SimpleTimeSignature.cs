@@ -1,23 +1,20 @@
-namespace Jaco;
+using Jaco.Notes;
 
-public class SimpleTimeSignature : TimeSignature
+namespace Jaco.Time;
+
+public class SimpleTimeSignature(int beats, Duration duration, int bpm = 60) : TimeSignature(beats, duration, bpm)
 {
-	public SimpleTimeSignature(int beats, Duration duration, int bpm = 60)
-		: base(beats, duration, bpm)
+	public override double ToFillCycle(Duration durationToTry)
 	{
-	}
-
-	public override double ToFillCycle(Duration duration)
-	{
-		return (BeatDurationTicks / duration.Tick) * beats;
+		return (BeatDurationTicks / durationToTry.Tick) * Beats;
 	}
 
 	public override string ToString()
 	{
-		var foo = duration.ToString().Length > 1
-				? duration.ToString().Substring(2)
-				: duration.ToString();
+		var foo = Duration.ToString().Length > 1
+				? Duration.ToString().Substring(2)
+				: Duration.ToString();
 
-		return $"{beats}/{foo}";
+		return $"{Beats}/{foo}";
 	}
 }

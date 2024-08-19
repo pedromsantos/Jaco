@@ -1,11 +1,7 @@
-﻿using Jaco.Notes;
+﻿using FluentAssertions;
+using Jaco.Notes;
 
-namespace JacoTests;
-
-using Xunit;
-using Jaco;
-using FluentAssertions;
-using NSubstitute.Routing.AutoValues;
+namespace JacoTests.Notes;
 
 public class IntervalShould
 {

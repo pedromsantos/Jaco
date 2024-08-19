@@ -1,4 +1,4 @@
-﻿namespace Jaco;
+﻿namespace Jaco.Notes;
 
 public enum IntervalQuality
 {
@@ -80,9 +80,9 @@ public class Interval
 			"U",
 			0,
 			IntervalQuality.Perfect,
-			() => PerfectOctave!,
-			() => PerfectOctave!,
-			() => Unison!
+			() => PerfectOctave,
+			() => PerfectOctave,
+			() => Unison
 		);
 
 	public static readonly Interval DiminishedUnison = new(
@@ -90,9 +90,9 @@ public class Interval
 		"d1",
 		0,
 		IntervalQuality.Diminished,
-		() => AugmentedUnison!,
-		() => DiminishedUnison!,
-		() => DiminishedUnison!
+		() => AugmentedUnison,
+		() => DiminishedUnison,
+		() => DiminishedUnison
 	);
 
 	public static readonly Interval AugmentedUnison = new(
@@ -101,8 +101,8 @@ public class Interval
 		1,
 		IntervalQuality.Augmented,
 		() => DiminishedUnison,
-		() => AugmentedUnison!,
-		() => AugmentedUnison!
+		() => AugmentedUnison,
+		() => AugmentedUnison
 	);
 
 	public static readonly Interval MinorSecond = new(
@@ -110,9 +110,9 @@ public class Interval
 		"m2",
 		1,
 		IntervalQuality.Minor,
-		() => MajorSeventh!,
-		() => MinorNinth!,
-		() => MinorSecond!
+		() => MajorSeventh,
+		() => MinorNinth,
+		() => MinorSecond
 	);
 
 	public static readonly Interval MajorSecond = new(
@@ -120,9 +120,9 @@ public class Interval
 		"M2",
 		2,
 		IntervalQuality.Major,
-		() => MinorSeventh!,
-		() => MajorNinth!,
-		() => MajorSecond!
+		() => MinorSeventh,
+		() => MajorNinth,
+		() => MajorSecond
 	);
 
 	public static readonly Interval AugmentedSecond = new(
@@ -130,9 +130,9 @@ public class Interval
 		"A2",
 		3,
 		IntervalQuality.Augmented,
-		() => DiminishedSeventh!,
-		() => AugmentedNinth!,
-		() => AugmentedSecond!
+		() => DiminishedSeventh,
+		() => AugmentedNinth,
+		() => AugmentedSecond
 	);
 
 	public static readonly Interval MinorThird = new(
@@ -140,9 +140,9 @@ public class Interval
 		"m3",
 		3,
 		IntervalQuality.Minor,
-		() => MajorSixth!,
-		() => MinorThird!,
-		() => MinorThird!
+		() => MajorSixth,
+		() => MinorThird,
+		() => MinorThird
 	);
 
 	public static readonly Interval MajorThird = new(
@@ -150,9 +150,9 @@ public class Interval
 		"M3",
 		4,
 		IntervalQuality.Major,
-		() => MinorSixth!,
-		() => MajorThird!,
-		() => MajorThird!
+		() => MinorSixth,
+		() => MajorThird,
+		() => MajorThird
 	);
 
 	public static readonly Interval PerfectFourth = new(
@@ -160,9 +160,9 @@ public class Interval
 		"P4",
 		5,
 		IntervalQuality.Perfect,
-		() => PerfectFifth!,
-		() => PerfectEleventh!,
-		() => PerfectFourth!
+		() => PerfectFifth,
+		() => PerfectEleventh,
+		() => PerfectFourth
 	);
 
 	public static readonly Interval AugmentedFourth = new(
@@ -170,9 +170,9 @@ public class Interval
 		"A4",
 		6,
 		IntervalQuality.Augmented,
-		() => DiminishedFifth!,
-		() => AugmentedEleventh!,
-		() => AugmentedFourth!
+		() => DiminishedFifth,
+		() => AugmentedEleventh,
+		() => AugmentedFourth
 	);
 
 	public static readonly Interval DiminishedFifth = new(
@@ -181,8 +181,8 @@ public class Interval
 		6,
 		IntervalQuality.Diminished,
 		() => AugmentedFourth,
-		() => DiminishedFifth!,
-		() => DiminishedFifth!
+		() => DiminishedFifth,
+		() => DiminishedFifth
 	);
 
 	public static readonly Interval Tritone = DiminishedFifth;
@@ -193,8 +193,8 @@ public class Interval
 		7,
 		IntervalQuality.Perfect,
 		() => PerfectFourth,
-		() => PerfectFifth!,
-		() => PerfectFifth!
+		() => PerfectFifth,
+		() => PerfectFifth
 	);
 
 	public static readonly Interval AugmentedFifth = new(
@@ -203,8 +203,8 @@ public class Interval
 		8,
 		IntervalQuality.Augmented,
 		() => AugmentedFourth,
-		() => AugmentedFifth!,
-		() => AugmentedFifth!
+		() => AugmentedFifth,
+		() => AugmentedFifth
 	);
 
 	public static readonly Interval MinorSixth = new(
@@ -213,8 +213,8 @@ public class Interval
 		8,
 		IntervalQuality.Minor,
 		() => MajorThird,
-		() => MinorThirteenth!,
-		() => MinorSixth!
+		() => MinorThirteenth,
+		() => MinorSixth
 	);
 
 	public static readonly Interval MajorSixth = new(
@@ -223,8 +223,8 @@ public class Interval
 		9,
 		IntervalQuality.Major,
 		() => MinorThird,
-		() => MajorThirteenth!,
-		() => MajorSixth!
+		() => MajorThirteenth,
+		() => MajorSixth
 	);
 
 	public static readonly Interval DiminishedSeventh = new(
@@ -233,8 +233,8 @@ public class Interval
 		9,
 		IntervalQuality.Diminished,
 		() => AugmentedSecond,
-		() => DiminishedSeventh!,
-		() => DiminishedSeventh!
+		() => DiminishedSeventh,
+		() => DiminishedSeventh
 	);
 
 	public static readonly Interval MinorSeventh = new(
@@ -243,8 +243,8 @@ public class Interval
 		10,
 		IntervalQuality.Minor,
 		() => MajorSecond,
-		() => MinorSeventh!,
-		() => MinorSeventh!
+		() => MinorSeventh,
+		() => MinorSeventh
 	);
 
 	public static readonly Interval MajorSeventh = new(
@@ -253,8 +253,8 @@ public class Interval
 		11,
 		IntervalQuality.Major,
 		() => MinorSecond,
-		() => MajorSeventh!,
-		() => MajorSeventh!
+		() => MajorSeventh,
+		() => MajorSeventh
 	);
 
 	public static readonly Interval PerfectOctave = new(
@@ -263,8 +263,8 @@ public class Interval
 		12,
 		IntervalQuality.Perfect,
 		() => Unison,
-		() => PerfectOctave!,
-		() => Unison!
+		() => PerfectOctave,
+		() => Unison
 	);
 
 	public static readonly Interval MinorNinth = new(
@@ -273,8 +273,8 @@ public class Interval
 		13,
 		IntervalQuality.Minor,
 		() => MajorSeventh,
-		() => MinorNinth!,
-		() => MinorSecond!
+		() => MinorNinth,
+		() => MinorSecond
 	);
 
 	public static readonly Interval MajorNinth = new(
@@ -283,8 +283,8 @@ public class Interval
 		14,
 		IntervalQuality.Major,
 		() => MinorSeventh,
-		() => MajorNinth!,
-		() => MajorSecond!
+		() => MajorNinth,
+		() => MajorSecond
 	);
 
 	public static readonly Interval AugmentedNinth = new(
@@ -293,8 +293,8 @@ public class Interval
 		15,
 		IntervalQuality.Augmented,
 		() => DiminishedUnison,
-		() => AugmentedNinth!,
-		() => AugmentedSecond!
+		() => AugmentedNinth,
+		() => AugmentedSecond
 	);
 
 	public static readonly Interval PerfectEleventh = new(
@@ -303,8 +303,8 @@ public class Interval
 		17,
 		IntervalQuality.Perfect,
 		() => PerfectFifth,
-		() => PerfectEleventh!,
-		() => PerfectFourth!
+		() => PerfectEleventh,
+		() => PerfectFourth
 	);
 
 	public static readonly Interval AugmentedEleventh = new(
@@ -313,8 +313,8 @@ public class Interval
 		18,
 		IntervalQuality.Augmented,
 		() => DiminishedFifth,
-		() => AugmentedEleventh!,
-		() => AugmentedFourth!
+		() => AugmentedEleventh,
+		() => AugmentedFourth
 	);
 
 	public static readonly Interval MinorThirteenth = new(
@@ -323,8 +323,8 @@ public class Interval
 		20,
 		IntervalQuality.Minor,
 		() => MajorThird,
-		() => MinorThirteenth!,
-		() => MinorSixth!
+		() => MinorThirteenth,
+		() => MinorSixth
 	);
 
 	public static readonly Interval MajorThirteenth = new(
@@ -333,7 +333,7 @@ public class Interval
 		21,
 		IntervalQuality.Major,
 		() => MinorThird,
-		() => MajorThirteenth!,
-		() => MajorSixth!
+		() => MajorThirteenth,
+		() => MajorSixth
 	);
 }

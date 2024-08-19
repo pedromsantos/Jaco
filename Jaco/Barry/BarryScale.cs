@@ -1,5 +1,8 @@
+using System.Collections;
+using Jaco.Notes;
+using Jaco.Scale;
 
-namespace Jaco;
+namespace Jaco.Barry;
 
 public abstract class BarryScale : IScale
 {
@@ -7,7 +10,7 @@ public abstract class BarryScale : IScale
 
 	protected BarryScale(ScalePattern scalePattern, Pitch root, Duration duration, Octave octave)
 	{
-		scale = new Scale(scalePattern, root, duration, octave);
+		scale = new Scale.Scale(scalePattern, root, duration, octave);
 	}
 
 	public ScalePattern ScalePattern => scale.ScalePattern;
@@ -16,7 +19,12 @@ public abstract class BarryScale : IScale
 
 	public IEnumerator<Pitch> GetEnumerator()
 	{
-		throw new NotImplementedException();
+		return scale.GetEnumerator();
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return GetEnumerator();
 	}
 
 	public MelodicLine ScaleUpMelodicLine()
@@ -83,6 +91,21 @@ public abstract class BarryScale : IScale
 	protected abstract bool InsertMaxHalfSteps(Note note);
 
 	protected abstract bool InsertMinHalfSteps(Note note);
+
+	public MelodicLine ArpeggioUp(ScaleDegree degree)
+	{
+		return scale.ArpeggioUp(degree);
+	}
+
+	public ScaleDegree? DegreeFor(Pitch pitch)
+	{
+		return scale.DegreeFor(pitch);
+	}
+
+	internal ScaleDegree? DegreeFor(object pitch)
+	{
+		throw new NotImplementedException();
+	}
 }
 
 public class BarryDominantScale : BarryScale

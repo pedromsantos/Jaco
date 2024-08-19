@@ -1,16 +1,17 @@
 using FluentAssertions;
-using Jaco;
+using Jaco.Notes;
+using Jaco.Time;
 
-namespace JacoTests;
+namespace JacoTests.Time;
 
 public class SimpleTimeSignatureShould
 {
 	[Fact]
 	public void TestBeatDurationInMilliseconds()
 	{
-		var timeSignature44 = new SimpleTimeSignature(4, Duration.Quarter, 60);
-		var timeSignature34 = new SimpleTimeSignature(3, Duration.Quarter, 60);
-		var timeSignature24 = new SimpleTimeSignature(2, Duration.Quarter, 60);
+		var timeSignature44 = new SimpleTimeSignature(4, Duration.Quarter);
+		var timeSignature34 = new SimpleTimeSignature(3, Duration.Quarter);
+		var timeSignature24 = new SimpleTimeSignature(2, Duration.Quarter);
 
 		Assert.Equal(1000, timeSignature44.BeatDurationMilliseconds);
 		Assert.Equal(1000, timeSignature34.BeatDurationMilliseconds);
@@ -20,9 +21,9 @@ public class SimpleTimeSignatureShould
 	[Fact]
 	public void TestBeatDurationInTicks()
 	{
-		var timeSignature44 = new SimpleTimeSignature(4, Duration.Quarter, 60);
-		var timeSignature34 = new SimpleTimeSignature(3, Duration.Quarter, 60);
-		var timeSignature24 = new SimpleTimeSignature(2, Duration.Quarter, 60);
+		var timeSignature44 = new SimpleTimeSignature(4, Duration.Quarter);
+		var timeSignature34 = new SimpleTimeSignature(3, Duration.Quarter);
+		var timeSignature24 = new SimpleTimeSignature(2, Duration.Quarter);
 
 		Assert.Equal(480, timeSignature44.TicksPerSecond);
 		Assert.Equal(480, timeSignature34.TicksPerSecond);
@@ -36,7 +37,7 @@ public class SimpleTimeSignatureShould
 	[Fact]
 	public void NoteDurationsInMilliseconds()
 	{
-		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter, 60);
+		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter);
 
 		var wholeNoteExpectedDuration = 4000;
 
@@ -51,7 +52,7 @@ public class SimpleTimeSignatureShould
 	[Fact]
 	public void MeasureDurationsInMilliseconds()
 	{
-		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter, 60);
+		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter);
 
 		var expectedDuration = 4000;
 
@@ -61,7 +62,7 @@ public class SimpleTimeSignatureShould
 	[Fact]
 	public void MeasureDurationsInTicks()
 	{
-		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter, 60);
+		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter);
 
 		Assert.Equal(1920, timeSignature.TicksPerCycle);
 	}
@@ -69,7 +70,7 @@ public class SimpleTimeSignatureShould
 	[Fact]
 	public void NumberOfNotesToFillCycleIn44()
 	{
-		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter, 60);
+		var timeSignature = new SimpleTimeSignature(4, Duration.Quarter);
 
 		Assert.Equal(1, timeSignature.ToFillCycle(Duration.Whole));
 		Assert.Equal(2, timeSignature.ToFillCycle(Duration.Half));

@@ -1,9 +1,7 @@
 using FluentAssertions;
-using Jaco;
 using Jaco.Notes;
-using Xunit;
 
-namespace JacoTests;
+namespace JacoTests.Notes;
 
 public class NoteShould
 {

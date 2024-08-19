@@ -1,4 +1,6 @@
-namespace Jaco;
+using Jaco.Notes;
+
+namespace Jaco.Time;
 
 public class CompoundTimeSignature : TimeSignature
 {
@@ -11,27 +13,27 @@ public class CompoundTimeSignature : TimeSignature
 		}
 	}
 
-	protected override double beatValue
+	protected override double BeatValue
 	{
-		get { return duration.Value * 3; }
+		get { return Duration.Value * 3; }
 	}
 
-	public override double ToFillCycle(Duration duration)
+	public override double ToFillCycle(Duration durationToTry)
 	{
-		return (BeatDurationTicks / duration.Tick) * beats * 3;
+		return (BeatDurationTicks / durationToTry.Tick) * Beats * 3;
 	}
 
 	public override double TicksPerCycle
 	{
-		get { return BeatDurationTicks * beats * 3; }
+		get { return BeatDurationTicks * Beats * 3; }
 	}
 
 	public override string ToString()
 	{
-		var foo = duration.ToString().Length > 1
-				? duration.ToString().Substring(2)
-				: duration.ToString();
+		var foo = Duration.ToString().Length > 1
+				? Duration.ToString().Substring(2)
+				: Duration.ToString();
 
-		return $"{beats * 3}/{foo}";
+		return $"{Beats * 3}/{foo}";
 	}
 }

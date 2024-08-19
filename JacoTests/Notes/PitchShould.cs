@@ -1,8 +1,7 @@
 using FluentAssertions;
-using Jaco;
 using Jaco.Notes;
 
-namespace JacoTests;
+namespace JacoTests.Notes;
 
 
 public class PitchShould

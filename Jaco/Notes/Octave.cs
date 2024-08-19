@@ -1,7 +1,4 @@
-namespace Jaco;
-
-using System;
-using System.Collections.Generic;
+namespace Jaco.Notes;
 
 public class Octave
 {

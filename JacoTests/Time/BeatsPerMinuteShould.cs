@@ -1,8 +1,8 @@
-using System.IO.Compression;
 using FluentAssertions;
-using Jaco;
+using Jaco.Notes;
+using Jaco.Time;
 
-namespace JacoTests;
+namespace JacoTests.Time;
 
 public class BeatsPerMinuteShould
 {
